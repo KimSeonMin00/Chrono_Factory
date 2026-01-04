@@ -1,10 +1,17 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 
 public class GridDataManager : Singleton<GridDataManager>
 {
     private Dictionary<Vector3Int, PlacedBuilding> m_placedObjects = new Dictionary<Vector3Int, PlacedBuilding>();
+    [SerializeField] private Tilemap m_Tilemap;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        m_Tilemap = FindFirstObjectByType<Tilemap>();
+    }
     public bool IsOccupied(Vector3Int vecCellPos)
     {
         return m_placedObjects.ContainsKey(vecCellPos);
@@ -22,6 +29,18 @@ public class GridDataManager : Singleton<GridDataManager>
     {
         m_placedObjects.TryGetValue(vecCellPos, out var building);
         return building;
+    }
+
+    public ResourceType Get_ResourceOnTile(Vector3Int vecCellPos)
+    {
+        TileBase tile = m_Tilemap.GetTile(vecCellPos);
+
+        if(tile is ResourceTile resTile)
+        {
+            return resTile.type;
+        }
+
+        return ResourceType.None;
     }
 
     public void Remove_Object(Vector3Int vecCellPos)

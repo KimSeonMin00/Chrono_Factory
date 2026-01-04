@@ -23,5 +23,5 @@ public abstract class Building : MonoBehaviour
     public virtual void OnDestroyed()
     {
         Destroy(gameObject);
-    }
+    }   
 }

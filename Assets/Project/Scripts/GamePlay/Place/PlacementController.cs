@@ -6,7 +6,6 @@ public class PlacementController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Grid m_Grid;
-    [SerializeField] private MouseCursorPointer m_MouseCusorPointer;
 
     [Header("Settings")]
     [SerializeField] private float m_fMaxRayDist = 100f;
@@ -34,17 +33,17 @@ public class PlacementController : MonoBehaviour
 
     private void OnLeftClicked()
     {
-        if(m_MouseCusorPointer.m_bIsGround)
+        if(MouseCursorPointer.Instance.m_bIsGround)
         {
-            Spawn_Object(m_MouseCusorPointer.m_vecCurrentCell);
+            Spawn_Object(MouseCursorPointer.Instance.m_vecCurrentCell);
         }
     }
 
     private void OnRightClicked()
     {
-        if (m_MouseCusorPointer.m_bIsGround)
+        if (MouseCursorPointer.Instance.m_bIsGround)
         {
-            Remove_Object(m_MouseCusorPointer.m_vecCurrentCell);
+            Remove_Object(MouseCursorPointer.Instance.m_vecCurrentCell);
         }
     }
 
@@ -61,22 +60,12 @@ public class PlacementController : MonoBehaviour
 
         if (m_BuildingData != null)
         {
+            if (!m_BuildingData.IsEnable_Spawn(vecCellPos))
+                return;
+
             if (m_BuildingData.m_goPrefab != null)
             {
-                GameObject goSpawn = Instantiate(m_BuildingData.m_goPrefab, vecSpawnWorldPos, Quaternion.identity);               
-
-                Debug.Log("Spawn");
-
-                Building building = goSpawn.GetComponent<Building>();
-
-                building.Init(m_BuildingData, vecCellPos, m_BuildingData.m_BuildingName);
-
-                GridDataManager.Instance.Add_Object(vecCellPos, m_BuildingData, building);
-
-                BillbordSprite billboard = goSpawn.AddComponent<BillbordSprite>();
-
-                if (billboard != null)
-                    billboard.Set_Billboard();
+                m_BuildingData.Spawn_Instance(vecSpawnWorldPos, vecCellPos);
             }
         }
     }

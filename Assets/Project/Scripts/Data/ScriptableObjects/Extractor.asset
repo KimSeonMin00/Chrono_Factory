@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0cc09d8f13da1844bc408e451cba21e, type: 3}
+  m_Script: {fileID: 11500000, guid: cbe3702630f3f334c92d1db7da3604e5, type: 3}
   m_Name: Extractor
   m_EditorClassIdentifier: 
-  m_BuildingName: Extractor
-  m_goPrefab: {fileID: 6466809969024368420, guid: 7c6ea12d2252efb429fbff6544218c39, type: 3}
+  m_BuildingName: 
+  m_goPrefab: {fileID: 0}

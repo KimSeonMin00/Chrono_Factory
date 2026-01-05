@@ -1,16 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0cc09d8f13da1844bc408e451cba21e, type: 3}
-  m_Name: Test
-  m_EditorClassIdentifier: 
-  m_BuildingName: Storage
-  m_goPrefab: {fileID: 627271680989556834, guid: fcd636fb552798f418660a1de2840fd3, type: 3}
+version https://git-lfs.github.com/spec/v1
+oid sha256:a3f0c199f5794d02a0e4f58ddd2c55dc080cb9249d6ac09dd57148ea95cbb583
+size 511

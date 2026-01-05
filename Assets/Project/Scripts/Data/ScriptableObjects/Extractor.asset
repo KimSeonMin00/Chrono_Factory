@@ -1,16 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbe3702630f3f334c92d1db7da3604e5, type: 3}
-  m_Name: Extractor
-  m_EditorClassIdentifier: 
-  m_BuildingName: 
-  m_goPrefab: {fileID: 0}
+version https://git-lfs.github.com/spec/v1
+oid sha256:66e4ea55b2f176dcd6496ccdf54caff181509cb23363c82d63afd43906f2aa96
+size 519

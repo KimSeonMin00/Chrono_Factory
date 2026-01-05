@@ -21,8 +21,6 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         m_Resources[type] += iAmount;
         OnResourceChanged?.Invoke(type, m_Resources[type]);
-
-        Debug.Log($"{type} : {m_Resources[type]}");
     }
 
     public bool Consume_Resource(ResourceType type, int iAmount)

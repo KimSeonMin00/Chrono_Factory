@@ -6,7 +6,8 @@ public class ExtractorData : BuildingData
 
     public override bool IsEnable_Spawn(Vector3Int vecCellPos)
     {
-        base.IsEnable_Spawn(vecCellPos);
+        if (!base.IsEnable_Spawn(vecCellPos))
+            return false;
 
         if (GridDataManager.Instance.Get_ResourceOnTile(vecCellPos) != ResourceType.None)
         {

@@ -11,6 +11,9 @@ public class BuildingData : ScriptableObject
         if (GridDataManager.Instance.IsOccupied(vecCellPos))
             return false;
 
+        if (vecCellPos == Player.m_vecPlayerCellPos)
+            return false;
+
         return true;
     }
 

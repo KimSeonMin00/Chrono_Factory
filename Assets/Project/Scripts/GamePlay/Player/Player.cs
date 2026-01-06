@@ -11,7 +11,14 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody m_Rigid;
     private Vector3 m_vecMoveDirection;
 
+    public static Vector3 m_vecPlayerPos;
+    public static Vector3Int m_vecPlayerCellPos;
     // Update is called once per frame
+    private void Update()
+    {
+        m_vecPlayerPos = new Vector3(transform.position.x, 0f, transform.position.z);
+        m_vecPlayerCellPos = MouseCursorPointer.Instance.Get_CellPos(m_vecPlayerPos);
+    }
     void FixedUpdate()
     {
         OnMove();

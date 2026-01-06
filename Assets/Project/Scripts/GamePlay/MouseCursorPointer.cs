@@ -33,13 +33,17 @@ public class MouseCursorPointer : Singleton<MouseCursorPointer>
 
         if (Physics.Raycast(ray, out RaycastHit groundHit, m_fMaxRayDist, m_GroundLayermask))
         {
-            Vector3Int CurrentCell = m_Grid.WorldToCell(groundHit.point);
-            CurrentCell.z = 0;
-            m_vecCurrentCell = CurrentCell;
-
+            m_vecCurrentCell = Get_CellPos(groundHit.point);
             m_bIsGround = m_Tilemap.HasTile(m_vecCurrentCell);
         }
         else
             m_bIsGround = false;
+    }
+
+    public Vector3Int Get_CellPos(Vector3 vecPos)
+    {
+        Vector3Int CurrentCell = m_Grid.WorldToCell(vecPos);
+        CurrentCell.z = 0;
+        return CurrentCell;
     }
 }

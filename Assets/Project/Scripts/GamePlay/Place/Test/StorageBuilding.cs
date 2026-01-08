@@ -6,4 +6,9 @@ public class StorageBuilding : Building
     {
         UIManager.Instance.OpenUI();
     }
+
+    public override void RecalculateBonus()
+    {
+        return;
+    }
 }

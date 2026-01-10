@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
-public class PlacementController : MonoBehaviour
+public class PlacementController : Singleton<PlacementController>
 {
     [Header("References")]
     [SerializeField] private Grid m_Grid;
@@ -16,9 +16,10 @@ public class PlacementController : MonoBehaviour
     [Header("Ghost")]
     [SerializeField] private GhostObject m_GhostObject;
 
-    private void Awake()
+    protected override void Awake()
     {
-        m_GhostObject.Set_Ghost(m_BuildingData.m_goPrefab);
+        base.Awake();
+        
     }
 
     private void Update()
@@ -100,5 +101,11 @@ public class PlacementController : MonoBehaviour
 
             m_GhostObject.Update_Ghost(Get_WorldPos(vecCellPos), m_BuildingData.IsEnable_Spawn(vecCellPos));
         }
+    }
+
+    public void Set_BuildingData(BuildingData data)
+    {
+        m_BuildingData = data;
+        m_GhostObject.Set_Ghost(m_BuildingData.m_goPrefab);
     }
 }

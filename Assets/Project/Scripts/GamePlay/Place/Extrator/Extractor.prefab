@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 3664552121213690645}
   - component: {fileID: -5750723390123877532}
   m_Layer: 0
-  m_Name: Drill
+  m_Name: Extractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

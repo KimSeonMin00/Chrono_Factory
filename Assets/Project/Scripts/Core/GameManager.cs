@@ -5,6 +5,20 @@ public class GameManager : Singleton<GameManager>
 {
     public GameState m_currentState { get; private set; }
 
+    public float m_fGameoverTime;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        m_fGameoverTime = 30f;
+    }
+
+    private void Update()
+    {
+        if(m_fGameoverTime > 0f)
+            m_fGameoverTime -= Time.deltaTime;
+    }
     public void Change_State(GameState newState)
     {
         if (newState == m_currentState) return;

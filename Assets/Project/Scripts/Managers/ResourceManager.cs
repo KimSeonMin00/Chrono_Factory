@@ -27,7 +27,7 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         if (m_Resources[type] >= iAmount)
         {
-            m_Resources[type] += iAmount;
+            m_Resources[type] -= iAmount;
             OnResourceChanged?.Invoke(type, m_Resources[type]);
             return true;
         }

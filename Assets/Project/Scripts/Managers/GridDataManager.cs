@@ -1,6 +1,7 @@
-using UnityEngine;
-using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class GridDataManager : Singleton<GridDataManager>
 {
@@ -13,6 +14,21 @@ public class GridDataManager : Singleton<GridDataManager>
         m_Tilemap = FindFirstObjectByType<Tilemap>();
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        m_Tilemap = FindFirstObjectByType<Tilemap>();
+        m_placedObjects.Clear();
+    }
     public bool IsOccupied(Vector3Int vecCellPos)
     {
         return m_placedObjects.ContainsKey(vecCellPos);

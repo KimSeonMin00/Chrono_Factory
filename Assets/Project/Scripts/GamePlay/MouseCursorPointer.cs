@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class MouseCursorPointer : Singleton<MouseCursorPointer>
 {
@@ -27,6 +28,16 @@ public class MouseCursorPointer : Singleton<MouseCursorPointer>
         Update_MouseCellPos();
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     public void Update_MouseCellPos()
     {
         Ray ray = Camera.main.ScreenPointToRay(InputManager.Instance.m_MousePos);
@@ -42,8 +53,20 @@ public class MouseCursorPointer : Singleton<MouseCursorPointer>
 
     public Vector3Int Get_CellPos(Vector3 vecPos)
     {
-        Vector3Int CurrentCell = m_Grid.WorldToCell(vecPos);
-        CurrentCell.z = 0;
-        return CurrentCell;
+        if (m_Grid != null)
+        {
+            Vector3Int CurrentCell = m_Grid.WorldToCell(vecPos);
+            CurrentCell.z = 0;
+            return CurrentCell;
+        }
+        else
+            return new Vector3Int(-999, -999, -999);
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        m_Grid = FindFirstObjectByType<Grid>();
+        m_Tilemap = FindFirstObjectByType<Tilemap>();
+        m_GroundLayermask = LayerMask.GetMask("Ground");
     }
 }

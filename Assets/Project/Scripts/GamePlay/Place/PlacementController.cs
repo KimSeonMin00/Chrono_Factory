@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class PlacementController : Singleton<PlacementController>
@@ -29,6 +30,7 @@ public class PlacementController : Singleton<PlacementController>
 
     private void OnEnable()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         if (InputManager.Instance != null)
         {
             InputManager.Instance.OnLeftClicked += OnLeftClicked;
@@ -38,6 +40,7 @@ public class PlacementController : Singleton<PlacementController>
 
     private void OnDisable()
     {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
         if (InputManager.Instance != null)
         {
             InputManager.Instance.OnLeftClicked -= OnLeftClicked;
@@ -59,6 +62,11 @@ public class PlacementController : Singleton<PlacementController>
         {
             Remove_Object(MouseCursorPointer.Instance.m_vecCurrentCell);
         }
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        m_Grid = FindFirstObjectByType<Grid>();
     }
 
     public void Spawn_Object(Vector3Int vecCellPos)
@@ -84,13 +92,23 @@ public class PlacementController : Singleton<PlacementController>
 
     public Vector3 Get_WorldPos(Vector3Int vecCellPos)
     {
-        Vector3 vecWorldPos = m_Grid.CellToWorld(MouseCursorPointer.Instance.m_vecCurrentCell);
-        Vector3 vecCellSize = m_Grid.cellSize;
+        if (m_Grid != null)
+        {
+            Vector3 vecWorldPos = m_Grid.CellToWorld(MouseCursorPointer.Instance.m_vecCurrentCell);
+            Vector3 vecCellSize = m_Grid.cellSize;
 
-        vecWorldPos.x += vecCellSize.x * 0.5f;
-        vecWorldPos.y = 0.01f;
+            vecWorldPos.x += vecCellSize.x * 0.5f;
+            vecWorldPos.y = 0.01f;
 
-        return vecWorldPos;
+            return vecWorldPos;
+        }
+        else
+            return new Vector3(-999f, -999f, -999f);
+    }
+
+    public void Set_GhostObject(GhostObject ghostgo)
+    {
+        m_GhostObject = ghostgo;
     }
 
     public void Update_Ghost()
@@ -99,7 +117,8 @@ public class PlacementController : Singleton<PlacementController>
         {
             Vector3Int vecCellPos = MouseCursorPointer.Instance.m_vecCurrentCell;
 
-            m_GhostObject.Update_Ghost(Get_WorldPos(vecCellPos), m_BuildingData.IsEnable_Spawn(vecCellPos));
+            if(m_GhostObject != null)
+                m_GhostObject.Update_Ghost(Get_WorldPos(vecCellPos), m_BuildingData.IsEnable_Spawn(vecCellPos));
         }
     }
 

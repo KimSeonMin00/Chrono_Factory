@@ -11,13 +11,18 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
-        m_fGameoverTime = 30f;
+        m_fGameoverTime = 5f;
     }
 
     private void Update()
     {
         if(m_fGameoverTime > 0f)
             m_fGameoverTime -= Time.deltaTime;
+    }
+
+    public void Reset_Timer()
+    {
+        m_fGameoverTime = 5f;
     }
     public void Change_State(GameState newState)
     {

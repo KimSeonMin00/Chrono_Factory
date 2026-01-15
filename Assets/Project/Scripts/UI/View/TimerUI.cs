@@ -24,6 +24,7 @@ public class TimerUI : MonoBehaviour
             {
                 m_bIsRunning = false;
                 m_TimerText.text = "GAME OVER";
+                SceneLoader.Instance.Load_Scene("Result");
                 return;
             }
 

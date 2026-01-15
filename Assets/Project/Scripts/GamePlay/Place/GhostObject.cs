@@ -11,6 +11,12 @@ public class GhostObject : MonoBehaviour
     private void Awake()
     {
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        
+    }
+
+    private void Start()
+    {
+        PlacementController.Instance.Set_GhostObject(this);
     }
 
     public void Set_Ghost(GameObject goPrefab)

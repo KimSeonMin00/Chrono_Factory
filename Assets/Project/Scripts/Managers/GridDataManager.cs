@@ -42,16 +42,16 @@ public class GridDataManager : Singleton<GridDataManager>
         return building;
     }
 
-    public ResourceType Get_ResourceOnTile(Vector3Int vecCellPos)
+    public ItemData Get_ResourceOnTile(Vector3Int vecCellPos)
     {
         TileBase tile = m_Tilemap.GetTile(vecCellPos);
 
         if(tile is ResourceTile resTile)
         {
-            return resTile.type;
+            return resTile.data;
         }
 
-        return ResourceType.None;
+        return null;
     }
     public void Add_Object(Vector3Int vecCellPos, BuildingData data, Building PlacedBuilding)
     {

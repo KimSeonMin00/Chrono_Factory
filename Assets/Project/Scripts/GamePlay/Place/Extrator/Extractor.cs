@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Extractor : Building
 {
-    [SerializeField]private ResourceType m_Resourcetype = ResourceType.None;
+    [SerializeField]private ItemData m_itemdata = null;
 
     public float m_fProduceCooldown = 1f;
     public float m_fTime = 0f;
@@ -13,7 +13,7 @@ public class Extractor : Building
         m_fTime += Time.deltaTime;
         if(m_fTime >= m_fProduceCooldown)
         {
-            ResourceManager.Instance.Add_Resource(m_Resourcetype, 1);
+            ResourceManager.Instance.Add_Resource(m_itemdata, 1);
             m_fTime = 0;
         }
     }
@@ -22,9 +22,9 @@ public class Extractor : Building
         return;
     }
 
-    public void SetUp_Resource(ResourceType type)
+    public void SetUp_Resource(ItemData data)
     {
-        m_Resourcetype = type;
+        m_itemdata = data;
     }
 
     public override void RecalculateBonus()

@@ -9,7 +9,7 @@ public class ExtractorData : BuildingData
         if (!base.IsEnable_Spawn(vecCellPos))
             return false;
 
-        if (GridDataManager.Instance.Get_ResourceOnTile(vecCellPos) != ResourceType.None)
+        if (GridDataManager.Instance.Get_ResourceOnTile(vecCellPos) != null)
         {
             return true;
         }

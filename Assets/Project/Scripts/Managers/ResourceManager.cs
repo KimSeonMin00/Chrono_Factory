@@ -15,9 +15,6 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         base.Awake();
 
-        foreach (var item in m_ItemDataList)
-            if (item != null) m_Resources[item] = 0;
-
         Reset_Resource();
     }
 

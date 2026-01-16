@@ -14,16 +14,18 @@ public class ResourceUI : MonoBehaviour
     {
         m_TMPText = GetComponentInChildren<TextMeshProUGUI>();
 
-        GetComponent<Image>().sprite = m_ItemData.m_iconSprite;
+        GetComponent<Image>().sprite = m_ItemData.m_iconSprite;      
+    }
 
+    private void Start()
+    {
         ResourceManager.Instance.OnResourceChanged += Change_Amount;
-
         m_TMPText.text = ResourceManager.Instance.Get_ResourceAmount(m_ItemData).ToString();
     }
 
-    public void Change_Amount(ItemData type, int iAmount)
+    public void Change_Amount(ItemData data, int iAmount)
     {
-        if(type == m_ItemData)
+        if(data == m_ItemData)
         {
             m_TMPText.text = iAmount.ToString();
         }

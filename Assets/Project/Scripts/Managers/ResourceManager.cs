@@ -60,6 +60,6 @@ public class ResourceManager : Singleton<ResourceManager>
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Result")
-            Reset_Resource();
+            UnlockManager.Instance.Start_CalculatePoint();
     }
 }

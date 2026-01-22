@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class UnlockManager : Singleton<UnlockManager>
 {
     [SerializeField] private PermanantData m_Data;
+    [SerializeField] private List<UpgradeData> m_UpgradeList;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public event Action<int> OnPointChanged;
 
@@ -18,6 +19,11 @@ public class UnlockManager : Singleton<UnlockManager>
             _instance = this;
             DontDestroyOnLoad(gameObject);
             m_Data.m_iTotalPoint = 0;
+
+            foreach(UpgradeData data in m_UpgradeList)
+            {
+                data.Reset_Level();
+            }
         }
 
         else
@@ -56,5 +62,24 @@ public class UnlockManager : Singleton<UnlockManager>
                 yield return new WaitForSeconds(0.1f);
             }
         }
+    }
+
+    public bool Try_Upgrade(UpgradeData data)
+    {
+        if (data != null)
+        {
+            int iCost = data.Get_Cost();
+            if (iCost <= m_Data.m_iTotalPoint)
+            {
+                m_Data.m_iTotalPoint -= iCost;
+                OnPointChanged?.Invoke(m_Data.m_iTotalPoint);
+                data.Upgrade_Level();
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+            return false;
     }
 }

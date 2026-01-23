@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class Extractor : Building
 {
-    [SerializeField]private ItemData m_itemdata = null;
+    [SerializeField] private ItemData m_itemdata = null;
 
+    [Header("Upgrade Data")]
+    [SerializeField] private UpgradeData m_ExtratorAdj = null;
+
+    [Header("Building Setting")]
     public float m_fProduceCooldown = 1f;
     public float m_fTime = 0f;
 
@@ -14,6 +18,8 @@ public class Extractor : Building
         if(m_fTime >= m_fProduceCooldown)
         {
             ResourceManager.Instance.Add_Resource(m_itemdata, 1);
+            if(m_ExtratorAdj.m_bActivate)
+                ResourceManager.Instance.Add_Resource(m_itemdata, m_iCount);
             m_fTime = 0;
         }
     }

@@ -154,6 +154,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5cf773d8dc8634438be3ddc1dbb8705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Data: {fileID: 0}
   m_vecCellPos: {x: 0, y: 0, z: 0}
   m_BuildingName: Extractor
   m_fMaxHP: 100
+  m_NearTile:
+  - {x: 0, y: 1, z: 0}
+  - {x: 0, y: -1, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  m_itemdata: {fileID: 0}
+  m_ExtratorAdj: {fileID: 11400000, guid: 034a19332d5122e408c0d173d1510f38, type: 2}
+  m_fProduceCooldown: 1
+  m_fTime: 0
+  m_iCount: 0

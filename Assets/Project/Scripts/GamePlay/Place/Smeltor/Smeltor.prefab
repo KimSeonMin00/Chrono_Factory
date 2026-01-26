@@ -165,5 +165,6 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 0}
   m_input: {fileID: 11400000, guid: e40f082620429b346accc7a6d6c0f996, type: 2}
   m_output: {fileID: 11400000, guid: 5909b18e82c2a8f48af6c3e8966f4cee, type: 2}
+  m_RecipeData: {fileID: 11400000, guid: 28b51297ce68c36408998f504bcd4dde, type: 2}
   m_fProduceCooldown: 2
   m_fTime: 0

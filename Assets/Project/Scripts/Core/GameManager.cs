@@ -11,7 +11,7 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
-        m_fGameoverTime = 10f;
+        m_fGameoverTime = 15f;
     }
 
     private void Update()
@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Reset_Timer()
     {
-        m_fGameoverTime = 10f;
+        m_fGameoverTime = 15f;
     }
     public void Change_State(GameState newState)
     {

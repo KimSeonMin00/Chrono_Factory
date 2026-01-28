@@ -7,6 +7,7 @@ public class BuildingUI : MonoBehaviour
     [SerializeField] private Image m_BuildingImage;
     [Header("Data")]
     [SerializeField] private BuildingData m_buildingData;
+    [SerializeField] private RecipeData m_RecipeData;
 
     private void Awake()
     {
@@ -19,6 +20,9 @@ public class BuildingUI : MonoBehaviour
 
     public void Set_Building()
     {
-        PlacementController.Instance.Set_BuildingData(m_buildingData);
+        PlacementInfo placeInfo = new PlacementInfo();
+        placeInfo.m_BuildingData = m_buildingData;
+        placeInfo.m_RecipeData = m_RecipeData;
+        PlacementController.Instance.Set_BuildingData(placeInfo);
     }
 }

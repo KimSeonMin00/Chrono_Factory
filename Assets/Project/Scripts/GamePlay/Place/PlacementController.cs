@@ -3,6 +3,11 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
+public struct PlacementInfo
+{
+    public BuildingData m_BuildingData;
+    public RecipeData m_RecipeData;
+}
 public class PlacementController : Singleton<PlacementController>
 {
     [Header("References")]
@@ -12,7 +17,7 @@ public class PlacementController : Singleton<PlacementController>
     [SerializeField] private float m_fMaxRayDist = 100f;
 
     [Header("Prefab to Spawn")]
-    [SerializeField] private BuildingData m_BuildingData;
+    [SerializeField] private PlacementInfo m_PlacementInfo;
 
     [Header("Ghost")]
     [SerializeField] private GhostObject m_GhostObject;
@@ -73,14 +78,14 @@ public class PlacementController : Singleton<PlacementController>
     {
         Vector3 vecWorldPos = Get_WorldPos(vecCellPos);
 
-        if (m_BuildingData != null)
+        if (m_PlacementInfo.m_BuildingData != null)
         {
-            if (!m_BuildingData.IsEnable_Spawn(vecCellPos))
+            if (!m_PlacementInfo.m_BuildingData.IsEnable_Spawn(vecCellPos))
                 return;
 
-            if (m_BuildingData.m_goPrefab != null)
+            if (m_PlacementInfo.m_BuildingData.m_goPrefab != null)
             {
-                m_BuildingData.Spawn_Instance(vecWorldPos, vecCellPos);
+                m_PlacementInfo.m_BuildingData.Spawn_Instance(vecWorldPos, vecCellPos, m_PlacementInfo.m_RecipeData);
             }
         }
     }
@@ -113,18 +118,18 @@ public class PlacementController : Singleton<PlacementController>
 
     public void Update_Ghost()
     {
-        if (m_BuildingData != null)
+        if (m_PlacementInfo.m_BuildingData != null)
         {
             Vector3Int vecCellPos = MouseCursorPointer.Instance.m_vecCurrentCell;
 
             if(m_GhostObject != null)
-                m_GhostObject.Update_Ghost(Get_WorldPos(vecCellPos), m_BuildingData.IsEnable_Spawn(vecCellPos));
+                m_GhostObject.Update_Ghost(Get_WorldPos(vecCellPos), m_PlacementInfo.m_BuildingData.IsEnable_Spawn(vecCellPos));
         }
     }
 
-    public void Set_BuildingData(BuildingData data)
+    public void Set_BuildingData(PlacementInfo placeInfo)
     {
-        m_BuildingData = data;
-        m_GhostObject.Set_Ghost(m_BuildingData.m_goPrefab);
+        m_PlacementInfo = placeInfo;
+        m_GhostObject.Set_Ghost(m_PlacementInfo.m_BuildingData.m_goPrefab);
     }
 }

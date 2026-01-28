@@ -17,7 +17,7 @@ public class ExtractorData : BuildingData
             return false;
     }
 
-    public override Building SetUp_Building(GameObject goInstance, Vector3Int vecCellPos)
+    public override Building SetUp_Building(GameObject goInstance, Vector3Int vecCellPos, RecipeData recipe)
     {
         Extractor building = goInstance.GetComponent<Extractor>();
 

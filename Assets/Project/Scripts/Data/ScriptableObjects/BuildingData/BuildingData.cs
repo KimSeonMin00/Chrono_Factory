@@ -1,10 +1,19 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "BuildingData", menuName = "Scriptable Objects/Building Data/New BuildingData")]
 public class BuildingData : ScriptableObject
 {
+    [Header("Base Info")]
     public string m_BuildingName;
+    public Sprite m_IconSprite;
     public GameObject m_goPrefab;
+
+    [Header("Building Setting")]
+    public int m_iHeight = 1;
+    public int m_iWidth = 1;
+    public List<ResourceAmount> m_Cost;
 
     public virtual bool IsEnable_Spawn(Vector3Int vecCellPos)
     {
@@ -17,11 +26,11 @@ public class BuildingData : ScriptableObject
         return true;
     }
 
-    public virtual void Spawn_Instance(Vector3 vecWolrdPos, Vector3Int vecCellPos)
+    public virtual void Spawn_Instance(Vector3 vecWolrdPos, Vector3Int vecCellPos, RecipeData recipe)
     {
         GameObject goInstance = Instantiate(m_goPrefab, vecWolrdPos, Quaternion.identity);
 
-        Building building = SetUp_Building(goInstance, vecCellPos);
+        Building building = SetUp_Building(goInstance, vecCellPos, recipe);
 
         GridDataManager.Instance.Add_Object(vecCellPos, this, building);
 
@@ -31,7 +40,7 @@ public class BuildingData : ScriptableObject
             billboard.Set_Billboard();
     }
 
-    public virtual Building SetUp_Building(GameObject goInstance, Vector3Int vecCellPos)
+    public virtual Building SetUp_Building(GameObject goInstance, Vector3Int vecCellPos, RecipeData recipe)
     {
         Building building = goInstance.GetComponent<Building>();
 

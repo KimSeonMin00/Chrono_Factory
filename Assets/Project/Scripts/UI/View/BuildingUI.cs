@@ -1,13 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class BuildingUI : MonoBehaviour
 {
-    [Header("Referencces")]
+    [Header("References")]
     [SerializeField] private Image m_BuildingImage;
     [Header("Data")]
     [SerializeField] private BuildingData m_buildingData;
-    [SerializeField] private RecipeData m_RecipeData;
+    [SerializeField] private List<RecipeData> m_RecipeList;
+
+    [Header("List")]
+    [SerializeField] private RecipeUIList m_RecipeUIList;
+    
 
     private void Awake()
     {
@@ -16,13 +21,26 @@ public class BuildingUI : MonoBehaviour
             m_BuildingImage = GetComponentsInChildren<Image>()[1];
             m_BuildingImage.sprite = m_buildingData.m_goPrefab.GetComponent<SpriteRenderer>().sprite;
         }
+
+        if (m_RecipeList.Count != 0)
+            Set_Recipe();
     }
 
+    public void Set_Recipe()
+    {
+        m_RecipeUIList.Set_Recipe(m_buildingData, m_RecipeList);
+    }
     public void Set_Building()
     {
         PlacementInfo placeInfo = new PlacementInfo();
         placeInfo.m_BuildingData = m_buildingData;
-        placeInfo.m_RecipeData = m_RecipeData;
+        placeInfo.m_RecipeData = null;
         PlacementController.Instance.Set_BuildingData(placeInfo);
+    }
+
+    public void On_Clicked()
+    {
+        if (m_RecipeList.Count == 0)
+            Set_Building();
     }
 }

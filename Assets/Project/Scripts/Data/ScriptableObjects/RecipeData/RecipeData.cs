@@ -8,6 +8,7 @@ using System.Collections.Generic;
 public class RecipeData : ScriptableObject
 {
     public string m_recipeName;
+    public Sprite m_OutputSprite;
     public List<ResourceAmount> m_InputResources;
     public ResourceAmount m_OutputResources;
     public float m_fProductionTime;

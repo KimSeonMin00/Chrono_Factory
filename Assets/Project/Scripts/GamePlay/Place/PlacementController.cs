@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
+[System.Serializable]
 public struct PlacementInfo
 {
     public BuildingData m_BuildingData;

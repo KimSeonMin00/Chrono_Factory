@@ -15,6 +15,10 @@ public abstract class Producer : Building
         if (m_bIsProduce)
         {
             m_fTime += Time.deltaTime;
+
+            ResourceManager.Instance.Add_Heat(m_Data.m_fHeatPerSecond * Time.deltaTime);
+            ResourceManager.Instance.Add_Pollution(m_Data.m_fPollutionPerSecond * Time.deltaTime);
+
             if (m_fTime >= m_RecipeData.m_fProductionTime)
             {
                 ProduceItem();

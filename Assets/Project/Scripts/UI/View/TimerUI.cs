@@ -20,7 +20,7 @@ public class TimerUI : MonoBehaviour
     {
         if (m_bIsRunning)
         {
-            if (GameManager.Instance.m_fGameoverTime <= 0f)
+            if (GameManager.Instance.m_fGameoverTimer <= 0f)
             {
                 m_bIsRunning = false;
                 m_TimerText.text = "GAME OVER";
@@ -28,7 +28,7 @@ public class TimerUI : MonoBehaviour
                 return;
             }
 
-            Update_Timer(GameManager.Instance.m_fGameoverTime);
+            Update_Timer(GameManager.Instance.m_fGameoverTimer);
         }
     }
 

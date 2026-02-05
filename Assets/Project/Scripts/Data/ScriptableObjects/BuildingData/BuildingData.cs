@@ -15,6 +15,10 @@ public class BuildingData : ScriptableObject
     public int m_iWidth = 1;
     public List<ResourceAmount> m_Cost;
 
+    [Header("Penalty Setting")]
+    public float m_fHeatPerSecond;
+    public float m_fPollutionPerSecond;
+
     public virtual bool IsEnable_Spawn(Vector3Int vecCellPos)
     {
         if (GridDataManager.Instance.IsOccupied(vecCellPos))

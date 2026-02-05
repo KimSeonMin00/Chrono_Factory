@@ -15,7 +15,11 @@ public class Extractor : Building
     private void Update()
     {
         m_fTime += Time.deltaTime;
-        if(m_fTime >= m_fProduceCooldown)
+
+        ResourceManager.Instance.Add_Heat(m_Data.m_fHeatPerSecond * Time.deltaTime);
+        ResourceManager.Instance.Add_Pollution(m_Data.m_fPollutionPerSecond * Time.deltaTime);
+
+        if (m_fTime >= m_fProduceCooldown)
         {
             ResourceManager.Instance.Add_Resource(m_itemdata, 1);
             if(m_ExtratorAdj.m_bActivate)

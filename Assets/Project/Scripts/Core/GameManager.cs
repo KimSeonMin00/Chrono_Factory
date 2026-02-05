@@ -5,24 +5,25 @@ public class GameManager : Singleton<GameManager>
 {
     public GameState m_currentState { get; private set; }
 
-    public float m_fGameoverTime;
+    public float m_fGameoverTimer;
+    public float m_fLimitTime = 60f;
 
     protected override void Awake()
     {
         base.Awake();
 
-        m_fGameoverTime = 15f;
+        m_fGameoverTimer = m_fLimitTime;
     }
 
     private void Update()
     {
-        if(m_fGameoverTime > 0f)
-            m_fGameoverTime -= Time.deltaTime;
+        if(m_fGameoverTimer > 0f)
+            m_fGameoverTimer -= Time.deltaTime;
     }
 
     public void Reset_Timer()
     {
-        m_fGameoverTime = 15f;
+        m_fGameoverTimer = m_fLimitTime;
     }
     public void Change_State(GameState newState)
     {

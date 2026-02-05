@@ -10,6 +10,9 @@ public class ResourceManager : Singleton<ResourceManager>
     public List<ItemData> m_ItemDataList;
     private Dictionary<ItemData, int> m_Resources = new Dictionary<ItemData, int>();
 
+    public float m_fHeat = 0f;
+    public float m_fPollution = 0f;
+
     public event Action<ItemData, int> OnResourceChanged;
     protected override void Awake()
     {
@@ -36,10 +39,33 @@ public class ResourceManager : Singleton<ResourceManager>
         return false;   
     }
 
+    public void Add_Heat(float fHeat)
+    {
+        m_fHeat += fHeat;
+    }
+
+    public void Consume_Heat(float fHeat)
+    {
+        m_fHeat -= fHeat;
+    }
+
+    public void Add_Pollution(float fPollution)
+    {
+        m_fPollution += fPollution;
+    }
+
+    public void Consume_Pollution(float fPollution)
+    {
+        m_fPollution -= fPollution;
+    }
+
     public void Reset_Resource()
     {
         foreach (var item in m_ItemDataList)
             if (item != null) m_Resources[item] = 0;
+
+        m_fHeat = 0f;
+        m_fPollution = 0f;
     }
 
     public int Get_ResourceAmount(ItemData type)

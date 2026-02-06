@@ -24,6 +24,9 @@ public class Extractor : Building
             ResourceManager.Instance.Add_Resource(m_itemdata, 1);
             if(m_ExtratorAdj.m_bActivate)
                 ResourceManager.Instance.Add_Resource(m_itemdata, m_iCount);
+
+            ResourceManager.Instance.Produce_Effect(m_itemdata, transform.position);
+
             m_fTime = 0;
         }
     }

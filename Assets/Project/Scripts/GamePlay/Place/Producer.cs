@@ -86,6 +86,8 @@ public abstract class Producer : Building
             return;
 
         ResourceManager.Instance.Add_Resource(m_RecipeData.m_OutputResources.m_item, m_RecipeData.m_OutputResources.m_iAmount);
+        ResourceManager.Instance.Produce_Effect(m_RecipeData.m_OutputResources.m_item, transform.position);
+
         m_bIsProduce = false;
     }
 

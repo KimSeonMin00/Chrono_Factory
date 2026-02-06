@@ -13,6 +13,8 @@ public class ResourceManager : Singleton<ResourceManager>
     public float m_fHeat = 0f;
     public float m_fPollution = 0f;
 
+    public GameObject m_ProduceSpriteEffect;
+
     public event Action<ItemData, int> OnResourceChanged;
     protected override void Awake()
     {
@@ -87,5 +89,13 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         if (scene.name == "Result")
             UnlockManager.Instance.Start_CalculatePoint();
+    }
+
+    public void Produce_Effect(ItemData data, Vector3 vecPos)
+    {
+        GameObject go = Instantiate(m_ProduceSpriteEffect, vecPos + new Vector3(0f, 1.5f, 0f), Quaternion.identity);
+        go.GetComponent<ProdueSpriteEffect>().Init(data);
+
+        go.AddComponent<BillbordSprite>();
     }
 }

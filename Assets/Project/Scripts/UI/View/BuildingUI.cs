@@ -1,8 +1,9 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class BuildingUI : MonoBehaviour
+public class BuildingUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("References")]
     [SerializeField] private Image m_BuildingImage;
@@ -42,5 +43,15 @@ public class BuildingUI : MonoBehaviour
     {
         if (m_RecipeList.Count == 0)
             Set_Building();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        UIManager.Instance.ShowTooltip(m_buildingData.name, m_buildingData.m_BuildingDesc, m_buildingData.m_IconSprite);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UIManager.Instance.HideTooltip();
     }
 }

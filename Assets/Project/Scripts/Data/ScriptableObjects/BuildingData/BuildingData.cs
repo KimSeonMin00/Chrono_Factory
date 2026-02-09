@@ -7,6 +7,8 @@ public class BuildingData : ScriptableObject
 {
     [Header("Base Info")]
     public string m_BuildingName;
+    [TextArea]
+    public string m_BuildingDesc;
     public Sprite m_IconSprite;
     public GameObject m_goPrefab;
 

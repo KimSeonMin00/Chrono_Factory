@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 234698470546300225}
   - component: {fileID: 7301767103463989577}
   - component: {fileID: 1107518067767058991}
+  - component: {fileID: 4899326409168850441}
   m_Layer: 0
   m_Name: ProduceEffect
   m_TagString: Untagged
@@ -100,5 +101,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19650b9510b278d47a7183528ab6ad28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SpriteRenderer: {fileID: 0}
   m_fTime: 0
-  m_fDisableTime: 1
+  m_fDisableTime: 0.5
+--- !u!114 &4899326409168850441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191177059717936030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3760ec62b16af2e4d9342ea446c6a1fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

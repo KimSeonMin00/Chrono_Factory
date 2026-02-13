@@ -32,6 +32,11 @@ public class TimerUI : MonoBehaviour
         }
     }
 
+    public void Reset_Timer()
+    {
+        m_bIsRunning = true;
+    }
+
     public void Update_Timer(float fTime)
     {
         float fMinutes = Mathf.FloorToInt(fTime) / 60;

@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager>
     public void Reset_Timer()
     {
         m_fGameoverTimer = m_fLimitTime;
+
+        UIManager.Instance.Reset_Timer();
     }
     public void Change_State(GameState newState)
     {

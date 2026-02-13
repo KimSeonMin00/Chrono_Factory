@@ -12,7 +12,7 @@ public class Extractor : Building
     public float m_fTime = 0f;
 
     public int m_iCount = 0;
-    private void Update()
+    void Update()
     {
         m_fTime += Time.deltaTime;
 

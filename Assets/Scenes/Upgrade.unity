@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13267acb332bbc342868ad0b83450145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UpgradeData: {fileID: 0}
+  m_UpgradeData: {fileID: 11400000, guid: 4e1f162772b1a2748825415becbe22a6, type: 2}
 --- !u!114 &1776521190
 MonoBehaviour:
   m_ObjectHideFlags: 0

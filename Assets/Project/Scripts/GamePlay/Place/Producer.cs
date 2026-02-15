@@ -10,11 +10,16 @@ public abstract class Producer : Building
     public float m_fTime = 0f;
     public bool m_bIsProduce = false;
 
+    public float m_fBaseProduceSpeed = 1.0f;
+    public int m_iBaseProduceAmount = 1;
+
+    public float m_fCurrentProduceSpeed = 1.0f;
+    public int m_iCurrentProduceAmount = 1;
     public void Update_Produce()
     {
         if (m_bIsProduce)
         {
-            m_fTime += Time.deltaTime;
+            m_fTime += Time.deltaTime * m_fCurrentProduceSpeed;
 
             ResourceManager.Instance.Add_Heat(m_Data.m_fHeatPerSecond * Time.deltaTime);
             ResourceManager.Instance.Add_Pollution(m_Data.m_fPollutionPerSecond * Time.deltaTime);
@@ -85,7 +90,7 @@ public abstract class Producer : Building
         if (m_RecipeData == null)
             return;
 
-        ResourceManager.Instance.Add_Resource(m_RecipeData.m_OutputResources.m_item, m_RecipeData.m_OutputResources.m_iAmount);
+        ResourceManager.Instance.Add_Resource(m_RecipeData.m_OutputResources.m_item, m_RecipeData.m_OutputResources.m_iAmount * m_iCurrentProduceAmount);
         ResourceManager.Instance.Produce_Effect(m_RecipeData.m_OutputResources.m_item, transform.position);
 
         m_bIsProduce = false;

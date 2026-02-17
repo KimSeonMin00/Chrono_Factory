@@ -1,9 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManager : Singleton<InputManager>
 {
     private GameInput m_GameInput;
+
+    private bool isPointerOverUI;
 
     public event Action OnLeftClicked;
     public event Action OnRightClicked;
@@ -24,6 +27,15 @@ public class InputManager : Singleton<InputManager>
         {
             Destroy(gameObject);
         }
+    }
+
+    void Update()
+    {
+        isPointerOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+    }
+    public bool IsPointerOverUI()
+    {
+        return isPointerOverUI;
     }
 
     private void OnEnable()

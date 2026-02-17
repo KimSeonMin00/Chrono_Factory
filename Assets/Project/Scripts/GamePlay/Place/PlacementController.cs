@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -56,7 +57,7 @@ public class PlacementController : Singleton<PlacementController>
 
     private void OnLeftClicked()
     {
-        if(MouseCursorPointer.Instance.m_bIsGround)
+        if(MouseCursorPointer.Instance.m_bIsGround && !InputManager.Instance.IsPointerOverUI())
         {
             Spawn_Object(MouseCursorPointer.Instance.m_vecCurrentCell);
         }
@@ -64,7 +65,7 @@ public class PlacementController : Singleton<PlacementController>
 
     private void OnRightClicked()
     {
-        if (MouseCursorPointer.Instance.m_bIsGround)
+        if (MouseCursorPointer.Instance.m_bIsGround && !InputManager.Instance.IsPointerOverUI())
         {
             Remove_Object(MouseCursorPointer.Instance.m_vecCurrentCell);
         }
@@ -132,5 +133,7 @@ public class PlacementController : Singleton<PlacementController>
     {
         m_PlacementInfo = placeInfo;
         m_GhostObject.Set_Ghost(m_PlacementInfo.m_BuildingData.m_goPrefab);
+
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_ClickSound);
     }
 }

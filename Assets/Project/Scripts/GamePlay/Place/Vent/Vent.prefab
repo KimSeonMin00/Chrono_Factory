@@ -63,7 +63,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1081941516154996889}
   - component: {fileID: 3664552121213690645}
-  - component: {fileID: -2139779471998067176}
+  - component: {fileID: 9003373837665611552}
   m_Layer: 0
   m_Name: Vent
   m_TagString: Untagged
@@ -142,7 +142,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-2139779471998067176
+--- !u!114 &9003373837665611552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6466809969024368420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d711cb77380dad84091fb245e1ce083f, type: 3}
+  m_Script: {fileID: 11500000, guid: 33e6b9683ba2614459fb16ee6f355e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Data: {fileID: 11400000, guid: e93256aa43c9d3240aa08e368272d957, type: 2}
@@ -163,7 +163,10 @@ MonoBehaviour:
   - {x: 0, y: -1, z: 0}
   - {x: -1, y: 0, z: 0}
   - {x: 1, y: 0, z: 0}
+  m_ListNearCell: []
   m_fHeatConsume: 0
   m_fPollutuionConsume: 0
   m_fCooldown: 1
   m_fTime: 0
+  m_VentUpgrade: {fileID: 11400000, guid: 9b9aca9ff5e6d354e90b4c64b157a4c3, type: 2}
+  m_UpgradeResource: {fileID: 11400000, guid: 7892ec194f535f142bc5b3f77402d8c4, type: 2}

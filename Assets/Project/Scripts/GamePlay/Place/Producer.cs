@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public abstract class Producer : Building
 {
     [Header("Recipe Data")]
-    [SerializeField] private RecipeData m_RecipeData;
+    [SerializeField] protected RecipeData m_RecipeData;
 
     public event Action OnProduced; 
 
@@ -55,6 +55,11 @@ public abstract class Producer : Building
     {
         if(recipe != null)
             m_RecipeData = recipe;
+    }
+
+    public RecipeData Get_Recipe()
+    {
+        return m_RecipeData;
     }
 
     public bool HasResource()

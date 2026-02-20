@@ -20,10 +20,10 @@ public class UnlockManager : Singleton<UnlockManager>
             DontDestroyOnLoad(gameObject);
             m_Data.m_iTotalPoint = 0;
 
-            foreach (UpgradeData data in m_UpgradeList)
-            {
-                data.Reset_Level();
-            }
+            //foreach (UpgradeData data in m_UpgradeList)
+            //{
+            //    data.Reset_Level();
+            //}
         }
 
         else

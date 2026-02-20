@@ -285,6 +285,11 @@ MonoBehaviour:
   - {x: 0, y: -1, z: 0}
   - {x: -1, y: 0, z: 0}
   - {x: 1, y: 0, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 1, y: -1, z: 0}
+  - {x: -1, y: 1, z: 0}
+  - {x: -1, y: -1, z: 0}
+  m_ListNearCell: []
   m_RecipeData: {fileID: 0}
   m_fTime: 0
   m_bIsProduce: 0
@@ -292,3 +297,5 @@ MonoBehaviour:
   m_iBaseProduceAmount: 1
   m_fCurrentProduceSpeed: 0
   m_iCurrentProduceAmount: 0
+  m_CrafterAdj: {fileID: 11400000, guid: b4a7be47962744a4c9bba9a3ca60937a, type: 2}
+  m_bIsUpgradeActive: 0

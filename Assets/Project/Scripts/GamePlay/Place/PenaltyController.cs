@@ -10,7 +10,7 @@ public class PenaltyController : Building
     public float m_fCooldown = 1f;
     public float m_fTime = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Update()
+    protected virtual void Update()
     {
         m_fTime += Time.deltaTime;
 

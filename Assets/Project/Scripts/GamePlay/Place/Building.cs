@@ -14,6 +14,7 @@ public abstract class Building : MonoBehaviour
 
     [Header("Play Data")]
     [SerializeField] protected Vector3Int[] m_NearTile = { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right };
+    public List<Vector3Int> m_ListNearCell;
 
     public virtual void Init(BuildingData data, Vector3Int vecCellPos, string Name)
     {
@@ -21,18 +22,33 @@ public abstract class Building : MonoBehaviour
         m_vecCellPos = vecCellPos;
         m_BuildingName = Name;
         m_fCurrentHP = m_fMaxHP;
+
+        m_ListNearCell = new List<Vector3Int>();
+        Get_NearCellPos();
+
+        GridDataManager.Instance.OnTileChanged += OnTileChanged;
     }
 
     public List<Vector3Int> Get_NearCellPos()
     {
-        List<Vector3Int> ListVecCell = new List<Vector3Int>();
-
         foreach(Vector3Int NearDir in m_NearTile)
         {
-            ListVecCell.Add(m_vecCellPos + NearDir);
+            m_ListNearCell.Add(m_vecCellPos + NearDir);
         }
 
-        return ListVecCell;
+        return m_ListNearCell;
+    }
+
+    public void OnTileChanged(Vector3Int vecCellPos)
+    {
+        foreach(var NearCell in m_ListNearCell)
+        {
+            if (NearCell == vecCellPos)
+            {
+                RecalculateBonus();
+                return;
+            }                
+        }
     }
 
     public abstract void RecalculateBonus();
@@ -41,6 +57,7 @@ public abstract class Building : MonoBehaviour
 
     public virtual void OnDestroyed()
     {
+        GridDataManager.Instance.OnTileChanged -= OnTileChanged;
         Destroy(gameObject);
     }   
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Smeltor : Producer
 {
     [Header("Upgrade Data")]
-    [SerializeField] private UpgradeData m_ExtratorAdj = null;
+    [SerializeField] private UpgradeData m_SmeltorAdj = null;
     public bool m_bIsUpgradeActive = false;
 
     public void Update()
@@ -25,12 +25,15 @@ public class Smeltor : Producer
 
     public override void RecalculateBonus()
     {
+        if (!m_SmeltorAdj.m_bActivate)
+            return;
+
         int iCount = 0;
         m_bIsUpgradeActive = false;
 
-        foreach (Vector3Int Near in m_NearTile)
+        foreach (Vector3Int Near in m_ListNearCell)
         {
-            PlacedBuilding building = GridDataManager.Instance.Get_PlacedBuilding(m_vecCellPos + Near);
+            PlacedBuilding building = GridDataManager.Instance.Get_PlacedBuilding(Near);
 
             if (building != null && building.m_data.m_fHeatPerSecond > 0f)
             {

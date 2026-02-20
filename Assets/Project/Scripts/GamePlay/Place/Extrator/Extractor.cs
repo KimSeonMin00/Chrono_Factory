@@ -42,11 +42,14 @@ public class Extractor : Building
 
     public override void RecalculateBonus()
     {
+        if (!m_ExtratorAdj.m_bActivate)
+            return;
+
         int iCount = 0;
 
-        foreach(Vector3Int Near in m_NearTile)
+        foreach(Vector3Int Near in m_ListNearCell)
         {
-            PlacedBuilding building = GridDataManager.Instance.Get_PlacedBuilding(m_vecCellPos + Near);
+            PlacedBuilding building = GridDataManager.Instance.Get_PlacedBuilding(Near);
 
             if (building != null && building.m_placedBuilding is Extractor)
                 iCount++;

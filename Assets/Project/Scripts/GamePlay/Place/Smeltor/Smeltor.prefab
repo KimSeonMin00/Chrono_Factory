@@ -292,5 +292,5 @@ MonoBehaviour:
   m_iBaseProduceAmount: 1
   m_fCurrentProduceSpeed: 1
   m_iCurrentProduceAmount: 1
-  m_ExtratorAdj: {fileID: 11400000, guid: 4e1f162772b1a2748825415becbe22a6, type: 2}
+  m_SmeltorAdj: {fileID: 11400000, guid: 4e1f162772b1a2748825415becbe22a6, type: 2}
   m_bIsUpgradeActive: 0

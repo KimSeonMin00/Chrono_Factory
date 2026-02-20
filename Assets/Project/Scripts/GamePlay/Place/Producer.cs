@@ -1,11 +1,14 @@
 using System.Collections.Generic;
-using TMPro;
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public abstract class Producer : Building
 {
     [Header("Recipe Data")]
     [SerializeField] private RecipeData m_RecipeData;
+
+    public event Action OnProduced; 
 
     public float m_fTime = 0f;
     public bool m_bIsProduce = false;
@@ -92,6 +95,8 @@ public abstract class Producer : Building
 
         ResourceManager.Instance.Add_Resource(m_RecipeData.m_OutputResources.m_item, m_RecipeData.m_OutputResources.m_iAmount * m_iCurrentProduceAmount);
         ResourceManager.Instance.Produce_Effect(m_RecipeData.m_OutputResources.m_item, transform.position);
+
+        OnProduced?.Invoke();
 
         m_bIsProduce = false;
     }

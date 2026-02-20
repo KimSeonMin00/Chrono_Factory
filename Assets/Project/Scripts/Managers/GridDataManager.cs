@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -7,6 +8,7 @@ public class GridDataManager : Singleton<GridDataManager>
 {
     private Dictionary<Vector3Int, PlacedBuilding> m_placedObjects = new Dictionary<Vector3Int, PlacedBuilding>();
     [SerializeField] private Tilemap m_Tilemap;
+    public event Action<Vector3Int> OnTileChanged;
 
     protected override void Awake()
     {
@@ -61,7 +63,9 @@ public class GridDataManager : Singleton<GridDataManager>
 
             PlacedBuilding.RecalculateBonus();
 
-            Notify_NearCell(PlacedBuilding.Get_NearCellPos());
+            OnTileChanged?.Invoke(vecCellPos);
+
+            //Notify_NearCell(PlacedBuilding.Get_NearCellPos());
         }
     }
 
@@ -72,11 +76,11 @@ public class GridDataManager : Singleton<GridDataManager>
             if (m_placedObjects.TryGetValue(vecCellPos, out var building))
             {
                 List<Vector3Int> CellList = building.m_placedBuilding.Get_NearCellPos();
+                OnTileChanged?.Invoke(vecCellPos);
+                //Notify_NearCell(CellList);
 
                 building.m_placedBuilding.OnDestroyed();
-                m_placedObjects.Remove(vecCellPos);
-
-                Notify_NearCell(CellList);
+                m_placedObjects.Remove(vecCellPos);              
             }
         }
     }

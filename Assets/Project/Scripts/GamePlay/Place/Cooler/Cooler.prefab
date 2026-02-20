@@ -171,3 +171,7 @@ MonoBehaviour:
   m_fPollutuionConsume: 0
   m_fCooldown: 1
   m_fTime: 0
+  m_iProduceCount: 0
+  m_NearProducers: []
+  m_CoolerAdj: {fileID: 11400000, guid: fd24126cddfecec45bed59e574391559, type: 2}
+  m_bIsUpgradeActive: 0

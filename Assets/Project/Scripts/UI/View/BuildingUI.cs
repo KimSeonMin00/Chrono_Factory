@@ -20,7 +20,7 @@ public class BuildingUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (m_buildingData != null)
         {
             m_BuildingImage = GetComponentsInChildren<Image>()[1];
-            m_BuildingImage.sprite = m_buildingData.m_goPrefab.GetComponent<SpriteRenderer>().sprite;
+            m_BuildingImage.sprite = m_buildingData.m_IconSprite;
         }
 
         if (m_RecipeList.Count != 0)

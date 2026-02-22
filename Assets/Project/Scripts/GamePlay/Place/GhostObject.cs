@@ -19,9 +19,9 @@ public class GhostObject : MonoBehaviour
         PlacementController.Instance.Set_GhostObject(this);
     }
 
-    public void Set_Ghost(GameObject goPrefab)
+    public void Set_Ghost(BuildingData data)
     {
-        m_SpriteRenderer.sprite = goPrefab.GetComponent<SpriteRenderer>().sprite;
+        m_SpriteRenderer.sprite = data.m_IconSprite;
     }
 
     public void Update_Ghost(Vector3 vecPos, bool bEnablePlace)

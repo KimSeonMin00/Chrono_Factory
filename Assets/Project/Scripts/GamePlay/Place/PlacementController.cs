@@ -104,7 +104,7 @@ public class PlacementController : Singleton<PlacementController>
             Vector3 vecWorldPos = m_Grid.CellToWorld(MouseCursorPointer.Instance.m_vecCurrentCell);
             Vector3 vecCellSize = m_Grid.cellSize;
 
-            vecWorldPos.x += vecCellSize.x * 0.5f;
+            vecWorldPos.x += vecCellSize.x * 0.5f * (float)m_PlacementInfo.m_BuildingData.m_iWidth;
             vecWorldPos.y = 0.01f;
 
             return vecWorldPos;
@@ -132,7 +132,7 @@ public class PlacementController : Singleton<PlacementController>
     public void Set_BuildingData(PlacementInfo placeInfo)
     {
         m_PlacementInfo = placeInfo;
-        m_GhostObject.Set_Ghost(m_PlacementInfo.m_BuildingData.m_goPrefab);
+        m_GhostObject.Set_Ghost(m_PlacementInfo.m_BuildingData);
 
         SoundManager.Instance.PlaySFX(SoundManager.Instance.m_ClickSound);
     }

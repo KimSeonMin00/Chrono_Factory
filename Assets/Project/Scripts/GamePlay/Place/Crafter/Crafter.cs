@@ -42,7 +42,7 @@ public class Crafter : Producer
                         m_bIsNearIron = true;
                         break;
 
-                    case "CopperIngot":
+                    case "Crystal":
                         m_bIsNearCrystal = true;
                         break;
 

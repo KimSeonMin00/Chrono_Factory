@@ -50,6 +50,7 @@ public class ResourceManager : Singleton<ResourceManager>
         {
             m_fHeat = m_fMaxHeat;
             SceneLoader.Instance.Load_Scene("Result", GameState.GameOver);
+            m_fHeat = 0f;
         }
     }
 
@@ -73,6 +74,7 @@ public class ResourceManager : Singleton<ResourceManager>
         {
             m_fPollution = m_fMaxPollution;
             SceneLoader.Instance.Load_Scene("Result", GameState.GameOver);
+            m_fPollution = 0f;
         }
     }
 

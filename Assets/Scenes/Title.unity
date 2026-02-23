@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fGameoverTimer: 0
-  m_fLimitTime: 10
+  m_fLimitTime: 30
 --- !u!4 &56543043
 Transform:
   m_ObjectHideFlags: 0

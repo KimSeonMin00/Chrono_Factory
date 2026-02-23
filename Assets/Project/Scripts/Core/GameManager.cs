@@ -18,6 +18,9 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
+        if (m_currentState != GameState.Playing)
+            return;
+
         if(m_fGameoverTimer > 0f)
             m_fGameoverTimer -= Time.deltaTime;
     }

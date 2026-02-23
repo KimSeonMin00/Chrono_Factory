@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
-    public void Load_Scene(string sceneName)
+    public void Load_Scene(string sceneName, GameState state)
     {
-        StartCoroutine(Load_Scene_Async(sceneName));
+        StartCoroutine(Load_Scene_Async(sceneName, state));
     }
 
-    private IEnumerator Load_Scene_Async(string sceneName)
+    private IEnumerator Load_Scene_Async(string sceneName, GameState state)
     {
         if (GameManager.Instance != null)
             GameManager.Instance.Change_State(GameState.Loading);
@@ -24,7 +24,7 @@ public class SceneLoader : Singleton<SceneLoader>
         }
 
         if(GameManager.Instance != null)
-            GameManager.Instance.Change_State(GameState.Playing);
+            GameManager.Instance.Change_State(state);
 
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum GameState { Boot, Menu, Loading, Playing, Paused, GameOver}
+public enum GameState { Boot, Menu, Loading, Playing, Paused, GameOver, Clear}
 public class GameManager : Singleton<GameManager>
 {
     public GameState m_currentState { get; private set; }
@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
 
         m_fGameoverTimer = m_fLimitTime;
+        m_currentState = GameState.Boot;
     }
 
     private void Update()

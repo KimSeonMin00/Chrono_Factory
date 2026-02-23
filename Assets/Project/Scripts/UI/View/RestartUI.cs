@@ -6,6 +6,6 @@ public class RestartUI : MonoBehaviour
     {
         GameManager.Instance.Reset_Timer();
         ResourceManager.Instance.Reset_Resource();
-        SceneLoader.Instance.Load_Scene("Main");
+        SceneLoader.Instance.Load_Scene("Main", GameState.Playing);
     }
 }

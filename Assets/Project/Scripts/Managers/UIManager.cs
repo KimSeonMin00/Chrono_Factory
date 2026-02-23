@@ -8,6 +8,22 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] TooltipUI m_tootipUI;
     [SerializeField] TimerUI m_timerUI;
 
+    [Header("GameMode")]
+    [SerializeField] GameObject m_Playing;
+
+    public void Start()
+    {
+        GameManager.Instance.OnStateChanged += OnStateChanged;
+    }
+
+    public void OnStateChanged(GameState state)
+    {
+        if (state == GameState.Playing)
+            m_Playing.SetActive(true);
+
+        else
+            m_Playing.SetActive(false);
+    }
     public void OpenUI()
     {
         m_storageUI.gameObject.SetActive(true);

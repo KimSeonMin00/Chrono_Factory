@@ -47,7 +47,10 @@ public class ResourceManager : Singleton<ResourceManager>
         m_fHeat += fHeat;
 
         if (m_fHeat >= m_fMaxHeat)
+        {
             m_fHeat = m_fMaxHeat;
+            SceneLoader.Instance.Load_Scene("Result", GameState.GameOver);
+        }
     }
 
     public void Consume_Heat(float fHeat)
@@ -67,7 +70,10 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         m_fPollution += fPollution;
         if (m_fPollution >= m_fMaxPollution)
+        {
             m_fPollution = m_fMaxPollution;
+            SceneLoader.Instance.Load_Scene("Result", GameState.GameOver);
+        }
     }
 
     public void Consume_Pollution(float fPollution)

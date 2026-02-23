@@ -21,10 +21,10 @@ public class TimerUI : MonoBehaviour
         if (m_bIsRunning)
         {
             if (GameManager.Instance.m_fGameoverTimer <= 0f)
-            {
+            {               
                 m_bIsRunning = false;
-                m_TimerText.text = "GAME OVER";
-                SceneLoader.Instance.Load_Scene("Result");
+                m_TimerText.text = "GAME OVER";            
+                SceneLoader.Instance.Load_Scene("Result", GameState.GameOver);
                 return;
             }
 

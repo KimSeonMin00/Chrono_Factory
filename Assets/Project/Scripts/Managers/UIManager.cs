@@ -4,7 +4,6 @@ using UnityEngine.Rendering;
 public class UIManager : Singleton<UIManager>
 {
     [Header("UI References")]
-    [SerializeField] StorageUI m_storageUI;
     [SerializeField] TooltipUI m_tootipUI;
     [SerializeField] TimerUI m_timerUI;
 
@@ -23,10 +22,6 @@ public class UIManager : Singleton<UIManager>
 
         else
             m_Playing.SetActive(false);
-    }
-    public void OpenUI()
-    {
-        m_storageUI.gameObject.SetActive(true);
     }
 
     public void Reset_Timer()

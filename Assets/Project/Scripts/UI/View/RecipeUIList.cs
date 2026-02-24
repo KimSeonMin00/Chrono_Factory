@@ -21,7 +21,7 @@ public class RecipeUIList : MonoBehaviour
         {
             GameObject recipeUI = Instantiate(m_RecipeUIPrefab, this.transform);
             recipeUI.GetComponent<RecipeUI>().Set_Info(building, Recipe);
-            recipeUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, m_fOffsetY + i * m_fRectY);
+            recipeUI.GetComponent<RectTransform>().sizeDelta =new Vector2(m_fRectY, m_fRectY); 
 
             m_RecipeUIList.Add(recipeUI);
 

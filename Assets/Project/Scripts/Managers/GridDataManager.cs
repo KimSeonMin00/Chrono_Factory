@@ -10,10 +10,13 @@ public class GridDataManager : Singleton<GridDataManager>
     [SerializeField] private Tilemap m_Tilemap;
     public event Action<Vector3Int> OnTileChanged;
 
+    public float m_fMinX, m_fMinY, m_fMaxX, m_fMaxY;
+
     protected override void Awake()
     {
         base.Awake();
         m_Tilemap = FindFirstObjectByType<Tilemap>();
+        Calculate_Bounds();
     }
 
     private void OnEnable()
@@ -36,7 +39,17 @@ public class GridDataManager : Singleton<GridDataManager>
         return m_placedObjects.ContainsKey(vecCellPos);
     }
 
-    
+    public void Calculate_Bounds()
+    {      
+        m_Tilemap.CompressBounds(); 
+        Bounds bounds = m_Tilemap.localBounds;
+
+        // 3. 맵 끝에서 카메라 크기만큼 안쪽으로 제한 범위 계산
+        m_fMinX = bounds.min.x;
+        m_fMaxX = bounds.max.x;
+        m_fMinY = bounds.min.y;
+        m_fMaxY = bounds.max.y;
+    }
 
     public PlacedBuilding Get_PlacedBuilding(Vector3Int vecCellPos)
     {

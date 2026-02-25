@@ -1,8 +1,10 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 [System.Serializable]
 public struct PlacementInfo
@@ -85,11 +87,33 @@ public class PlacementController : Singleton<PlacementController>
             if (!m_PlacementInfo.m_BuildingData.IsEnable_Spawn(vecCellPos))
                 return;
 
+            if (!Consume_Cost())
+            {
+                Debug.Log("Not Enough Resource");
+                return;
+            }
+
             if (m_PlacementInfo.m_BuildingData.m_goPrefab != null)
             {
                 m_PlacementInfo.m_BuildingData.Spawn_Instance(vecWorldPos, vecCellPos, m_PlacementInfo.m_RecipeData);
             }
         }
+    }
+
+    public bool Consume_Cost()
+    {
+        List<ResourceAmount> m_Costs = m_PlacementInfo.m_BuildingData.m_Cost;
+
+        foreach (var cost in m_Costs)
+        {
+            if (ResourceManager.Instance.Get_ResourceAmount(cost.m_item) < cost.m_iAmount)
+                return false;
+        }
+
+        foreach (var cost in m_Costs)
+            ResourceManager.Instance.Consume_Resource(cost.m_item, cost.m_iAmount);
+
+        return true;
     }
 
     public void Remove_Object(Vector3Int vecCellPos)

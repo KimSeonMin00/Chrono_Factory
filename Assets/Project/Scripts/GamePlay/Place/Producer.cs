@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,6 +19,9 @@ public abstract class Producer : Building
 
     public float m_fCurrentProduceSpeed = 1.0f;
     public int m_iCurrentProduceAmount = 1;
+
+    public bool m_bHasted = false;
+    public float m_fHastedTime;
     public void Update_Produce()
     {
         if (m_bIsProduce)
@@ -106,4 +110,33 @@ public abstract class Producer : Building
         m_bIsProduce = false;
     }
 
+    public void Haste()
+    {
+        m_fHastedTime = 2f;
+
+        if (!m_bHasted)
+        {
+            m_bHasted = true;
+            m_fCurrentProduceSpeed = 5f;
+            StartCoroutine(HasteBuilding());
+        }
+    }
+
+    private IEnumerator HasteBuilding()
+    {
+        while (true)
+        {
+            m_fHastedTime -= Time.deltaTime;
+
+            if (m_fHastedTime <= 0f)
+            {
+                m_fCurrentProduceSpeed = m_fBaseProduceSpeed;
+                m_bHasted = false;
+
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
 }

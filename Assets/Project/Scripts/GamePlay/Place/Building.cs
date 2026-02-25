@@ -59,5 +59,6 @@ public abstract class Building : MonoBehaviour
     {
         GridDataManager.Instance.OnTileChanged -= OnTileChanged;
         Destroy(gameObject);
+        StopAllCoroutines();
     }   
 }

@@ -981,6 +981,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 790218211159995430, guid: 5e7dbb82a8e2af444af26486386328d6, type: 3}
+      propertyPath: m_LightChange
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 864239011391578663, guid: 5e7dbb82a8e2af444af26486386328d6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5725,9 +5729,10 @@ GameObject:
   - component: {fileID: 1988188073}
   - component: {fileID: 1988188072}
   - component: {fileID: 1988188071}
+  - component: {fileID: 1988188074}
   m_Layer: 0
-  m_Name: Directional Light
-  m_TagString: Untagged
+  m_Name: MainLight
+  m_TagString: MainLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5835,6 +5840,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1988188074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988188070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b6b74b9ff57d674d977346b066436ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ColorRef:
+    image: {fileID: 0}
+    textmesh: {fileID: 0}
+    light: {fileID: 1988188072}
+  m_ColorOrigin: {r: 0.5372549, g: 0.5019608, b: 0.8784314, a: 1}
+  m_ColorChange: {r: 1, g: 0.4, b: 0.38039216, a: 1}
+  m_fChangeDelay: 1
+  m_fChangeTime: 1
+  m_bChanged: 0
 --- !u!1 &2112249168
 GameObject:
   m_ObjectHideFlags: 0

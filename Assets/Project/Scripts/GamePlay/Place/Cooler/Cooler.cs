@@ -61,9 +61,10 @@ public class Cooler : PenaltyController
     {
         m_iProduceCount++;
 
-        if(m_iProduceCount >= 10)
+        if(m_iProduceCount >= 50)
         {
-            Debug.Log("Buff");
+            foreach (var producer in m_NearProducers)
+                producer.Haste();
             m_iProduceCount = 0;
         }
     }

@@ -7,6 +7,7 @@ public class TimerUI : MonoBehaviour
     [Header("Component")]
     TextMeshProUGUI m_TimerText;
 
+    public Color m_FadeColor;
     public bool m_bIsRunning;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,8 +24,8 @@ public class TimerUI : MonoBehaviour
             if (GameManager.Instance.m_fGameoverTimer <= 0f)
             {               
                 m_bIsRunning = false;
-                m_TimerText.text = "GAME OVER";            
-                SceneLoader.Instance.Load_Scene("Result", GameState.GameOver);
+                m_TimerText.text = "GAME OVER";
+                Fade.Instance.FadeTo("Result", GameState.GameOver, m_FadeColor);
                 return;
             }
 

@@ -19,7 +19,7 @@ public class Vent : PenaltyController
             if (m_VentUpgrade.m_bActivate)
             {
                 ResourceManager.Instance.Add_Resource(m_UpgradeResource, 1);
-                ResourceManager.Instance.Produce_Effect(m_UpgradeResource, transform.position);
+                ResourceManager.Instance.Produce_Effect(m_UpgradeResource, transform.position, 1);
             }
 
             m_fTime = 0;

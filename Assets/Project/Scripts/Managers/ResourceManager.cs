@@ -10,6 +10,8 @@ public class ResourceManager : Singleton<ResourceManager>
     public List<ItemData> m_ItemDataList;
     private Dictionary<ItemData, int> m_Resources = new Dictionary<ItemData, int>();
 
+    public Color m_FadeColor;
+
     public float m_fHeat = 0f;
     public float m_fPollution = 0f;
 
@@ -17,6 +19,8 @@ public class ResourceManager : Singleton<ResourceManager>
     public float m_fMaxPollution = 100f;
 
     public event Action<ItemData, int> OnResourceChanged;
+
+    bool m_bStop = false;
     protected override void Awake()
     {
         base.Awake();
@@ -26,6 +30,9 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public void Add_Resource(ItemData data, int iAmount)
     {
+        if (m_bStop)
+            return;
+
         m_Resources[data] += iAmount;
         OnResourceChanged?.Invoke(data, m_Resources[data]);
     }
@@ -44,18 +51,25 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public void Add_Heat(float fHeat)
     {
+        if (m_bStop)
+            return;
+
         m_fHeat += fHeat;
 
         if (m_fHeat >= m_fMaxHeat)
         {
             m_fHeat = m_fMaxHeat;
-            SceneLoader.Instance.Load_Scene("Result", GameState.GameOver);
+            Fade.Instance.FadeTo("Result", GameState.GameOver, m_FadeColor);
             m_fHeat = 0f;
+            m_bStop = true;
         }
     }
 
     public void Consume_Heat(float fHeat)
     {
+        if (m_bStop)
+            return;
+
         m_fHeat -= fHeat;
 
         if (m_fHeat <= 0f)
@@ -69,17 +83,24 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public void Add_Pollution(float fPollution)
     {
+        if (m_bStop)
+            return;
+
         m_fPollution += fPollution;
         if (m_fPollution >= m_fMaxPollution)
         {
             m_fPollution = m_fMaxPollution;
-            SceneLoader.Instance.Load_Scene("Result", GameState.GameOver);
+            Fade.Instance.FadeTo("Result", GameState.GameOver, m_FadeColor);
             m_fPollution = 0f;
+            m_bStop = true;
         }
     }
 
     public void Consume_Pollution(float fPollution)
     {
+        if (m_bStop)
+            return;
+
         m_fPollution -= fPollution;
 
         if (m_fPollution <= 0f)
@@ -98,6 +119,7 @@ public class ResourceManager : Singleton<ResourceManager>
 
         m_fHeat = 0f;
         m_fPollution = 0f;
+        m_bStop = false;
     }
 
     public int Get_ResourceAmount(ItemData type)
@@ -121,11 +143,11 @@ public class ResourceManager : Singleton<ResourceManager>
             UnlockManager.Instance.Start_CalculatePoint();
     }
 
-    public void Produce_Effect(ItemData data, Vector3 vecPos)
+    public void Produce_Effect(ItemData data, Vector3 vecPos, int iAmount)
     {
         GameObject go = PoolManager.Instance.Create_Pool();
 
         go.transform.position = vecPos + new Vector3(0f, 1.5f, 0f);
-        go.GetComponent<ProdueSpriteEffect>().Init(data);
+        go.GetComponent<ProdueSpriteEffect>().Init(data, iAmount);
     }
 }

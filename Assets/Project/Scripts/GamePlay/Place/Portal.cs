@@ -8,6 +8,7 @@ public class Portal : Building
     private Vector3 m_PlayerPos;
 
     CustomizeCamera m_Camera;
+    bool m_bStop = false;
 
     void Start()
     {
@@ -19,14 +20,21 @@ public class Portal : Building
     }
     void Update()
     {
+        if ((m_bStop))
+            return;
+
         m_fTime += Time.deltaTime;
 
         if (m_fTime < 3f)
         {
-            m_Pos = Vector3.Lerp(m_PlayerPos, transform.position, Mathf.Min(m_fTime, 1f));           
+            m_Pos = Vector3.Lerp(m_PlayerPos, transform.position, Mathf.Min(m_fTime, 1f));
         }
         else
-            SceneLoader.Instance.Load_Scene("Clear", GameState.Clear);
+        {
+            Fade.Instance.FadeTo("Clear", GameState.Clear, Color.white);
+            SoundManager.Instance.PlayPortal();
+            m_bStop = true;
+        }
     }
 
     void LateUpdate()

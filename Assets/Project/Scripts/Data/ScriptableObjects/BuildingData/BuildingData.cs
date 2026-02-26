@@ -42,6 +42,8 @@ public class BuildingData : ScriptableObject
 
         BillbordSprite billboard = goInstance.AddComponent<BillbordSprite>();
 
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_ClickSound);
+
         if (billboard != null)
             billboard.Set_Billboard();
     }

@@ -48,6 +48,7 @@ public class BuildingUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         UIManager.Instance.ShowTooltip(m_buildingData.name, m_buildingData.m_BuildingDesc, m_buildingData.m_IconSprite);
+        UIManager.Instance.Use_Option(m_buildingData.m_Cost);
     }
 
     public void OnPointerExit(PointerEventData eventData)

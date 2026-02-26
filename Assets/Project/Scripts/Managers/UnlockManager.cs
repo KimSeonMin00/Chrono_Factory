@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class UnlockManager : Singleton<UnlockManager>
@@ -12,6 +13,8 @@ public class UnlockManager : Singleton<UnlockManager>
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public event Action<int> OnPointChanged;
 
+    private Coroutine m_Calculate;
+
     protected override void Awake()
     {
         if (_instance == null)
@@ -20,16 +23,29 @@ public class UnlockManager : Singleton<UnlockManager>
             DontDestroyOnLoad(gameObject);
             m_Data.m_iTotalPoint = 0;
 
-            //foreach (UpgradeData data in m_UpgradeList)
-            //{
-            //    data.Reset_Level();
-            //}
+            foreach (UpgradeData data in m_UpgradeList)
+            {
+                data.Reset_Level();
+            }
         }
 
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
+        InputManager.Instance.OnLeftClicked += SkipCalculate;
+    }
+
+    private void OnDisable()
+    {
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.OnLeftClicked -= SkipCalculate;
+        }      
     }
     public void Add_Point(int iPoint)
     {
@@ -43,7 +59,7 @@ public class UnlockManager : Singleton<UnlockManager>
 
     public void Start_CalculatePoint()
     {
-        StartCoroutine(Calculate_Point());
+        m_Calculate = StartCoroutine(Calculate_Point());
     }
     IEnumerator Calculate_Point()
     {
@@ -68,6 +84,9 @@ public class UnlockManager : Singleton<UnlockManager>
     {
         if (data != null)
         {
+            if (data.m_bActivate)
+                return false;
+
             int iCost = data.Get_Cost();
             if (iCost <= m_Data.m_iTotalPoint)
             {
@@ -81,5 +100,28 @@ public class UnlockManager : Singleton<UnlockManager>
         }
         else
             return false;
+    }
+
+    public void SkipCalculate()
+    {
+        if (GameManager.Instance.m_currentState != GameState.GameOver)
+            return;
+
+        if (m_Calculate != null)
+            StopCoroutine(m_Calculate);
+        else
+            return;
+
+            var m_itemList = ResourceManager.Instance.m_ItemDataList;
+        int iCurrentPoints = m_Data.m_iTotalPoint;
+
+        foreach (var item in m_itemList)
+        {
+            int iAmount = ResourceManager.Instance.Get_ResourceAmount(item);
+            ResourceManager.Instance.Consume_Resource(item, iAmount);
+            m_Data.m_iTotalPoint += item.m_iValuePerUnit * iAmount;
+        }
+
+        OnPointChanged?.Invoke(m_Data.m_iTotalPoint);
     }
 }

@@ -15,6 +15,12 @@ public class UpgradeUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             m_UpgradeImage.sprite = m_UpgradeData.m_IconSprite;
             m_Cost.text = m_UpgradeData.Get_Cost().ToString();
+
+            if (m_UpgradeData.m_bActivate)
+            {
+                m_Cost.text = "OK!";
+                m_Cost.color = Color.green;
+            }
         }
 
     }
@@ -30,6 +36,14 @@ public class UpgradeUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
     public void OnClick_Button()
     {
-        UnlockManager.Instance.Try_Upgrade(m_UpgradeData);
+        if (!UnlockManager.Instance.Try_Upgrade(m_UpgradeData))
+            return;
+
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_UpgradeSound);
+        if (m_UpgradeData.m_bActivate)
+        {
+            m_Cost.text = "OK!";
+            m_Cost.color = Color.green;
+        }
     }
 }

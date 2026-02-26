@@ -6,6 +6,7 @@ public class SceneLoader : Singleton<SceneLoader>
 {
     public void Load_Scene(string sceneName, GameState state)
     {
+        SoundManager.Instance.StopAllSound();
         StartCoroutine(Load_Scene_Async(sceneName, state));
     }
 

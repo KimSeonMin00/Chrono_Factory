@@ -1,7 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class Extractor : Building
 {
+    private static int currentPlayingCount = 0;
+    private const int MAX_BUILDING_SOUNDS = 3;
     [SerializeField] private ItemData m_itemdata = null;
 
     [Header("Upgrade Data")]
@@ -19,16 +22,34 @@ public class Extractor : Building
         ResourceManager.Instance.Add_Heat(m_Data.m_fHeatPerSecond * Time.deltaTime);
         ResourceManager.Instance.Add_Pollution(m_Data.m_fPollutionPerSecond * Time.deltaTime);
 
+        if (currentPlayingCount < MAX_BUILDING_SOUNDS)
+        {
+            StartCoroutine(PlaySound());
+            currentPlayingCount++;
+            Invoke("OnSoundFinished", SoundManager.Instance.m_MachineSound.length);
+        }
+
         if (m_fTime >= m_fProduceCooldown)
         {
             ResourceManager.Instance.Add_Resource(m_itemdata, 1);
             if(m_ExtratorAdj.m_bActivate)
                 ResourceManager.Instance.Add_Resource(m_itemdata, m_iCount);
 
-            ResourceManager.Instance.Produce_Effect(m_itemdata, transform.position);
+            ResourceManager.Instance.Produce_Effect(m_itemdata, transform.position, 1+m_iCount);
 
             m_fTime = 0;
         }
+    }
+    void OnSoundFinished()
+    {
+        currentPlayingCount--;
+    }
+
+    IEnumerator PlaySound()
+    {
+        yield return new WaitForSeconds(Random.Range(0f, 1f));
+
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_MachineSound, 0.1f);
     }
     public override void OnInteract()
     {

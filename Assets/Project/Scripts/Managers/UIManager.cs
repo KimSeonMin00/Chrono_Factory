@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using System.Collections.Generic;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -43,5 +44,10 @@ public class UIManager : Singleton<UIManager>
     public void HideTooltip()
     {
         m_tootipUI.HideTooltip();
+    }
+
+    public void Use_Option(List<ResourceAmount> resource)
+    {
+        m_tootipUI.Use_Option(resource);
     }
 }

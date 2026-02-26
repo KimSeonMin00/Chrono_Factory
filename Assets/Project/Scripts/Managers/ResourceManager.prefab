@@ -50,6 +50,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7892ec194f535f142bc5b3f77402d8c4, type: 2}
   - {fileID: 11400000, guid: c4962c47993365f49aa5e8226e15015f, type: 2}
   - {fileID: 11400000, guid: aeefba4e43aac7c4bbdb7982775bfbe0, type: 2}
+  m_FadeColor: {r: 0.5647059, g: 0.12156863, b: 0.12156863, a: 1}
   m_fHeat: 0
   m_fPollution: 0
   m_fMaxHeat: 100

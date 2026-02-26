@@ -39,6 +39,12 @@ public class PenaltyBarHandler : MonoBehaviour
         if(m_LightChange == null)
             m_LightChange = GameObject.FindWithTag("MainLight").GetComponent<Change_Color>();
 
-        m_LightChange.Activate(m_bHeatAlert || m_bPollutionAlert);
+        if (m_bHeatAlert || m_bPollutionAlert)
+        {
+            m_LightChange.Activate(true);
+            SoundManager.Instance.PlayAlert();
+        }
+        else
+            m_LightChange.Activate(false);
     }
 }

@@ -76,5 +76,7 @@ public class SoundManager : Singleton<SoundManager>
 
         if (m_AlertSource.isPlaying)
             m_AlertSource.Stop();
+
+        Extractor.currentPlayingCount = 0;
     }
 }

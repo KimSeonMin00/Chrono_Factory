@@ -21,12 +21,8 @@ public class UnlockManager : Singleton<UnlockManager>
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
-            m_Data.m_iTotalPoint = 0;
 
-            foreach (UpgradeData data in m_UpgradeList)
-            {
-                data.Reset_Level();
-            }
+            Reset_Upgrade();
         }
 
         else
@@ -70,8 +66,11 @@ public class UnlockManager : Singleton<UnlockManager>
 
         foreach (var item in m_itemList)
         {
+            if (item.m_iValuePerUnit == 0)
+                continue;
+
             while (ResourceManager.Instance.Consume_Resource(item, 1))
-            {
+            {               
                 m_Data.m_iTotalPoint += item.m_iValuePerUnit;
                 OnPointChanged?.Invoke(m_Data.m_iTotalPoint);
 
@@ -123,5 +122,15 @@ public class UnlockManager : Singleton<UnlockManager>
         }
 
         OnPointChanged?.Invoke(m_Data.m_iTotalPoint);
+    }
+
+    public void Reset_Upgrade()
+    {
+        m_Data.m_iTotalPoint = 0;
+
+        foreach (UpgradeData data in m_UpgradeList)
+        {
+            data.Reset_Level();
+        }
     }
 }

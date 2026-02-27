@@ -10,6 +10,9 @@ public class ResourceManager : Singleton<ResourceManager>
     public List<ItemData> m_ItemDataList;
     private Dictionary<ItemData, int> m_Resources = new Dictionary<ItemData, int>();
 
+    [Header("Base Resource")]
+    [SerializeField] private ResourceAmount m_StartingResource;
+
     public Color m_FadeColor;
 
     public float m_fHeat = 0f;
@@ -114,12 +117,15 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public void Reset_Resource()
     {
+        m_bStop = false;
+        m_fHeat = 0f;
+        m_fPollution = 0f;
+
         foreach (var item in m_ItemDataList)
             if (item != null) m_Resources[item] = 0;
 
-        m_fHeat = 0f;
-        m_fPollution = 0f;
-        m_bStop = false;
+        if(m_StartingResource.m_item != null)
+            Add_Resource(m_StartingResource.m_item, m_StartingResource.m_iAmount);        
     }
 
     public int Get_ResourceAmount(ItemData type)

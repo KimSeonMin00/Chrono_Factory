@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fGameoverTimer: 0
-  m_fLimitTime: 60
+  m_fLimitTime: 180
 --- !u!4 &56543043
 Transform:
   m_ObjectHideFlags: 0
@@ -173,6 +173,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 403509118077443331, guid: e581f3721fb3d1d4ab84454a33acb539, type: 3}
+      propertyPath: m_StartingResource.m_item
+      value: 
+      objectReference: {fileID: 11400000, guid: 5909b18e82c2a8f48af6c3e8966f4cee, type: 2}
+    - target: {fileID: 403509118077443331, guid: e581f3721fb3d1d4ab84454a33acb539, type: 3}
+      propertyPath: m_StartingResource.m_iAmount
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4696104515892974075, guid: e581f3721fb3d1d4ab84454a33acb539, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.34137
@@ -280,7 +288,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3bceda63f1bd5ac49a3902218502b52e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc8d7ad393c8c224e8a251af00f0024b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

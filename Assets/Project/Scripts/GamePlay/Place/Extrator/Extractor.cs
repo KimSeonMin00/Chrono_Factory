@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Extractor : Building
 {
-    private static int currentPlayingCount = 0;
+    public static int currentPlayingCount = 0;
     private const int MAX_BUILDING_SOUNDS = 3;
     [SerializeField] private ItemData m_itemdata = null;
 
@@ -11,7 +11,7 @@ public class Extractor : Building
     [SerializeField] private UpgradeData m_ExtratorAdj = null;
 
     [Header("Building Setting")]
-    public float m_fProduceCooldown = 1f;
+    public float m_fProduceCooldown = 3f;
     public float m_fTime = 0f;
 
     public int m_iCount = 0;
@@ -42,7 +42,8 @@ public class Extractor : Building
     }
     void OnSoundFinished()
     {
-        currentPlayingCount--;
+        if(currentPlayingCount > 0)
+            currentPlayingCount--;
     }
 
     IEnumerator PlaySound()
@@ -77,5 +78,10 @@ public class Extractor : Building
         }
 
         m_iCount = iCount;
+    }
+
+    public void OnDestroy()
+    {
+        currentPlayingCount--;
     }
 }

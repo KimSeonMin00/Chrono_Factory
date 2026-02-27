@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.Rendering;
 
 public class GridDataManager : Singleton<GridDataManager>
 {
@@ -91,9 +92,17 @@ public class GridDataManager : Singleton<GridDataManager>
                 List<Vector3Int> CellList = building.m_placedBuilding.Get_NearCellPos();
                 OnTileChanged?.Invoke(vecCellPos);
                 //Notify_NearCell(CellList);
+                List<ResourceAmount> m_Costs = building.m_placedBuilding.m_Data.m_Cost;
+
+                foreach (var cost in m_Costs)
+                {
+                    ResourceManager.Instance.Add_Resource(cost.m_item, cost.m_iAmount);
+                }
 
                 building.m_placedBuilding.OnDestroyed();
-                m_placedObjects.Remove(vecCellPos);              
+                m_placedObjects.Remove(vecCellPos);
+
+                OnTileChanged?.Invoke(vecCellPos);
             }
         }
     }

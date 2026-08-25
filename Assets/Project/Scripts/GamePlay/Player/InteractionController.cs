@@ -18,6 +18,6 @@ public class InteractionController : MonoBehaviour
     }
     public void Interact_Building()
     {
-        GridDataManager.Instance.Get_PlacedBuilding(m_MouseCusorPointer.m_vecCurrentCell).m_placedBuilding.OnInteract();
+        GridDataManager.Instance.Get_PlacedBuilding(m_MouseCusorPointer.m_vecCurrentCell).m_building.OnInteract();
     }
 }

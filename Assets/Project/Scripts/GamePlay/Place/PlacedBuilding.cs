@@ -4,11 +4,11 @@ using UnityEngine;
 public class PlacedBuilding
 {
     public BuildingData m_data;
-    public Building m_placedBuilding;
+    public Building m_building;
 
-    public PlacedBuilding(BuildingData data, Building placedBuilding)
+    public PlacedBuilding(BuildingData data, Building building)
     {
         this.m_data = data;
-        this.m_placedBuilding = placedBuilding;
+        this.m_building = building;
     }
 }

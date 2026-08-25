@@ -32,9 +32,9 @@ public class Crafter : Producer
         {
             PlacedBuilding building = GridDataManager.Instance.Get_PlacedBuilding(Near);
 
-            if (building != null && building.m_placedBuilding is Producer)
+            if (building != null && building.m_building is Producer)
             {
-                Producer producer = building.m_placedBuilding as Producer;
+                Producer producer = building.m_building as Producer;
 
                 switch(producer.Get_Recipe().m_OutputResources.m_item.m_itemName)
                 {

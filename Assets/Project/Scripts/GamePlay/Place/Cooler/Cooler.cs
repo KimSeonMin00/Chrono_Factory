@@ -46,9 +46,9 @@ public class Cooler : PenaltyController
         {
             PlacedBuilding building = GridDataManager.Instance.Get_PlacedBuilding(Near);
 
-            if (building != null && building.m_placedBuilding is Producer)
+            if (building != null && building.m_building is Producer)
             {
-                Producer producer = building.m_placedBuilding as Producer;
+                Producer producer = building.m_building as Producer;
 
                 m_NearProducers.Add(producer);
                 producer.OnProduced += Produce_Detect;

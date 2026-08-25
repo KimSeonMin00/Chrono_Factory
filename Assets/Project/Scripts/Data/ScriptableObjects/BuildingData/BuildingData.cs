@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class BuildingData : ScriptableObject
 {
     [Header("Base Info")]
+    public int m_iBuildingID;
     public string m_BuildingName;
     [TextArea]
     public string m_BuildingDesc;
@@ -21,14 +22,22 @@ public class BuildingData : ScriptableObject
     public float m_fHeatPerSecond;
     public float m_fPollutionPerSecond;
 
-    public virtual bool IsEnable_Spawn(Vector3Int vecCellPos)
-    {
-        if (GridDataManager.Instance.IsOccupied(vecCellPos))
-            return false;
+    public virtual bool IsEnable_Spawn(Vector3Int vecOriginCellPos)
+    { 
+        for(int i =0; i<m_iWidth;  i++)
+        {
+            for(int j= 0; j<m_iHeight; j++)
+            {
+                Vector3Int vecCellPos = vecOriginCellPos + new Vector3Int(i, j, 0);
 
-        if (vecCellPos == Player.m_vecPlayerCellPos)
-            return false;
+                if (GridDataManager.Instance.IsOccupied(vecCellPos))
+                    return false;
 
+                if (vecCellPos == Player.m_vecPlayerCellPos)
+                    return false;
+            }
+        }       
+    
         return true;
     }
 

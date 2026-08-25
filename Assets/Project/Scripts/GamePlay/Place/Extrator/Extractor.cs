@@ -59,7 +59,7 @@ public class Extractor : Building
 
     public void SetUp_Resource(ItemData data)
     {
-        m_itemdata = data;
+         m_itemdata = data;
     }
 
     public override void RecalculateBonus()
@@ -73,7 +73,7 @@ public class Extractor : Building
         {
             PlacedBuilding building = GridDataManager.Instance.Get_PlacedBuilding(Near);
 
-            if (building != null && building.m_placedBuilding is Extractor)
+            if (building != null && building.m_building is Extractor)
                 iCount++;
         }
 

@@ -6,4 +6,5 @@ using System.Collections.Generic;
 public class SaveData
 {
     public List<PlacedBuildingSaveData> m_placedBuildings;
+    public PlayerSaveData m_playerData;
 }

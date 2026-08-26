@@ -30,6 +30,13 @@ public class SaveManager : Singleton<SaveManager>
             saveData.m_placedBuildings.Add(data);
         }
 
+        saveData.m_playerData = new PlayerSaveData();
+
+        saveData.m_playerData.m_iTotalPoint = UnlockManager.Instance.Get_Point();
+
+
+
+
         string json = 
             JsonUtility.ToJson(saveData, true);
 

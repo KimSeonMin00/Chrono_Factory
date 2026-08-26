@@ -13,6 +13,8 @@ public class UpgradeData : ScriptableObject
     [SerializeField] private int iLevel = 1;
 
     [SerializeField] private int iCost;
+
+    [SerializeField] private UpgradeEffect m_upgradeEffect;
     public int m_iLevel => iLevel;
 
     public void Upgrade_Level()
@@ -35,5 +37,10 @@ public class UpgradeData : ScriptableObject
     {
         bActivate = false;
         iLevel = 1;
+    }
+
+    public UpgradeEffect Get_Effect()
+    {
+        return m_upgradeEffect;
     }
 }

@@ -31,9 +31,9 @@ public class Extractor : Building
 
         if (m_fTime >= m_fProduceCooldown)
         {
-            ResourceManager.Instance.Add_Resource(m_itemdata, 1);
-            if(m_ExtratorAdj.m_bActivate)
-                ResourceManager.Instance.Add_Resource(m_itemdata, m_iCount);
+            ResourceManager.Instance.Add_Resource(m_itemdata, 1+m_iCount);
+            //if(m_ExtratorAdj.m_bActivate)
+            //    ResourceManager.Instance.Add_Resource(m_itemdata, m_iCount);
 
             ResourceManager.Instance.Produce_Effect(m_itemdata, transform.position, 1+m_iCount);
 
@@ -64,19 +64,15 @@ public class Extractor : Building
 
     public override void RecalculateBonus()
     {
-        if (!m_ExtratorAdj.m_bActivate)
-            return;
-
-        int iCount = 0;
-
-        foreach(Vector3Int Near in m_ListNearCell)
+        foreach(UpgradeData upgrade in m_Data.m_upgradeList)
         {
-            PlacedBuilding building = GridDataManager.Instance.Get_PlacedBuilding(Near);
-
-            if (building != null && building.m_building is Extractor)
-                iCount++;
+            if(upgrade.m_bActivate)
+                upgrade.Get_Effect().Apply(this);
         }
+    }
 
+    public void Set_Bonus(int iCount)
+    {
         m_iCount = iCount;
     }
 

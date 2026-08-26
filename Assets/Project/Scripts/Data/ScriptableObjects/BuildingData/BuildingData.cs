@@ -22,6 +22,9 @@ public class BuildingData : ScriptableObject
     public float m_fHeatPerSecond;
     public float m_fPollutionPerSecond;
 
+    [Header("Upgrade List")]
+    public List<UpgradeData> m_upgradeList;
+
     public virtual bool IsEnable_Spawn(Vector3Int vecOriginCellPos)
     { 
         for(int i =0; i<m_iWidth;  i++)

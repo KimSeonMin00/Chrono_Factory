@@ -24,16 +24,18 @@ public abstract class Building : MonoBehaviour
         m_fCurrentHP = m_fMaxHP;
 
         m_ListNearCell = new List<Vector3Int>();
-        Get_NearCellPos();
+        Set_NearCellPos();
     }
 
-    public List<Vector3Int> Get_NearCellPos()
+    private void Set_NearCellPos()
     {
-        foreach(Vector3Int NearDir in m_NearTile)
+        foreach (Vector3Int NearDir in m_NearTile)
         {
             m_ListNearCell.Add(m_vecOriginCellPos + NearDir);
         }
-
+    }
+    public List<Vector3Int> Get_NearCellPos()
+    {        
         return m_ListNearCell;
     }
 

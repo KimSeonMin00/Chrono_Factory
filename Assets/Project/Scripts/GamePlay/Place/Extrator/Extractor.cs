@@ -66,8 +66,8 @@ public class Extractor : Building
     {
         foreach(UpgradeData upgrade in m_Data.m_upgradeList)
         {
-            if(upgrade.m_bActivate)
-                upgrade.Get_Effect().Apply(this);
+            if (upgrade.m_bActivate)
+                UpgradeManager.Instance.Upgrade_Apply(upgrade.Get_EffectType(), this);
         }
     }
 

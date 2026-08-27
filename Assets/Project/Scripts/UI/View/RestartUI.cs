@@ -13,7 +13,7 @@ public class RestartUI : MonoBehaviour
     {
         GameManager.Instance.Reset_Timer();
         ResourceManager.Instance.Reset_Resource();
-        UnlockManager.Instance.Reset_Upgrade();
+        UpgradeManager.Instance.Reset_Upgrade();
         SceneLoader.Instance.Load_Scene("Title", GameState.Boot);
     }
 }

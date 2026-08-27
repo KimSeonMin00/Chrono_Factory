@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class UpgradeEffect : ScriptableObject
+public interface IUpgradeEffect
 {
-    public abstract void Apply(Building building);
+    void Apply(Building building);
 }

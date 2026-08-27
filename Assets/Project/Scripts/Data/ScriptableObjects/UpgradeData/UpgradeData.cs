@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UpgradeData", menuName = "Scriptable Objects/UpgradeData")]
+
 public class UpgradeData : ScriptableObject
 {
     [SerializeField] private string m_UpgradeName;
@@ -14,7 +15,7 @@ public class UpgradeData : ScriptableObject
 
     [SerializeField] private int iCost;
 
-    [SerializeField] private UpgradeEffect m_upgradeEffect;
+    [SerializeField] private UpgradeEffectType m_upgradeEffectType;
     public int m_iLevel => iLevel;
 
     public void Upgrade_Level()
@@ -39,8 +40,15 @@ public class UpgradeData : ScriptableObject
         iLevel = 1;
     }
 
-    public UpgradeEffect Get_Effect()
+    public UpgradeEffectType Get_EffectType()
     {
-        return m_upgradeEffect;
+        return m_upgradeEffectType;
     }
 }
+
+
+public enum UpgradeEffectType
+{
+    ExtractorAdjacency,
+}
+

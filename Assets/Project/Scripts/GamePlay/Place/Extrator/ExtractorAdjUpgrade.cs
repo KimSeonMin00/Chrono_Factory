@@ -1,9 +1,7 @@
 using UnityEngine;
-
-[CreateAssetMenu(fileName = "ExtractorAdj", menuName = "Scriptable Objects/Upgrade/ExtractorAdj")]
-public class ExtractorAdjEffect : UpgradeEffect
+public class ExtractorAdjEffect : IUpgradeEffect
 {
-    public override void Apply(Building building)
+    public void Apply(Building building)
     {
         Extractor extractor = building as Extractor;
 

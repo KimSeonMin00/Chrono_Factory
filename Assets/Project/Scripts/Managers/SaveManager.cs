@@ -32,7 +32,7 @@ public class SaveManager : Singleton<SaveManager>
 
         saveData.m_playerData = new PlayerSaveData();
 
-        saveData.m_playerData.m_iTotalPoint = UnlockManager.Instance.Get_Point();
+        saveData.m_playerData.m_iTotalPoint = UpgradeManager.Instance.Get_Point();
 
 
 

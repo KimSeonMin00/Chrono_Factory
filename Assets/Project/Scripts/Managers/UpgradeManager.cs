@@ -6,10 +6,11 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
-public class UnlockManager : Singleton<UnlockManager>
+public class UpgradeManager : Singleton<UpgradeManager>
 {
     [SerializeField] private PermanantData m_Data;
     [SerializeField] private List<UpgradeData> m_UpgradeList;
+    private UpgradeEffectRegistry m_UpgradeEffects;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public event Action<int> OnPointChanged;
 
@@ -23,6 +24,8 @@ public class UnlockManager : Singleton<UnlockManager>
             DontDestroyOnLoad(gameObject);
 
             Reset_Upgrade();
+
+            m_UpgradeEffects = new UpgradeEffectRegistry();
         }
 
         else
@@ -132,5 +135,10 @@ public class UnlockManager : Singleton<UnlockManager>
         {
             data.Reset_Level();
         }
+    }
+
+    public void Upgrade_Apply(UpgradeEffectType effectType, Building building)
+    {
+        m_UpgradeEffects.Apply(effectType, building);
     }
 }

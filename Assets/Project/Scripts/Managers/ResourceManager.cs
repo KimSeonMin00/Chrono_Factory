@@ -146,7 +146,7 @@ public class ResourceManager : Singleton<ResourceManager>
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Result")
-            UnlockManager.Instance.Start_CalculatePoint();
+            UpgradeManager.Instance.Start_CalculatePoint();
     }
 
     public void Produce_Effect(ItemData data, Vector3 vecPos, int iAmount)

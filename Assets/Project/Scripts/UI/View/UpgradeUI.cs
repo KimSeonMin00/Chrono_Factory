@@ -36,7 +36,7 @@ public class UpgradeUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
     public void OnClick_Button()
     {
-        if (!UnlockManager.Instance.Try_Upgrade(m_UpgradeData))
+        if (!UpgradeManager.Instance.Try_Upgrade(m_UpgradeData))
             return;
 
         SoundManager.Instance.PlaySFX(SoundManager.Instance.m_UpgradeSound);

@@ -12,15 +12,15 @@ public class PointUI : MonoBehaviour
     }
     private void Start()
     {
-        UnlockManager.Instance.OnPointChanged += Update_Point;
-        Update_Point(UnlockManager.Instance.Get_Point());
+        UpgradeManager.Instance.OnPointChanged += Update_Point;
+        Update_Point(UpgradeManager.Instance.Get_Point());
     }
 
     private void OnDestroy()
     {
-        if (UnlockManager.Instance != null)
+        if (UpgradeManager.Instance != null)
         {
-            UnlockManager.Instance.OnPointChanged -= Update_Point;
+            UpgradeManager.Instance.OnPointChanged -= Update_Point;
         }
     }
 

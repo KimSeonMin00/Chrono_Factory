@@ -41,6 +41,9 @@ public abstract class Building : MonoBehaviour
 
     public abstract void RecalculateBonus();
 
+    public virtual void OnNearbyProduction(Building producer)
+    {
+    }
     public abstract void OnInteract();
 
     public virtual void OnDestroyed()

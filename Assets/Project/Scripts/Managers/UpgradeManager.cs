@@ -129,7 +129,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     public void Reset_Upgrade()
     {
-        m_Data.m_iTotalPoint = 0;
+        m_Data.m_iTotalPoint = 1000;
 
         foreach (UpgradeData data in m_UpgradeList)
         {

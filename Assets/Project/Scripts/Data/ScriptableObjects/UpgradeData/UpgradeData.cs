@@ -51,5 +51,7 @@ public enum UpgradeEffectType
 {
     ExtractorAdjacency,
     SmeltorAdjacency,
+    CrafterAdjacency,
+    VentUpgrade,
 }
 

@@ -16,10 +16,10 @@ public class Vent : PenaltyController
             ResourceManager.Instance.Consume_Heat(m_fHeatConsume);
             ResourceManager.Instance.Consume_Pollution(m_fPollutuionConsume);
 
-            if (m_VentUpgrade.m_bActivate)
+            foreach (UpgradeData upgrade in m_Data.m_upgradeList)
             {
-                ResourceManager.Instance.Add_Resource(m_UpgradeResource, 1);
-                ResourceManager.Instance.Produce_Effect(m_UpgradeResource, transform.position, 1);
+                if (upgrade.m_bActivate)
+                    UpgradeManager.Instance.Upgrade_Apply(upgrade.Get_EffectType(), this);
             }
 
             m_fTime = 0;

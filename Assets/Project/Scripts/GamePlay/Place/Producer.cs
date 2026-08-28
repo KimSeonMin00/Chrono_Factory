@@ -16,6 +16,7 @@ public abstract class Producer : Building
 
     public float m_fBaseProduceSpeed = 1.0f;
     public int m_iBaseProduceAmount = 1;
+    public int m_iBonusProduceAmount = 0;
 
     public float m_fCurrentProduceSpeed = 1.0f;
     public int m_iCurrentProduceAmount = 1;

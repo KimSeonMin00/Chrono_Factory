@@ -9,10 +9,7 @@ public class Smeltor : Producer
 
     public void Update()
     {
-        if (m_bIsUpgradeActive)
-            m_iCurrentProduceAmount = m_iBaseProduceAmount + 1;
-        else
-            m_iCurrentProduceAmount = m_iBaseProduceAmount;
+        m_iCurrentProduceAmount = m_iBaseProduceAmount + m_iBonusProduceAmount;
 
         Update_Produce();
     }
@@ -23,27 +20,10 @@ public class Smeltor : Producer
 
     public override void RecalculateBonus()
     {
-        if (!m_SmeltorAdj.m_bActivate)
-            return;
-
-        int iCount = 0;
-        m_bIsUpgradeActive = false;
-
-        foreach (Vector3Int Near in m_ListNearCell)
+        foreach (UpgradeData upgrade in m_Data.m_upgradeList)
         {
-            PlacedBuilding building = GridDataManager.Instance.Get_PlacedBuilding(Near);
-
-            if (building != null && building.m_data.m_fHeatPerSecond > 0f)
-            {
-                iCount++;
-
-                if (iCount >= 2)
-                {
-                    m_bIsUpgradeActive = true;
-                    return;
-                }
-            }
-         
-        }
+            if (upgrade.m_bActivate)
+                UpgradeManager.Instance.Upgrade_Apply(upgrade.Get_EffectType(), this);
+        }       
     }
 }

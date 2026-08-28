@@ -7,9 +7,6 @@ public class Extractor : Building
     private const int MAX_BUILDING_SOUNDS = 3;
     [SerializeField] private ItemData m_itemdata = null;
 
-    [Header("Upgrade Data")]
-    [SerializeField] private UpgradeData m_ExtratorAdj = null;
-
     [Header("Building Setting")]
     public float m_fProduceCooldown = 3f;
     public float m_fTime = 0f;

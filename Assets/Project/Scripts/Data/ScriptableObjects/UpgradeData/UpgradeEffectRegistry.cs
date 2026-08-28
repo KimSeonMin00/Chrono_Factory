@@ -12,6 +12,7 @@ public class UpgradeEffectRegistry
         m_UpgradeEffects = new Dictionary<UpgradeEffectType, IUpgradeEffect>();
 
         m_UpgradeEffects[UpgradeEffectType.ExtractorAdjacency] = new ExtractorAdjEffect();
+        m_UpgradeEffects[UpgradeEffectType.SmeltorAdjacency] = new SmeltorAdjEffect();
     }
 
     public void Apply(UpgradeEffectType effectType, Building building)

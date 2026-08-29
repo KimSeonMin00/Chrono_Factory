@@ -15,6 +15,7 @@ public class UpgradeEffectRegistry
         m_UpgradeEffects[UpgradeEffectType.SmeltorAdjacency] = new SmeltorAdjEffect();
         m_UpgradeEffects[UpgradeEffectType.CrafterAdjacency] = new CrafterAdjEffect();
         m_UpgradeEffects[UpgradeEffectType.VentUpgrade] = new VentUpgradeEffect();
+        m_UpgradeEffects[UpgradeEffectType.CoolerAdjacency] = new CoolerAdjEffect();
     }
 
     public void Apply(UpgradeEffectType effectType, Building building)

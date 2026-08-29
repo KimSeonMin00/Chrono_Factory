@@ -106,7 +106,16 @@ public abstract class Producer : Building
         ResourceManager.Instance.Add_Resource(m_RecipeData.m_OutputResources.m_item, m_RecipeData.m_OutputResources.m_iAmount * m_iCurrentProduceAmount);
         ResourceManager.Instance.Produce_Effect(m_RecipeData.m_OutputResources.m_item, transform.position, m_RecipeData.m_OutputResources.m_iAmount * m_iCurrentProduceAmount);
 
-        OnProduced?.Invoke();
+        foreach (Vector3Int cell in Get_NearCellPos())
+        {
+            PlacedBuilding placed =
+                GridDataManager.Instance.Get_PlacedBuilding(cell);
+
+            if (placed != null)
+            {
+                placed.m_building.OnNearbyProduction(this);
+            }
+        }
 
         m_bIsProduce = false;
     }

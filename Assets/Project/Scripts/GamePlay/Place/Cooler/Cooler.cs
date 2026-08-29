@@ -4,7 +4,6 @@ using UnityEngine;
 public class Cooler : PenaltyController
 {
     public int m_iProduceCount = 0;
-    public List<Producer> m_NearProducers;
 
     [Header("Upgrade Data")]
     [SerializeField] private UpgradeData m_CoolerAdj = null;
@@ -14,7 +13,6 @@ public class Cooler : PenaltyController
     {
         base.Init(data, vecCellPos, Name);
 
-        m_NearProducers = new List<Producer>();
     }
 
     public override void OnInteract()
@@ -25,46 +23,29 @@ public class Cooler : PenaltyController
     public override void OnDestroyed()
     {
         base.OnDestroyed();
-
-        foreach (var producer in m_NearProducers)
-            producer.OnProduced -= Produce_Detect;
-
-        m_NearProducers.Clear();
     }
 
     public override void RecalculateBonus()
     {
+        
+    }
+
+    public override void OnNearbyProduction(Building producer)
+    {
+
         if (!m_CoolerAdj.m_bActivate)
             return;
 
-        foreach (var producer in m_NearProducers)
-            producer.OnProduced -= Produce_Detect;
-
-        m_NearProducers.Clear();
-
-        foreach (Vector3Int Near in m_ListNearCell)
-        {
-            PlacedBuilding building = GridDataManager.Instance.Get_PlacedBuilding(Near);
-
-            if (building != null && building.m_building is Producer)
-            {
-                Producer producer = building.m_building as Producer;
-
-                m_NearProducers.Add(producer);
-                producer.OnProduced += Produce_Detect;
-            }
-
-        }
-    }
-
-    public void Produce_Detect()
-    {
         m_iProduceCount++;
 
-        if(m_iProduceCount >= 50)
+        if (m_iProduceCount >= 50)
         {
-            foreach (var producer in m_NearProducers)
-                producer.Haste();
+            foreach (UpgradeData upgrade in m_Data.m_upgradeList)
+            {
+                if (upgrade.m_bActivate)
+                    UpgradeManager.Instance.Upgrade_Apply(upgrade.Get_EffectType(), this);
+            }
+
             m_iProduceCount = 0;
         }
     }

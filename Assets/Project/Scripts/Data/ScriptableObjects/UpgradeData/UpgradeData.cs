@@ -53,5 +53,6 @@ public enum UpgradeEffectType
     SmeltorAdjacency,
     CrafterAdjacency,
     VentUpgrade,
+    CoolerAdjacency,
 }
 

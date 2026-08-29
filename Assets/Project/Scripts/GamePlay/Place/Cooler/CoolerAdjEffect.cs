@@ -6,7 +6,7 @@ public class CoolerAdjEffect : IUpgradeEffect
     {
         Cooler cooler = building as Cooler;
 
-        if (cooler != null)        
+        if (cooler == null)        
             return;
         
         foreach(Vector3Int cell in cooler.Get_NearCellPos())

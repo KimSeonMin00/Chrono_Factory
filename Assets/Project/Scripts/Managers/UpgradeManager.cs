@@ -110,7 +110,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
             data.Upgrade_Level();
     }
 
-    public List<UpgradeData> Get_AllUpgrades()
+    public List<UpgradeData> Get_All_Upgrades()
     {
         return m_UpgradeList;
     }
@@ -140,7 +140,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     public void Reset_Upgrade()
     {
-        m_Data.m_iTotalPoint = 1000;
+        m_Data.m_iTotalPoint = 0;
 
         foreach (UpgradeData data in m_UpgradeList)
         {

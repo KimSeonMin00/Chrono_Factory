@@ -5,6 +5,6 @@ using System.Collections.Generic;
 [System.Serializable]
 public class SaveData
 {
-    public List<PlacedBuildingSaveData> m_placedBuildings;
     public PlayerSaveData m_playerData;
+    public List<UpgradeSaveData> m_upgrades;
 }

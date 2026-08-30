@@ -1,0 +1,27 @@
+{
+    "m_playerData": {
+        "m_iTotalPoint": 13
+    },
+    "m_upgrades": [
+        {
+            "m_iUpgradeID": 0,
+            "m_bActivate": false
+        },
+        {
+            "m_iUpgradeID": 0,
+            "m_bActivate": false
+        },
+        {
+            "m_iUpgradeID": 0,
+            "m_bActivate": false
+        },
+        {
+            "m_iUpgradeID": 0,
+            "m_bActivate": false
+        },
+        {
+            "m_iUpgradeID": 0,
+            "m_bActivate": false
+        }
+    ]
+}

@@ -10,7 +10,7 @@ public class UpgradeDatabase : Singleton<UpgradeDatabase>
     protected override void Awake()
     {
         base.Awake();
-        
+        Create_Upgradetable();       
     }
 
     public void Create_Upgradetable()
@@ -19,5 +19,10 @@ public class UpgradeDatabase : Singleton<UpgradeDatabase>
         {
             m_Upgradetables.Add(data.m_iUpgradeID, data);
         }
+    }
+
+    public UpgradeData Get_UpgradeData(int iID)
+    {
+        return m_Upgradetables[iID];
     }
 }

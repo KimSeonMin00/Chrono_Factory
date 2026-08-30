@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 497339166}
   - component: {fileID: 497339165}
   m_Layer: 0
-  m_Name: UnlockManager
+  m_Name: UpgradeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

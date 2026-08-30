@@ -122,7 +122,11 @@ public class ResourceManager : Singleton<ResourceManager>
         m_fPollution = 0f;
 
         foreach (var item in m_ItemDataList)
-            if (item != null) m_Resources[item] = 0;
+            if (item != null)
+            {
+                m_Resources[item] = 0;
+                OnResourceChanged?.Invoke(item, m_Resources[item]);
+            }
 
         if(m_StartingResource.m_item != null)
             Add_Resource(m_StartingResource.m_item, m_StartingResource.m_iAmount);        

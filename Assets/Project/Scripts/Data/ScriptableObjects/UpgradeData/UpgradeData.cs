@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UpgradeData : ScriptableObject
 {
+    [SerializeField] public int m_iUpgradeID;
     [SerializeField] private string m_UpgradeName;
     [TextArea]
     public string m_UpgradeDesc;

@@ -104,6 +104,17 @@ public class UpgradeManager : Singleton<UpgradeManager>
             return false;
     }
 
+    public void Activate_Upgrade(UpgradeData data)
+    {
+        if (data != null)
+            data.Upgrade_Level();
+    }
+
+    public List<UpgradeData> Get_AllUpgrades()
+    {
+        return m_UpgradeList;
+    }
+
     public void SkipCalculate()
     {
         if (GameManager.Instance.m_currentState != GameState.GameOver)

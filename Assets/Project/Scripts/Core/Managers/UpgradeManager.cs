@@ -6,12 +6,13 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
+//업그레이드 포인트와 업그레이트 Data, Effect 관리
 public class UpgradeManager : Singleton<UpgradeManager>
 {
-    [SerializeField] private PermanantData m_playerData;
-    [SerializeField] private List<UpgradeData> m_upgradeList;
-    private UpgradeEffectRegistry m_upgradeEffects;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private PermanantData m_playerData;//업그레이드 포인트
+    [SerializeField] private List<UpgradeData> m_upgradeList;//Upgrade Data
+    private UpgradeEffectRegistry m_upgradeEffects;//실제 Upgrade Effect 모음
+
     public event Action<int> OnPointChanged;
 
     private Coroutine m_calculateCourutine;
@@ -60,6 +61,8 @@ public class UpgradeManager : Singleton<UpgradeManager>
     {
         m_calculateCourutine = StartCoroutine(Calculate_Point());
     }
+
+    //게임 오버 후 포인트를 정산 하는 코루틴, 자원이 서서히 줄어듬에 따라 포인트가 점점 올라가는 것을 시각적으로 보여주기 위함
     IEnumerator Calculate_Point()
     {
         var m_itemList = ResourceManager.Instance.m_itemDataList;
@@ -104,6 +107,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
             return false;
     }
 
+    //Save 파일 Load시에만 사용, 업그레이드 조건을 무시하고 활성화
     public void Activate_Upgrade(UpgradeData data)
     {
         if (data != null)
@@ -115,6 +119,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
         return m_upgradeList;
     }
 
+    //result 씬에서 화면 클릭시 코루틴을 종료하고 바로 최종 포인트를 계산
     public void SkipCalculate()
     {
         if (GameManager.Instance.m_currentState != GameState.GameOver)

@@ -12,6 +12,8 @@ public struct PlacementInfo
     public BuildingData m_buildingData;
     public RecipeData m_recipeData;
 }
+
+//플레이 도중 건물 설치를 담당하는 클래스
 public class PlacementController : Singleton<PlacementController>
 {
     [Header("References")]
@@ -78,6 +80,7 @@ public class PlacementController : Singleton<PlacementController>
         m_Grid = FindFirstObjectByType<Grid>();
     }
 
+    //Building Data에서 설치 조건과 건물 Prefab을 가져와 설치
     public void Spawn_Object(Vector3Int vecCellPos)
     {
         Vector3 vecWorldPos = Get_WorldPos(vecCellPos);
@@ -121,6 +124,7 @@ public class PlacementController : Singleton<PlacementController>
         GridDataManager.Instance.Remove_Object(vecCellPos);
     }
 
+    //Cell Positon을 WorldPosition으로 전환하고 건물 크기에 따라 위치를 조정
     public Vector3 Get_WorldPos(Vector3Int vecCellPos)
     {
         if (m_Grid != null)
@@ -129,7 +133,7 @@ public class PlacementController : Singleton<PlacementController>
             Vector3 vecCellSize = m_Grid.cellSize;
 
             vecWorldPos.x += vecCellSize.x * 0.5f * (float)m_PlacementInfo.m_buildingData.m_iWidth;
-            vecWorldPos.y = 0.01f;
+            vecWorldPos.y = 0.01f;//Ground와의 겹침을 방지하기 위해 살짝 띄움
 
             return vecWorldPos;
         }
@@ -153,6 +157,7 @@ public class PlacementController : Singleton<PlacementController>
         }
     }
 
+    //설치할 건물의 Data를 지정
     public void Set_BuildingData(PlacementInfo placeInfo)
     {
         m_PlacementInfo = placeInfo;

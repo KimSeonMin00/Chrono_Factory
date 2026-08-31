@@ -16,7 +16,7 @@ public class UpgradeData : ScriptableObject
 
     [SerializeField] private int iCost;
 
-    [SerializeField] private UpgradeEffectType m_upgradeEffectType;
+    [SerializeField] private UpgradeEffectType m_upgradeEffectType;//EffectRegistry에 있는 실제 Effect 적용 클래스 객체를 불러올때 사용 
     public int m_iLevel => iLevel;
 
     public void Upgrade_Level()

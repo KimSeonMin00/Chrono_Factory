@@ -5,13 +5,14 @@ using UnityEngine.Rendering.LookDev;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+//건물, 업그레이드 정보 툴팁
 public class TooltipUI : MonoBehaviour
 {
     [SerializeField] private Image m_sprite;
     [SerializeField] private TextMeshProUGUI m_tmpNameText;
     [SerializeField] private TextMeshProUGUI m_tmpDescText;
 
-    [SerializeField] private List<CostUI> m_costOption;
+    [SerializeField] private List<CostUI> m_costOption;//건물 정보를 볼때만 활성화
 
     private RectTransform m_rectTrasform;
 

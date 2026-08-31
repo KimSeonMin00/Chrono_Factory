@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//건물 선택시 반투명 상태로 설치 예정 위치에 생성, 설치 불가시 붉은색으로 변경
 public class GhostObject : MonoBehaviour
 {
     private SpriteRenderer m_spriteRenderer;

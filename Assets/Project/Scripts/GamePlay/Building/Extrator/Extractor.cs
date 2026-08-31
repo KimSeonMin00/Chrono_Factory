@@ -11,7 +11,7 @@ public class Extractor : Building
     public float m_fProduceCooldown = 3f;
     public float m_fTime = 0f;
 
-    public int m_iCount = 0;
+    public int m_iBonusAmount = 0;
     void Update()
     {
         m_fTime += Time.deltaTime;
@@ -28,11 +28,11 @@ public class Extractor : Building
 
         if (m_fTime >= m_fProduceCooldown)
         {
-            ResourceManager.Instance.Add_Resource(m_itemdata, 1+m_iCount);
+            ResourceManager.Instance.Add_Resource(m_itemdata, 1+m_iBonusAmount);
             //if(m_ExtratorAdj.m_bActivate)
             //    ResourceManager.Instance.Add_Resource(m_itemdata, m_iCount);
 
-            ResourceManager.Instance.Produce_Effect(m_itemdata, transform.position, 1+m_iCount);
+            ResourceManager.Instance.Produce_Effect(m_itemdata, transform.position, 1+m_iBonusAmount);
 
             m_fTime = 0;
         }
@@ -64,13 +64,13 @@ public class Extractor : Building
         foreach(UpgradeData upgrade in m_data.m_upgradeList)
         {
             if (upgrade.m_bActivate)
-                UpgradeManager.Instance.Upgrade_Apply(upgrade.Get_EffectType(), this);
+                UpgradeManager.Instance.Upgrade_Apply(upgrade.Get_EffectType(), this);//upgradedata에 있는 upgrade type을 통해 effect 적용
         }
     }
 
     public void Set_Bonus(int iCount)
     {
-        m_iCount = iCount;
+        m_iBonusAmount = iCount;
     }
 
     public void OnDestroy()

@@ -27,6 +27,7 @@ public abstract class Building : MonoBehaviour
         Set_NearCellPos();
     }
 
+    //인접 타일 설정
     private void Set_NearCellPos()
     {
         foreach (Vector3Int NearDir in m_nearTiles)
@@ -34,6 +35,8 @@ public abstract class Building : MonoBehaviour
             m_nearCellList.Add(m_vecOriginCellPos + NearDir);
         }
     }
+
+    //인접한 타일 가져오기
     public List<Vector3Int> Get_NearCellPos()
     {        
         return m_nearCellList;

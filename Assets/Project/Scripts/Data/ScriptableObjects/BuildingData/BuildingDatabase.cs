@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+//building data를 id로 관리, Save/Load에 사용(현재 사용 X)
 public class BuildingDatabase : Singleton<BuildingDatabase>
 {
     [SerializeField]

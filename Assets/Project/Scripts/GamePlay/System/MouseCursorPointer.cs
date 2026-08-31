@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 
+
+//Screen상 커서 위치를 CellPosition으로 변경하는 클래스
 public class MouseCursorPointer : Singleton<MouseCursorPointer>
 {
     [Header("References")]

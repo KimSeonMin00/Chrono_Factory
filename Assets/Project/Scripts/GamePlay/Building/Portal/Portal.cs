@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//설치시 게임을 클리어하는 건물
 public class Portal : Building
 {
     private float m_fTime = 0f;

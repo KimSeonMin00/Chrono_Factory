@@ -25,6 +25,7 @@ public class BuildingData : ScriptableObject
     [Header("Upgrade List")]
     public List<UpgradeData> m_upgradeList;
 
+    //설치 가능 여부 검사
     public virtual bool IsEnable_Spawn(Vector3Int vecOriginCellPos)
     { 
         for(int i =0; i<m_iWidth;  i++)
@@ -44,6 +45,7 @@ public class BuildingData : ScriptableObject
         return true;
     }
 
+    //인스턴스 생성
     public virtual void Spawn_Instance(Vector3 vecWolrdPos, Vector3Int vecCellPos, RecipeData recipe)
     {
         GameObject goInstance = Instantiate(m_goPrefab, vecWolrdPos, Quaternion.identity);
@@ -60,6 +62,7 @@ public class BuildingData : ScriptableObject
             billboard.Set_Billboard();
     }
 
+    //건물 초기 설정
     public virtual Building SetUp_Building(GameObject goInstance, Vector3Int vecCellPos, RecipeData recipe)
     {
         Building building = goInstance.GetComponent<Building>();

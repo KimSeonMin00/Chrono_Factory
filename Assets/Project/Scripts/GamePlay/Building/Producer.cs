@@ -113,13 +113,14 @@ public abstract class Producer : Building
 
             if (placed != null)
             {
-                placed.m_building.OnNearbyProduction(this);
+                placed.m_building.OnNearbyProduction(this);//생산시 주변 건물에 알림
             }
         }
 
         m_bIsProduce = false;
     }
 
+    //생산 속도 증가 버프
     public void Haste()
     {
         m_fHastedTime = 2f;

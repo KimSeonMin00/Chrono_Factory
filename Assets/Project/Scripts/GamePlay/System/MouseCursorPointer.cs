@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 public class MouseCursorPointer : Singleton<MouseCursorPointer>
 {
     [Header("References")]
-    [SerializeField] private Grid m_Grid;
-    [SerializeField] private Tilemap m_Tilemap;
-    [SerializeField] private LayerMask m_GroundLayermask;
+    [SerializeField] private Grid m_grid;
+    [SerializeField] private Tilemap m_tilemap;
+    [SerializeField] private LayerMask m_groundLayermask;
 
     [Header("Settings")]
     [SerializeField] private float m_fMaxRayDist = 100f;
@@ -18,9 +18,9 @@ public class MouseCursorPointer : Singleton<MouseCursorPointer>
     protected override void Awake()
     {
         base.Awake();
-        m_Grid = FindFirstObjectByType<Grid>();
-        m_Tilemap = FindFirstObjectByType<Tilemap>();
-        m_GroundLayermask = LayerMask.GetMask("Ground");
+        m_grid = FindFirstObjectByType<Grid>();
+        m_tilemap = FindFirstObjectByType<Tilemap>();
+        m_groundLayermask = LayerMask.GetMask("Ground");
     }
 
     private void Update()
@@ -42,10 +42,10 @@ public class MouseCursorPointer : Singleton<MouseCursorPointer>
     {
         Ray ray = Camera.main.ScreenPointToRay(InputManager.Instance.m_MousePos);
 
-        if (Physics.Raycast(ray, out RaycastHit groundHit, m_fMaxRayDist, m_GroundLayermask))
+        if (Physics.Raycast(ray, out RaycastHit groundHit, m_fMaxRayDist, m_groundLayermask))
         {
             m_vecCurrentCell = Get_CellPos(groundHit.point);
-            m_bIsGround = m_Tilemap.HasTile(m_vecCurrentCell);
+            m_bIsGround = m_tilemap.HasTile(m_vecCurrentCell);
         }
         else
             m_bIsGround = false;
@@ -53,9 +53,9 @@ public class MouseCursorPointer : Singleton<MouseCursorPointer>
 
     public Vector3Int Get_CellPos(Vector3 vecPos)
     {
-        if (m_Grid != null)
+        if (m_grid != null)
         {
-            Vector3Int CurrentCell = m_Grid.WorldToCell(vecPos);
+            Vector3Int CurrentCell = m_grid.WorldToCell(vecPos);
             CurrentCell.z = 0;
             return CurrentCell;
         }
@@ -65,8 +65,8 @@ public class MouseCursorPointer : Singleton<MouseCursorPointer>
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        m_Grid = FindFirstObjectByType<Grid>();
-        m_Tilemap = FindFirstObjectByType<Tilemap>();
-        m_GroundLayermask = LayerMask.GetMask("Ground");
+        m_grid = FindFirstObjectByType<Grid>();
+        m_tilemap = FindFirstObjectByType<Tilemap>();
+        m_groundLayermask = LayerMask.GetMask("Ground");
     }
 }

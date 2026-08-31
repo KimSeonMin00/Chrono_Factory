@@ -16,7 +16,7 @@ public class Vent : PenaltyController
             ResourceManager.Instance.Consume_Heat(m_fHeatConsume);
             ResourceManager.Instance.Consume_Pollution(m_fPollutuionConsume);
 
-            foreach (UpgradeData upgrade in m_Data.m_upgradeList)
+            foreach (UpgradeData upgrade in m_data.m_upgradeList)
             {
                 if (upgrade.m_bActivate)
                     UpgradeManager.Instance.Upgrade_Apply(upgrade.Get_EffectType(), this);

@@ -20,7 +20,7 @@ public class Smeltor : Producer
 
     public override void RecalculateBonus()
     {
-        foreach (UpgradeData upgrade in m_Data.m_upgradeList)
+        foreach (UpgradeData upgrade in m_data.m_upgradeList)
         {
             if (upgrade.m_bActivate)
                 UpgradeManager.Instance.Upgrade_Apply(upgrade.Get_EffectType(), this);

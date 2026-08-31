@@ -21,7 +21,7 @@ public class ExtractorData : BuildingData
     {
         Extractor building = goInstance.GetComponent<Extractor>();
 
-        building.Init(this, vecCellPos, m_BuildingName);
+        building.Init(this, vecCellPos, m_buildingName);
 
         building.SetUp_Resource(GridDataManager.Instance.Get_ResourceOnTile(vecCellPos));
 

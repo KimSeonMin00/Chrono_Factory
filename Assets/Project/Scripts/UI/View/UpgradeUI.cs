@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class UpgradeUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Image m_UpgradeImage;
-    [SerializeField] private TextMeshProUGUI m_Cost;
+    [SerializeField] private Image m_upgradeImage;
+    [SerializeField] private TextMeshProUGUI m_tmpCost;
     public UpgradeData m_UpgradeData;
 
     private void Awake()
     {
         if (m_UpgradeData != null)
         {
-            m_UpgradeImage.sprite = m_UpgradeData.m_IconSprite;
-            m_Cost.text = m_UpgradeData.Get_Cost().ToString();
+            m_upgradeImage.sprite = m_UpgradeData.m_iconSprite;
+            m_tmpCost.text = m_UpgradeData.Get_Cost().ToString();
 
             if (m_UpgradeData.m_bActivate)
             {
-                m_Cost.text = "OK!";
-                m_Cost.color = Color.green;
+                m_tmpCost.text = "OK!";
+                m_tmpCost.color = Color.green;
             }
         }
 
@@ -27,7 +27,7 @@ public class UpgradeUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        UIManager.Instance.ShowTooltip(m_UpgradeData.name, m_UpgradeData.m_UpgradeDesc, m_UpgradeData.m_IconSprite);
+        UIManager.Instance.ShowTooltip(m_UpgradeData.name, m_UpgradeData.m_upgradeDesc, m_UpgradeData.m_iconSprite);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -39,11 +39,11 @@ public class UpgradeUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (!UpgradeManager.Instance.Try_Upgrade(m_UpgradeData))
             return;
 
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_UpgradeSound);
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_upgradeSound);
         if (m_UpgradeData.m_bActivate)
         {
-            m_Cost.text = "OK!";
-            m_Cost.color = Color.green;
+            m_tmpCost.text = "OK!";
+            m_tmpCost.color = Color.green;
         }
     }
 }

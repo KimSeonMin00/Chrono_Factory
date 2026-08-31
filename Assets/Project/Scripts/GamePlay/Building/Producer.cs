@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public abstract class Producer : Building
 {
     [Header("Recipe Data")]
-    [SerializeField] protected RecipeData m_RecipeData;
+    [SerializeField] protected RecipeData m_recipeData;
 
     public event Action OnProduced; 
 
@@ -29,10 +29,10 @@ public abstract class Producer : Building
         {
             m_fTime += Time.deltaTime * m_fCurrentProduceSpeed;
 
-            ResourceManager.Instance.Add_Heat(m_Data.m_fHeatPerSecond * Time.deltaTime);
-            ResourceManager.Instance.Add_Pollution(m_Data.m_fPollutionPerSecond * Time.deltaTime);
+            ResourceManager.Instance.Add_Heat(m_data.m_fHeatPerSecond * Time.deltaTime);
+            ResourceManager.Instance.Add_Pollution(m_data.m_fPollutionPerSecond * Time.deltaTime);
 
-            if (m_fTime >= m_RecipeData.m_fProductionTime)
+            if (m_fTime >= m_recipeData.m_fProductionTime)
             {
                 ProduceItem();
                 m_fTime = 0f;
@@ -59,24 +59,24 @@ public abstract class Producer : Building
     public void Set_Recipe(RecipeData recipe)
     {
         if(recipe != null)
-            m_RecipeData = recipe;
+            m_recipeData = recipe;
     }
 
     public RecipeData Get_Recipe()
     {
-        return m_RecipeData;
+        return m_recipeData;
     }
 
     public bool HasResource()
     {
-        if (m_RecipeData == null)
+        if (m_recipeData == null)
             return false;
 
-        List<ResourceAmount> RequireResources = m_RecipeData.m_InputResources;
+        List<ResourceAmount> RequireResources = m_recipeData.m_inputResources;
 
         foreach (var resource in RequireResources)
         {
-            if (ResourceManager.Instance.Get_ResourceAmount(resource.m_item) < resource.m_iAmount)
+            if (ResourceManager.Instance.Get_ResourceAmount(resource.m_itemData) < resource.m_iAmount)
                 return false;
         }
 
@@ -85,14 +85,14 @@ public abstract class Producer : Building
 
     public void Consume_Resource()
     {
-        if (m_RecipeData == null)
+        if (m_recipeData == null)
             return;
 
-        List<ResourceAmount> RequireResources = m_RecipeData.m_InputResources;
+        List<ResourceAmount> RequireResources = m_recipeData.m_inputResources;
 
         foreach (var resource in RequireResources)
         {
-            ResourceManager.Instance.Consume_Resource(resource.m_item, resource.m_iAmount);
+            ResourceManager.Instance.Consume_Resource(resource.m_itemData, resource.m_iAmount);
         }
 
         m_bIsProduce = true;
@@ -100,11 +100,11 @@ public abstract class Producer : Building
 
     public void ProduceItem()
     {
-        if (m_RecipeData == null)
+        if (m_recipeData == null)
             return;
 
-        ResourceManager.Instance.Add_Resource(m_RecipeData.m_OutputResources.m_item, m_RecipeData.m_OutputResources.m_iAmount * m_iCurrentProduceAmount);
-        ResourceManager.Instance.Produce_Effect(m_RecipeData.m_OutputResources.m_item, transform.position, m_RecipeData.m_OutputResources.m_iAmount * m_iCurrentProduceAmount);
+        ResourceManager.Instance.Add_Resource(m_recipeData.m_outputResources.m_itemData, m_recipeData.m_outputResources.m_iAmount * m_iCurrentProduceAmount);
+        ResourceManager.Instance.Produce_Effect(m_recipeData.m_outputResources.m_itemData, transform.position, m_recipeData.m_outputResources.m_iAmount * m_iCurrentProduceAmount);
 
         foreach (Vector3Int cell in Get_NearCellPos())
         {

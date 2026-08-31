@@ -9,14 +9,14 @@ public class GridDataManager : Singleton<GridDataManager>
 {
     private Dictionary<Vector3Int, PlacedBuilding> m_placedObjects = new Dictionary<Vector3Int, PlacedBuilding>();
     private HashSet<PlacedBuilding> m_buildingsNotify = new();
-    [SerializeField] private Tilemap m_Tilemap;
+    [SerializeField] private Tilemap m_tilemap;
 
     public float m_fMinX, m_fMinY, m_fMaxX, m_fMaxY;
 
     protected override void Awake()
     {
         base.Awake();
-        m_Tilemap = FindFirstObjectByType<Tilemap>();
+        m_tilemap = FindFirstObjectByType<Tilemap>();
         Calculate_Bounds();
     }
 
@@ -32,7 +32,7 @@ public class GridDataManager : Singleton<GridDataManager>
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        m_Tilemap = FindFirstObjectByType<Tilemap>();
+        m_tilemap = FindFirstObjectByType<Tilemap>();
         m_placedObjects.Clear();
     }
     public bool IsOccupied(Vector3Int vecCellPos)
@@ -42,8 +42,8 @@ public class GridDataManager : Singleton<GridDataManager>
 
     public void Calculate_Bounds()
     {      
-        m_Tilemap.CompressBounds(); 
-        Bounds bounds = m_Tilemap.localBounds;
+        m_tilemap.CompressBounds(); 
+        Bounds bounds = m_tilemap.localBounds;
 
         // 3. 맵 끝에서 카메라 크기만큼 안쪽으로 제한 범위 계산
         m_fMinX = bounds.min.x;
@@ -65,7 +65,7 @@ public class GridDataManager : Singleton<GridDataManager>
 
     public ItemData Get_ResourceOnTile(Vector3Int vecCellPos)
     {
-        TileBase tile = m_Tilemap.GetTile(vecCellPos);
+        TileBase tile = m_tilemap.GetTile(vecCellPos);
 
         if(tile is ResourceTile resTile)
         {
@@ -99,11 +99,11 @@ public class GridDataManager : Singleton<GridDataManager>
             if (m_placedObjects.TryGetValue(vecCellPos, out var building))
             {
                 List<Vector3Int> CellList = building.m_building.Get_NearCellPos();
-                List<ResourceAmount> m_Costs = building.m_building.m_Data.m_Cost;
+                List<ResourceAmount> m_Costs = building.m_building.m_data.m_totalCost;
 
                 foreach (var cost in m_Costs)
                 {
-                    ResourceManager.Instance.Add_Resource(cost.m_item, cost.m_iAmount);
+                    ResourceManager.Instance.Add_Resource(cost.m_itemData, cost.m_iAmount);
                 }
 
                 

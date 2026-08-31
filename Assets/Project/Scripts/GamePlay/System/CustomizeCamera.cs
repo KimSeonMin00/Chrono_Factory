@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 public class CustomizeCamera : MonoBehaviour
 {
     [Header("Tilemap Ref")]
-    [SerializeField] private Tilemap m_TargetTilemap;
+    [SerializeField] private Tilemap m_targetTilemap;
 
     Camera m_Cam;
     [SerializeField] private Vector3 m_vecPositionOffset;
@@ -29,8 +29,8 @@ public class CustomizeCamera : MonoBehaviour
     public void Calculate_Bounds()
     {
         // 1. 타일들이 실제로 깔린 영역의 경계값(Bounds)을 가져옵니다.
-        m_TargetTilemap.CompressBounds(); // 빈 공간을 제외하고 실제 타일이 있는 곳으로 크기 압축
-        Bounds bounds = m_TargetTilemap.localBounds;
+        m_targetTilemap.CompressBounds(); // 빈 공간을 제외하고 실제 타일이 있는 곳으로 크기 압축
+        Bounds bounds = m_targetTilemap.localBounds;
 
         // 2. 카메라의 화면 크기(절반) 계산
         float camHeight = m_Cam.orthographicSize;

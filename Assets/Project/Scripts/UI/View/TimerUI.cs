@@ -5,15 +5,15 @@ using UnityEngine.UI;
 public class TimerUI : MonoBehaviour
 {
     [Header("Component")]
-    TextMeshProUGUI m_TimerText;
+    TextMeshProUGUI m_tmpTimerText;
 
-    public Color m_FadeColor;
+    public Color m_fadeColor;
     public bool m_bIsRunning;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         m_bIsRunning = true;
-        m_TimerText = GetComponentInChildren<TextMeshProUGUI>();
+        m_tmpTimerText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -24,8 +24,8 @@ public class TimerUI : MonoBehaviour
             if (GameManager.Instance.m_fGameoverTimer <= 0f)
             {               
                 m_bIsRunning = false;
-                m_TimerText.text = "GAME OVER";
-                Fade.Instance.FadeTo("Result", GameState.GameOver, m_FadeColor);
+                m_tmpTimerText.text = "GAME OVER";
+                Fade.Instance.FadeTo("Result", GameState.GameOver, m_fadeColor);
                 return;
             }
 
@@ -43,6 +43,6 @@ public class TimerUI : MonoBehaviour
         float fMinutes = Mathf.FloorToInt(fTime) / 60;
         float fSeconds = Mathf.FloorToInt(fTime) % 60;
 
-        m_TimerText.text = string.Format("{0:00} : {1:00}", fMinutes, fSeconds); 
+        m_tmpTimerText.text = string.Format("{0:00} : {1:00}", fMinutes, fSeconds); 
     }
 }

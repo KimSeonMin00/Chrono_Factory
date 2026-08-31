@@ -40,7 +40,7 @@ public class Cooler : PenaltyController
 
         if (m_iProduceCount >= 50)
         {
-            foreach (UpgradeData upgrade in m_Data.m_upgradeList)
+            foreach (UpgradeData upgrade in m_data.m_upgradeList)
             {
                 if (upgrade.m_bActivate)
                 {

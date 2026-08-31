@@ -6,19 +6,19 @@ using UnityEngine;
 public class ProdueSpriteEffect : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private SpriteRenderer m_SpriteRenderer;
-    [SerializeField] private SpriteRenderer m_Number;
+    [SerializeField] private SpriteRenderer m_spriteRenderer;
+    [SerializeField] private SpriteRenderer m_numberSpriteRenderer;
 
-    public NumberSprite m_NumSprite;
+    public NumberSprite m_numSprite;
     public float m_fTime;
     public float m_fDisableTime = 0.2f;
 
-    private Color m_Color;
-    private Color m_TextColor;
+    private Color m_color;
+    private Color m_textColor;
 
     private void Awake()
     {
-        m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        m_spriteRenderer = GetComponent<SpriteRenderer>();
 
         gameObject.SetActive(false);
     }
@@ -28,51 +28,51 @@ public class ProdueSpriteEffect : MonoBehaviour
         m_fTime += Time.deltaTime;
 
         transform.Translate(transform.up * 2f * Time.deltaTime);
-        m_Color.a -= 2f * Time.deltaTime;
-        m_TextColor.a -= 2f * Time.deltaTime;
-        if (m_Color.a <= 0f)
+        m_color.a -= 2f * Time.deltaTime;
+        m_textColor.a -= 2f * Time.deltaTime;
+        if (m_color.a <= 0f)
         {
-            m_Color.a = 0f;
-            m_TextColor.a = 0f;
+            m_color.a = 0f;
+            m_textColor.a = 0f;
         }
-        m_SpriteRenderer.color = m_Color;
-        m_Number.color = m_TextColor;
+        m_spriteRenderer.color = m_color;
+        m_numberSpriteRenderer.color = m_textColor;
 
         if (m_fTime >= m_fDisableTime)
         {
-            m_Color.a = 1f;
-            m_SpriteRenderer.color = m_Color;
+            m_color.a = 1f;
+            m_spriteRenderer.color = m_color;
 
-            m_TextColor.a = 1f;
-            m_Number.color = m_TextColor;
+            m_textColor.a = 1f;
+            m_numberSpriteRenderer.color = m_textColor;
             gameObject.SetActive(false);
         }
     }
 
     public void Init(ItemData data, int iAmount)
     {
-        m_SpriteRenderer.sprite = data.m_iconSprite;
+        m_spriteRenderer.sprite = data.m_iconSprite;
 
         m_fTime = 0f;
 
-        m_Color = m_SpriteRenderer.color;
-        m_Number.gameObject.SetActive(true);
+        m_color = m_spriteRenderer.color;
+        m_numberSpriteRenderer.gameObject.SetActive(true);
 
         if (iAmount > 1)
         {
 
-            foreach (var num in m_NumSprite.m_NumList)
+            foreach (var num in m_numSprite.m_numberList)
             {
-                if (num.m_iNum == iAmount)
+                if (num.m_iNumber == iAmount)
                 {
-                    m_Number.sprite = num.m_Sprite;
+                    m_numberSpriteRenderer.sprite = num.m_sprite;
                     break;
                 }
             }
         }
         else
-            m_Number.gameObject.SetActive(false);
+            m_numberSpriteRenderer.gameObject.SetActive(false);
 
-        m_TextColor = m_Number.color;
+        m_textColor = m_numberSpriteRenderer.color;
     }
 }

@@ -6,7 +6,7 @@ public class ItemDatabase : Singleton<ItemDatabase>
     [SerializeField]
     List<ItemData> m_itemDatas = new List<ItemData>();
 
-    Dictionary<int, ItemData> m_itemtables = new Dictionary<int, ItemData>();
+    Dictionary<int, ItemData> m_itemTables = new Dictionary<int, ItemData>();
 
     protected override void Awake()
     {
@@ -18,12 +18,12 @@ public class ItemDatabase : Singleton<ItemDatabase>
     {
         foreach (var data in m_itemDatas)
         {
-            m_itemtables.Add(data.m_iItemID, data);
+            m_itemTables.Add(data.m_iItemID, data);
         }
     }
 
     public ItemData Get_ItemData(int iItemID)
     {
-        return m_itemtables[iItemID];  
+        return m_itemTables[iItemID];  
     }
 }

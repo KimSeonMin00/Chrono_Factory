@@ -16,14 +16,14 @@ public class Extractor : Building
     {
         m_fTime += Time.deltaTime;
 
-        ResourceManager.Instance.Add_Heat(m_Data.m_fHeatPerSecond * Time.deltaTime);
-        ResourceManager.Instance.Add_Pollution(m_Data.m_fPollutionPerSecond * Time.deltaTime);
+        ResourceManager.Instance.Add_Heat(m_data.m_fHeatPerSecond * Time.deltaTime);
+        ResourceManager.Instance.Add_Pollution(m_data.m_fPollutionPerSecond * Time.deltaTime);
 
         if (currentPlayingCount < MAX_BUILDING_SOUNDS)
         {
             StartCoroutine(PlaySound());
             currentPlayingCount++;
-            Invoke("OnSoundFinished", SoundManager.Instance.m_MachineSound.length);
+            Invoke("OnSoundFinished", SoundManager.Instance.m_machineSound.length);
         }
 
         if (m_fTime >= m_fProduceCooldown)
@@ -47,7 +47,7 @@ public class Extractor : Building
     {
         yield return new WaitForSeconds(Random.Range(0f, 1f));
 
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_MachineSound, 0.1f);
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_machineSound, 0.1f);
     }
     public override void OnInteract()
     {
@@ -61,7 +61,7 @@ public class Extractor : Building
 
     public override void RecalculateBonus()
     {
-        foreach(UpgradeData upgrade in m_Data.m_upgradeList)
+        foreach(UpgradeData upgrade in m_data.m_upgradeList)
         {
             if (upgrade.m_bActivate)
                 UpgradeManager.Instance.Upgrade_Apply(upgrade.Get_EffectType(), this);

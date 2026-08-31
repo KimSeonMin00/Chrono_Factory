@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PoolManager : Singleton<PoolManager>
 {
     [Header("Pool")]
-    [SerializeField] private List<GameObject> m_ObjectPool;
+    [SerializeField] private List<GameObject> m_objectPool;
 
     [Header("Prefab")]
     [SerializeField] private GameObject m_goPrefab;
@@ -17,13 +17,13 @@ public class PoolManager : Singleton<PoolManager>
 
         for(int i=0; i<30; i++)
         {
-            m_ObjectPool.Add(Instantiate(m_goPrefab, this.transform));
+            m_objectPool.Add(Instantiate(m_goPrefab, this.transform));
         }
     }
 
     public GameObject Create_Pool()
     {
-        foreach(GameObject go in m_ObjectPool)
+        foreach(GameObject go in m_objectPool)
         {
             if (go.activeSelf == false)
             {
@@ -33,7 +33,7 @@ public class PoolManager : Singleton<PoolManager>
         }
 
         GameObject newgo = Instantiate(m_goPrefab, this.transform);
-        m_ObjectPool.Add(newgo);
+        m_objectPool.Add(newgo);
 
         return newgo;
     }

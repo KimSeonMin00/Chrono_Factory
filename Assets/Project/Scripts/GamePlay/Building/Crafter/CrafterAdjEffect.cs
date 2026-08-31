@@ -23,7 +23,7 @@ public class CrafterAdjEffect : IUpgradeEffect
             {
                 Producer producer = placed.m_building as Producer;
 
-                switch (producer.Get_Recipe().m_OutputResources.m_item.m_itemName)
+                switch (producer.Get_Recipe().m_outputResources.m_itemData.m_itemName)
                 {
                     case "IronIngot":
                         m_bIsNearIron = true;

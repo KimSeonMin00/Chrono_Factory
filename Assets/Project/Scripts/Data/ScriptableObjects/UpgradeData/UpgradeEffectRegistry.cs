@@ -5,21 +5,21 @@ using NUnit.Framework.Internal.Commands;
 
 public class UpgradeEffectRegistry
 {
-    private Dictionary<UpgradeEffectType, IUpgradeEffect> m_UpgradeEffects;
+    private Dictionary<UpgradeEffectType, IUpgradeEffect> m_upgradeEffects;
 
     public UpgradeEffectRegistry()
     {
-        m_UpgradeEffects = new Dictionary<UpgradeEffectType, IUpgradeEffect>();
+        m_upgradeEffects = new Dictionary<UpgradeEffectType, IUpgradeEffect>();
 
-        m_UpgradeEffects[UpgradeEffectType.ExtractorAdjacency] = new ExtractorAdjEffect();
-        m_UpgradeEffects[UpgradeEffectType.SmeltorAdjacency] = new SmeltorAdjEffect();
-        m_UpgradeEffects[UpgradeEffectType.CrafterAdjacency] = new CrafterAdjEffect();
-        m_UpgradeEffects[UpgradeEffectType.VentUpgrade] = new VentUpgradeEffect();
-        m_UpgradeEffects[UpgradeEffectType.CoolerAdjacency] = new CoolerAdjEffect();
+        m_upgradeEffects[UpgradeEffectType.ExtractorAdjacency] = new ExtractorAdjEffect();
+        m_upgradeEffects[UpgradeEffectType.SmeltorAdjacency] = new SmeltorAdjEffect();
+        m_upgradeEffects[UpgradeEffectType.CrafterAdjacency] = new CrafterAdjEffect();
+        m_upgradeEffects[UpgradeEffectType.VentUpgrade] = new VentUpgradeEffect();
+        m_upgradeEffects[UpgradeEffectType.CoolerAdjacency] = new CoolerAdjEffect();
     }
 
     public void Apply(UpgradeEffectType effectType, Building building)
     {
-        m_UpgradeEffects[effectType].Apply(building);
+        m_upgradeEffects[effectType].Apply(building);
     }
 }

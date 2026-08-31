@@ -5,38 +5,38 @@ using System.Collections.Generic;
 public abstract class Building : MonoBehaviour
 {
     [Header("Common Data")]
-    public BuildingData m_Data;
+    public BuildingData m_data;
     public Vector3Int m_vecOriginCellPos;
-    public string m_BuildingName;
+    public string m_buildingName;
 
     protected float m_fCurrentHP;
     [SerializeField]protected float m_fMaxHP = 100f;
 
     [Header("Play Data")]
-    [SerializeField] protected Vector3Int[] m_NearTile = { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right };
-    public List<Vector3Int> m_ListNearCell;
+    [SerializeField] protected Vector3Int[] m_nearTiles = { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right };
+    public List<Vector3Int> m_nearCellList;
 
     public virtual void Init(BuildingData data, Vector3Int vecCellPos, string Name)
     {
-        m_Data = data;
+        m_data = data;
         m_vecOriginCellPos = vecCellPos;
-        m_BuildingName = Name;
+        m_buildingName = Name;
         m_fCurrentHP = m_fMaxHP;
 
-        m_ListNearCell = new List<Vector3Int>();
+        m_nearCellList = new List<Vector3Int>();
         Set_NearCellPos();
     }
 
     private void Set_NearCellPos()
     {
-        foreach (Vector3Int NearDir in m_NearTile)
+        foreach (Vector3Int NearDir in m_nearTiles)
         {
-            m_ListNearCell.Add(m_vecOriginCellPos + NearDir);
+            m_nearCellList.Add(m_vecOriginCellPos + NearDir);
         }
     }
     public List<Vector3Int> Get_NearCellPos()
     {        
-        return m_ListNearCell;
+        return m_nearCellList;
     }
 
     public abstract void RecalculateBonus();

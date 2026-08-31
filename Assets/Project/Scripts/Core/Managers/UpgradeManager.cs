@@ -8,13 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class UpgradeManager : Singleton<UpgradeManager>
 {
-    [SerializeField] private PermanantData m_Data;
-    [SerializeField] private List<UpgradeData> m_UpgradeList;
-    private UpgradeEffectRegistry m_UpgradeEffects;
+    [SerializeField] private PermanantData m_playerData;
+    [SerializeField] private List<UpgradeData> m_upgradeList;
+    private UpgradeEffectRegistry m_upgradeEffects;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public event Action<int> OnPointChanged;
 
-    private Coroutine m_Calculate;
+    private Coroutine m_calculateCourutine;
 
     protected override void Awake()
     {
@@ -25,7 +25,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
             Reset_Upgrade();
 
-            m_UpgradeEffects = new UpgradeEffectRegistry();
+            m_upgradeEffects = new UpgradeEffectRegistry();
         }
 
         else
@@ -48,22 +48,22 @@ public class UpgradeManager : Singleton<UpgradeManager>
     }
     public void Add_Point(int iPoint)
     {
-        m_Data.m_iTotalPoint += iPoint;
+        m_playerData.m_iTotalPoint += iPoint;
     }
 
     public int Get_Point()
     {
-        return m_Data.m_iTotalPoint;
+        return m_playerData.m_iTotalPoint;
     }
 
     public void Start_CalculatePoint()
     {
-        m_Calculate = StartCoroutine(Calculate_Point());
+        m_calculateCourutine = StartCoroutine(Calculate_Point());
     }
     IEnumerator Calculate_Point()
     {
-        var m_itemList = ResourceManager.Instance.m_ItemDataList;
-        int iCurrentPoints = m_Data.m_iTotalPoint;
+        var m_itemList = ResourceManager.Instance.m_itemDataList;
+        int iCurrentPoints = m_playerData.m_iTotalPoint;
 
         yield return new WaitForSeconds(2f);
 
@@ -74,8 +74,8 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
             while (ResourceManager.Instance.Consume_Resource(item, 1))
             {               
-                m_Data.m_iTotalPoint += item.m_iValuePerUnit;
-                OnPointChanged?.Invoke(m_Data.m_iTotalPoint);
+                m_playerData.m_iTotalPoint += item.m_iValuePerUnit;
+                OnPointChanged?.Invoke(m_playerData.m_iTotalPoint);
 
                 yield return new WaitForSeconds(0.01f);
             }
@@ -90,10 +90,10 @@ public class UpgradeManager : Singleton<UpgradeManager>
                 return false;
 
             int iCost = data.Get_Cost();
-            if (iCost <= m_Data.m_iTotalPoint)
+            if (iCost <= m_playerData.m_iTotalPoint)
             {
-                m_Data.m_iTotalPoint -= iCost;
-                OnPointChanged?.Invoke(m_Data.m_iTotalPoint);
+                m_playerData.m_iTotalPoint -= iCost;
+                OnPointChanged?.Invoke(m_playerData.m_iTotalPoint);
                 data.Upgrade_Level();
                 return true;
             }
@@ -112,7 +112,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     public List<UpgradeData> Get_All_Upgrades()
     {
-        return m_UpgradeList;
+        return m_upgradeList;
     }
 
     public void SkipCalculate()
@@ -120,29 +120,29 @@ public class UpgradeManager : Singleton<UpgradeManager>
         if (GameManager.Instance.m_currentState != GameState.GameOver)
             return;
 
-        if (m_Calculate != null)
-            StopCoroutine(m_Calculate);
+        if (m_calculateCourutine != null)
+            StopCoroutine(m_calculateCourutine);
         else
             return;
 
-            var m_itemList = ResourceManager.Instance.m_ItemDataList;
-        int iCurrentPoints = m_Data.m_iTotalPoint;
+            var m_itemList = ResourceManager.Instance.m_itemDataList;
+        int iCurrentPoints = m_playerData.m_iTotalPoint;
 
         foreach (var item in m_itemList)
         {
             int iAmount = ResourceManager.Instance.Get_ResourceAmount(item);
             ResourceManager.Instance.Consume_Resource(item, iAmount);
-            m_Data.m_iTotalPoint += item.m_iValuePerUnit * iAmount;
+            m_playerData.m_iTotalPoint += item.m_iValuePerUnit * iAmount;
         }
 
-        OnPointChanged?.Invoke(m_Data.m_iTotalPoint);
+        OnPointChanged?.Invoke(m_playerData.m_iTotalPoint);
     }
 
     public void Reset_Upgrade()
     {
-        m_Data.m_iTotalPoint = 0;
+        m_playerData.m_iTotalPoint = 0;
 
-        foreach (UpgradeData data in m_UpgradeList)
+        foreach (UpgradeData data in m_upgradeList)
         {
             data.Reset_Level();
         }
@@ -150,6 +150,6 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     public void Upgrade_Apply(UpgradeEffectType effectType, Building building)
     {
-        m_UpgradeEffects.Apply(effectType, building);
+        m_upgradeEffects.Apply(effectType, building);
     }
 }

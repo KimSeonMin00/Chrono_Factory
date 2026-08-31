@@ -6,15 +6,15 @@ using UnityEngine.UI;
 [System.Serializable]
 public class ColorElement
 {
-    public Image image;
-    public TextMeshProUGUI textmesh;
-    public Light light;
+    public Image m_image;
+    public TextMeshProUGUI m_textmesh;
+    public Light m_light;
 
     public void ApplyColor(Color c)
     {
-        if (image != null) image.color = c;
-        if (textmesh != null) textmesh.color = c;
-        if (light != null) light.color = c;
+        if (m_image != null) m_image.color = c;
+        if (m_textmesh != null) m_textmesh.color = c;
+        if (m_light != null) m_light.color = c;
     }
 }
 public class Change_Color : MonoBehaviour

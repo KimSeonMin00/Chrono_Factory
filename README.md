@@ -23,10 +23,12 @@ Unity
 
 
 Result Scene
-</img width="400" height="240" alt="스크린샷 2026-02-27 194649" src="https://github.com/user-attachments/assets/91250295-420c-4140-b974-21a0287bb863" />
+
+<img width="400" height="240" alt="스크린샷 2026-02-27 194649" src="https://github.com/user-attachments/assets/91250295-420c-4140-b974-21a0287bb863" />
 
 Upgrade Scene
-</img width="400" height="240" alt="스크린샷 2026-02-27 194828" src="https://github.com/user-attachments/assets/cbaf53c3-fe63-4b55-9e72-e70c50044ffe" />
+
+<img width="400" height="240" alt="스크린샷 2026-02-27 194828" src="https://github.com/user-attachments/assets/cbaf53c3-fe63-4b55-9e72-e70c50044ffe" />
 
 
 게임 플레이 흐름

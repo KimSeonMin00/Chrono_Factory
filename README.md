@@ -22,7 +22,8 @@ Unity
 
 
 
-스크린샷/GIF
+<img width="400" height="240" alt="스크린샷 2026-02-27 194420" src="https://github.com/user-attachments/assets/b85f945e-2657-4e31-a869-fd1075b04a0f" />
+
 
 
 

@@ -1,8 +1,8 @@
-\# 게임 이름
+# 게임 이름
 
 
 
-\## Overview
+## Overview
 
 
 
@@ -18,7 +18,7 @@ Unity
 
 
 
-\## Gameplay
+## Gameplay
 
 
 
@@ -30,19 +30,19 @@ Unity
 
 
 
-\## Technical Features
+## Technical Features
 
 
 
-\- Grid-based Building System
+- Grid-based Building System
 
-\- Object Pool
+- Object Pool
 
-\- Event System
+- Event System
 
-\- ScriptableObject
+- ScriptableObject
 
-\- Upgrade Effect System
+- Upgrade Effect System
 
-\- Save / Load
+- Save / Load
 

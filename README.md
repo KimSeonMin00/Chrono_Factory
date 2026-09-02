@@ -1,5 +1,6 @@
-<img width="1000" height="560" alt="스크린샷 2026-02-27 194420" src="https://github.com/user-attachments/assets/b85f945e-2657-4e31-a869-fd1075b04a0f" />
-## 크로노팩토리(Chrono Factory)
+<img width="1000" height="560" alt="스크린샷 2026-02-27 194420" src="https://github.com/user-attachments/assets/b85f945e-2657-4e31-a869-fd1075b04a0f" />  
+
+# 크로노팩토리(Chrono Factory)
 
 
 

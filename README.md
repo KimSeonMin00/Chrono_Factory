@@ -115,7 +115,19 @@ json파일을 통해 save/load를 관리
  게임 상태를 ID 기반으로 직렬화해 JSON으로 저장,  
  Load시 ID기반으로 Database에 접근하여 실제 Data를 복원
 
-## Architecture
+## Develope Progress
+
+### Early
+<img width="400" height="240" alt="스크린샷 2026-01-23 190648" src="https://github.com/user-attachments/assets/ffd9758c-3551-4c10-b59a-06f76f5962b0" />  
+
+### Mid
+<img width="400" height="240" alt="스크린샷 2026-02-23 150639" src="https://github.com/user-attachments/assets/2a115a73-5a34-4f0a-aa66-082229fe8fd7" />  
+
+### Final
+<img width="400" height="240" alt="스크린샷 2026-02-27 194420" src="https://github.com/user-attachments/assets/aaca0c61-5a2d-40f9-8fa0-cf05f6cf22f9" />
+
+
+
 
 
  

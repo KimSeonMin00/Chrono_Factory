@@ -64,7 +64,7 @@ Vector3Int를 Key로 사용하는 Dictionary를 통해 특정 셀의 건물을 �
 
 UpgradeData를 통해 기본적인 데이터를 관리, 실제 적용은 UpgradeManager가 가지고 있는 EffectRegistry에 등록된 Effect클래스를 통해 적용  
 [Assets/Project/Scripts/Core/Managers/UpgradeManager.cs]  
-[Assets/Project/Scripts/Data/UpgradeData/UpgradeData.cs]
+[Assets/Project/Scripts/Data/UpgradeData/UpgradeData.cs]  
 [Assets/Project/Scripts/Data/UpgradeData/UpgradeEffectRegistry.cs]
 
 - Save / Load

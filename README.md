@@ -50,13 +50,37 @@ Upgrade Scene
 
 - Grid-based Building System
 
-- Object Pool
+게임 내 건물의 위치와 점유 셀을 GridDataManager를 통해 관리  
+[Assets/Project/Scripts/Core/Managers/GridDataManager.cs]  
+Vector3Int를 Key로 사용하는 Dictionary를 통해 특정 셀의 건물을 빠르게 조회, 설치 및 제거  
+건물의 크기에 따라 여러 셀을 점유 가능, 이 경우 Dictionary내에서 서로 다른 Key가 같은 Value를 가지도록 설정
 
-- Event System
+- Neighbor Building System
 
-- ScriptableObject
+건물 간 인접 여부에 따라 생산량 등의 보너스를 적용
+건물 생성/제거 시 영향을 받는 인접 타일의 건물을 GridDataManager를 통해 접근하여 인접보너스를 갱신
 
 - Upgrade Effect System
 
+UpgradeData를 통해 기본적인 데이터를 관리, 실제 적용은 UpgradeManager가 가지고 있는 EffectRegistry에 등록된 Effect클래스를 통해 적용  
+[Assets/Project/Scripts/Core/Managers/UpgradeManager.cs]  
+[Assets/Project/Scripts/Data/UpgradeData/UpgradeData.cs]
+[Assets/Project/Scripts/Data/UpgradeData/UpgradeEffectRegistry.cs]
+
 - Save / Load
+
+json파일을 통해 save/load를 관리
+
+- Object Pool
+
+반복적으로 생성/제거가 일어나는 오브젝트에 대해 Object Pool적용
+
+- ScriptableObject
+
+건물, 자원, 업그레이드 요소의 데이터를 SO로 관리
+
+## Technical Challanges
+
+
+
 

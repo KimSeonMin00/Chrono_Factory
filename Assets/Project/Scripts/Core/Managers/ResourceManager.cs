@@ -7,13 +7,13 @@ using UnityEngine.Tilemaps;
 public class ResourceManager : Singleton<ResourceManager>
 {
     [Header("Item List")]
-    public List<ItemData> m_ItemDataList;
-    private Dictionary<ItemData, int> m_Resources = new Dictionary<ItemData, int>();
+    public List<ItemData> m_itemDataList;
+    private Dictionary<ItemData, int> m_resources = new Dictionary<ItemData, int>();
 
     [Header("Base Resource")]
-    [SerializeField] private ResourceAmount m_StartingResource;
+    [SerializeField] private ResourceAmount m_startingResource;
 
-    public Color m_FadeColor;
+    public Color m_fadeColor;
 
     public float m_fHeat = 0f;
     public float m_fPollution = 0f;
@@ -36,16 +36,16 @@ public class ResourceManager : Singleton<ResourceManager>
         if (m_bStop)
             return;
 
-        m_Resources[data] += iAmount;
-        OnResourceChanged?.Invoke(data, m_Resources[data]);
+        m_resources[data] += iAmount;
+        OnResourceChanged?.Invoke(data, m_resources[data]);
     }
 
     public bool Consume_Resource(ItemData data, int iAmount)
     {
-        if (m_Resources[data] >= iAmount)
+        if (m_resources[data] >= iAmount)
         {
-            m_Resources[data] -= iAmount;
-            OnResourceChanged?.Invoke(data, m_Resources[data]);
+            m_resources[data] -= iAmount;
+            OnResourceChanged?.Invoke(data, m_resources[data]);
             return true;
         }
 
@@ -62,7 +62,7 @@ public class ResourceManager : Singleton<ResourceManager>
         if (m_fHeat >= m_fMaxHeat)
         {
             m_fHeat = m_fMaxHeat;
-            Fade.Instance.FadeTo("Result", GameState.GameOver, m_FadeColor);
+            Fade.Instance.FadeTo("Result", GameState.GameOver, m_fadeColor);
             m_fHeat = 0f;
             m_bStop = true;
         }
@@ -93,7 +93,7 @@ public class ResourceManager : Singleton<ResourceManager>
         if (m_fPollution >= m_fMaxPollution)
         {
             m_fPollution = m_fMaxPollution;
-            Fade.Instance.FadeTo("Result", GameState.GameOver, m_FadeColor);
+            Fade.Instance.FadeTo("Result", GameState.GameOver, m_fadeColor);
             m_fPollution = 0f;
             m_bStop = true;
         }
@@ -121,20 +121,20 @@ public class ResourceManager : Singleton<ResourceManager>
         m_fHeat = 0f;
         m_fPollution = 0f;
 
-        foreach (var item in m_ItemDataList)
+        foreach (var item in m_itemDataList)
             if (item != null)
             {
-                m_Resources[item] = 0;
-                OnResourceChanged?.Invoke(item, m_Resources[item]);
+                m_resources[item] = 0;
+                OnResourceChanged?.Invoke(item, m_resources[item]);
             }
 
-        if(m_StartingResource.m_item != null)
-            Add_Resource(m_StartingResource.m_item, m_StartingResource.m_iAmount);        
+        if(m_startingResource.m_itemData != null)
+            Add_Resource(m_startingResource.m_itemData, m_startingResource.m_iAmount);        
     }
 
     public int Get_ResourceAmount(ItemData type)
     {
-        return m_Resources[type];
+        return m_resources[type];
     }
 
     private void OnEnable()

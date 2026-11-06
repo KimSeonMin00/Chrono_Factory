@@ -5,18 +5,18 @@ using UnityEngine.Rendering;
 public class SoundManager : Singleton<SoundManager>
 {
     [Header("Audio Sources")]
-    [SerializeField] private AudioSource m_BgmSource;
-    [SerializeField] private List<AudioSource> m_SFXSources;
+    [SerializeField] private AudioSource m_bgmSource;
+    [SerializeField] private List<AudioSource> m_sfxSources;
 
-    [SerializeField] private AudioSource m_AlertSource;
-    [SerializeField] private AudioSource m_PortalSource;
+    [SerializeField] private AudioSource m_alertSource;
+    [SerializeField] private AudioSource m_portalSource;
 
     [Header("AudioClip")]
-    public AudioClip m_ClickSound;
-    public AudioClip m_UpgradeSound;
-    public AudioClip m_AlertSound;
-    public AudioClip m_MachineSound;
-    public AudioClip m_PortalSound;
+    public AudioClip m_clickSound;
+    public AudioClip m_upgradeSound;
+    public AudioClip m_alertSound;
+    public AudioClip m_machineSound;
+    public AudioClip m_portalSound;
 
 
     public void PlaySFX(AudioClip clip, float volume = 1.0f)
@@ -24,7 +24,7 @@ public class SoundManager : Singleton<SoundManager>
         if (clip == null) 
             return;
 
-        foreach(var source in m_SFXSources)
+        foreach(var source in m_sfxSources)
         {
             if(!source.isPlaying)
             {
@@ -35,38 +35,38 @@ public class SoundManager : Singleton<SoundManager>
             }
         }
 
-        m_SFXSources[0].PlayOneShot(clip, volume);
+        m_sfxSources[0].PlayOneShot(clip, volume);
     }
 
     public void PlayBGM(AudioClip clip, bool loop = true)
     {
-        m_BgmSource.clip = clip;
-        m_BgmSource.loop = loop;
-        m_BgmSource.Play();
+        m_bgmSource.clip = clip;
+        m_bgmSource.loop = loop;
+        m_bgmSource.Play();
     }
 
     public void PlayAlert()
     {
-        if (!m_AlertSource.isPlaying)
+        if (!m_alertSource.isPlaying)
         {
-            m_AlertSource.clip = m_AlertSound;
-            m_AlertSource.volume = 2.0f;
-            m_AlertSource.Play();
+            m_alertSource.clip = m_alertSound;
+            m_alertSource.volume = 2.0f;
+            m_alertSource.Play();
         }       
     }
     public void PlayPortal()
     {
-        if (!m_PortalSource.isPlaying)
+        if (!m_portalSource.isPlaying)
         {
-            m_PortalSource.clip = m_PortalSound;
-            m_PortalSource.volume = 1.0f;
-            m_PortalSource.Play();
+            m_portalSource.clip = m_portalSound;
+            m_portalSource.volume = 1.0f;
+            m_portalSource.Play();
         }
     }
 
     public void StopAllSound()
     {
-        foreach (var source in m_SFXSources)
+        foreach (var source in m_sfxSources)
         {
             if (source.isPlaying)
             {
@@ -74,8 +74,8 @@ public class SoundManager : Singleton<SoundManager>
             }
         }
 
-        if (m_AlertSource.isPlaying)
-            m_AlertSource.Stop();
+        if (m_alertSource.isPlaying)
+            m_alertSource.Stop();
 
         Extractor.currentPlayingCount = 0;
     }

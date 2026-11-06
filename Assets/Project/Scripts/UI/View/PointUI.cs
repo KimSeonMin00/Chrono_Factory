@@ -4,11 +4,11 @@ using UnityEngine;
 public class PointUI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private TextMeshProUGUI m_TMPText;
+    [SerializeField] private TextMeshProUGUI m_tmpText;
 
     private void Awake()
     {
-        m_TMPText = GetComponentInChildren<TextMeshProUGUI>();
+        m_tmpText = GetComponentInChildren<TextMeshProUGUI>();
     }
     private void Start()
     {
@@ -26,6 +26,6 @@ public class PointUI : MonoBehaviour
 
     public void Update_Point(int iPoint)
     {
-        m_TMPText.text = iPoint.ToString();
+        m_tmpText.text = iPoint.ToString();
     }
 }

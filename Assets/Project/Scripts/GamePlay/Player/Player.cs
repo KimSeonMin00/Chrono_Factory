@@ -7,9 +7,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float m_fSpeed;
 
     [Header("Components")]
-    [SerializeField] private SpriteRenderer m_SpriteRenderer;
-    [SerializeField] private Rigidbody m_Rigid;
-    [SerializeField] private Animator m_Anim;
+    [SerializeField] private SpriteRenderer m_spriteRenderer;
+    [SerializeField] private Rigidbody m_rigidBody;
+    [SerializeField] private Animator m_anim;
     private Vector3 m_vecMoveDirection;
 
     public static Vector3 m_vecPlayerPos;
@@ -38,17 +38,17 @@ public class Player : MonoBehaviour
         Vector2 vecInput = InputManager.Instance.m_MoveInput;
 
         if (vecInput.x > 0)
-            m_SpriteRenderer.flipX = false;
+            m_spriteRenderer.flipX = false;
         else if (vecInput.x < 0)
-            m_SpriteRenderer.flipX = true;
+            m_spriteRenderer.flipX = true;
 
         m_vecMoveDirection = new Vector3(vecInput.x, 0f, vecInput.y).normalized;
 
-        m_Rigid.linearVelocity = m_vecMoveDirection * m_fSpeed;
+        m_rigidBody.linearVelocity = m_vecMoveDirection * m_fSpeed;
 
         if (m_vecMoveDirection.magnitude > 0f)
-            m_Anim.SetBool("Move", true);
+            m_anim.SetBool("Move", true);
         else
-            m_Anim.SetBool("Move", false);
+            m_anim.SetBool("Move", false);
     }
 }

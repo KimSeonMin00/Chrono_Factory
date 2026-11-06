@@ -3,14 +3,14 @@ using UnityEngine;
 //건물 선택시 반투명 상태로 설치 예정 위치에 생성, 설치 불가시 붉은색으로 변경
 public class GhostObject : MonoBehaviour
 {
-    private SpriteRenderer m_SpriteRenderer;
+    private SpriteRenderer m_spriteRenderer;
 
-    [SerializeField] private Color m_EnableColor;
-    [SerializeField] private Color m_DisableColor;
+    [SerializeField] private Color m_enableColor;
+    [SerializeField] private Color m_disableColor;
 
     private void Awake()
     {
-        m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        m_spriteRenderer = GetComponent<SpriteRenderer>();
         
     }
 
@@ -21,7 +21,7 @@ public class GhostObject : MonoBehaviour
 
     public void Set_Ghost(BuildingData data)
     {
-        m_SpriteRenderer.sprite = data.m_IconSprite;
+        m_spriteRenderer.sprite = data.m_iconSprite;
     }
 
     public void Update_Ghost(Vector3 vecPos, bool bEnablePlace)
@@ -29,9 +29,9 @@ public class GhostObject : MonoBehaviour
         transform.position = vecPos;
 
         if (bEnablePlace)
-            m_SpriteRenderer.color = m_EnableColor;
+            m_spriteRenderer.color = m_enableColor;
 
         else
-            m_SpriteRenderer.color = m_DisableColor;
+            m_spriteRenderer.color = m_disableColor;
     }
 }

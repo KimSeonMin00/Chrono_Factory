@@ -19,7 +19,7 @@ public class PenaltyControllerData : BuildingData
     {
         PenaltyController penaltyController = goInstance.GetComponent<PenaltyController>(); 
 
-        penaltyController.Init(this, vecCellPos, m_buildingName);
+        penaltyController.Init(this, vecCellPos, m_BuildingName);
 
         penaltyController.Setup(m_fConsumeHeat, m_fConsumePollution);
 

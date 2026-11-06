@@ -5,29 +5,29 @@ using UnityEngine.UI;
 public class ResourceUI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField]private TextMeshProUGUI m_tmpText;
+    [SerializeField]private TextMeshProUGUI m_TMPText;
 
     [Header("Setting")]
-    [SerializeField] private ItemData m_itemData;
+    [SerializeField] private ItemData m_ItemData;
 
     private void Awake()
     {
-        m_tmpText = GetComponentInChildren<TextMeshProUGUI>();
+        m_TMPText = GetComponentInChildren<TextMeshProUGUI>();
 
-        GetComponent<Image>().sprite = m_itemData.m_iconSprite;      
+        GetComponent<Image>().sprite = m_ItemData.m_iconSprite;      
     }
 
     private void Start()
     {
         ResourceManager.Instance.OnResourceChanged += Change_Amount;
-        m_tmpText.text = ResourceManager.Instance.Get_ResourceAmount(m_itemData).ToString();
+        m_TMPText.text = ResourceManager.Instance.Get_ResourceAmount(m_ItemData).ToString();
     }
 
     public void Change_Amount(ItemData data, int iAmount)
     {
-        if(data == m_itemData)
+        if(data == m_ItemData)
         {
-            m_tmpText.text = iAmount.ToString();
+            m_TMPText.text = iAmount.ToString();
         }
     }
 

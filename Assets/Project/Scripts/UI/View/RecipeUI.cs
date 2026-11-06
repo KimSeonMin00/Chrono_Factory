@@ -4,26 +4,26 @@ using UnityEngine.UI;
 public class RecipeUI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Image m_outputImage;
+    [SerializeField] private Image m_OutputImage;
 
-    [SerializeField]private PlacementInfo m_placementInfo;
+    [SerializeField]private PlacementInfo m_Placement;
 
     private void Awake()
     {
-        m_placementInfo = new PlacementInfo();
+        m_Placement = new PlacementInfo();
     }
     public void Set_InfoToController()
     {
-        PlacementController.Instance.Set_BuildingData(m_placementInfo);
+        PlacementController.Instance.Set_BuildingData(m_Placement);
     }
 
     public void Set_Info(BuildingData building, RecipeData recipe)
     {
-        m_placementInfo.m_buildingData = building;
-        m_placementInfo.m_recipeData = recipe;
+        m_Placement.m_BuildingData = building;
+        m_Placement.m_RecipeData = recipe;
 
-        m_outputImage = GetComponentsInChildren<Image>()[1];
-        m_outputImage.sprite = recipe.m_outputSprite;
+        m_OutputImage = GetComponentsInChildren<Image>()[1];
+        m_OutputImage.sprite = recipe.m_OutputSprite;
     }
 
 }

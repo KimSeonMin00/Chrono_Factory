@@ -5,41 +5,41 @@ using System.Collections.Generic;
 public abstract class Building : MonoBehaviour
 {
     [Header("Common Data")]
-    public BuildingData m_data;
+    public BuildingData m_Data;
     public Vector3Int m_vecOriginCellPos;
-    public string m_buildingName;
+    public string m_BuildingName;
 
     protected float m_fCurrentHP;
     [SerializeField]protected float m_fMaxHP = 100f;
 
     [Header("Play Data")]
-    [SerializeField] protected Vector3Int[] m_nearTiles = { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right };
-    public List<Vector3Int> m_nearCellList;
+    [SerializeField] protected Vector3Int[] m_NearTile = { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right };
+    public List<Vector3Int> m_ListNearCell;
 
     public virtual void Init(BuildingData data, Vector3Int vecCellPos, string Name)
     {
-        m_data = data;
+        m_Data = data;
         m_vecOriginCellPos = vecCellPos;
-        m_buildingName = Name;
+        m_BuildingName = Name;
         m_fCurrentHP = m_fMaxHP;
 
-        m_nearCellList = new List<Vector3Int>();
+        m_ListNearCell = new List<Vector3Int>();
         Set_NearCellPos();
     }
 
     //인접 타일 설정
     private void Set_NearCellPos()
     {
-        foreach (Vector3Int NearDir in m_nearTiles)
+        foreach (Vector3Int NearDir in m_NearTile)
         {
-            m_nearCellList.Add(m_vecOriginCellPos + NearDir);
+            m_ListNearCell.Add(m_vecOriginCellPos + NearDir);
         }
     }
 
     //인접한 타일 가져오기
     public List<Vector3Int> Get_NearCellPos()
     {        
-        return m_nearCellList;
+        return m_ListNearCell;
     }
 
     public abstract void RecalculateBonus();

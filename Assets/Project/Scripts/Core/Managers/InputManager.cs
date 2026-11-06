@@ -4,22 +4,22 @@ using UnityEngine.EventSystems;
 
 public class InputManager : Singleton<InputManager>
 {
-    private GameInput m_gameInput;
+    private GameInput m_GameInput;
 
-    private bool m_bisPointerOverUI;
+    private bool isPointerOverUI;
 
     public event Action OnLeftClicked;
     public event Action OnRightClicked;
     public event Action OnInteract;
 
-    public Vector2 m_MoveInput => m_gameInput.Player.Move.ReadValue<Vector2>();
-    public Vector2 m_MousePos => m_gameInput.Player.MousePosition.ReadValue<Vector2>();
+    public Vector2 m_MoveInput => m_GameInput.Player.Move.ReadValue<Vector2>();
+    public Vector2 m_MousePos => m_GameInput.Player.MousePosition.ReadValue<Vector2>();
     protected override void Awake()
     {
         if (_instance == null)
         {
             _instance = this;
-            m_gameInput = new GameInput();
+            m_GameInput = new GameInput();
             DontDestroyOnLoad(gameObject);
         }
 
@@ -31,31 +31,31 @@ public class InputManager : Singleton<InputManager>
 
     void Update()
     {
-        m_bisPointerOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        isPointerOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
     }
     public bool IsPointerOverUI()
     {
-        return m_bisPointerOverUI;
+        return isPointerOverUI;
     }
 
     private void OnEnable()
     {
-        m_gameInput.Enable();
+        m_GameInput.Enable();
 
-        m_gameInput.Player.LeftClick.performed += _ => OnLeftClicked?.Invoke();
-        m_gameInput.Player.RightClick.performed += _ => OnRightClicked?.Invoke();
-        m_gameInput.Player.Interact.performed += _ => OnInteract?.Invoke();
+        m_GameInput.Player.LeftClick.performed += _ => OnLeftClicked?.Invoke();
+        m_GameInput.Player.RightClick.performed += _ => OnRightClicked?.Invoke();
+        m_GameInput.Player.Interact.performed += _ => OnInteract?.Invoke();
     }
 
     private void OnDisable()
     {
-        if (m_gameInput != null)
+        if (m_GameInput != null)
         {
-            m_gameInput.Player.LeftClick.performed -= _ => OnLeftClicked?.Invoke();
-            m_gameInput.Player.RightClick.performed -= _ => OnRightClicked?.Invoke();
-            m_gameInput.Player.Interact.performed -= _ => OnInteract?.Invoke();
+            m_GameInput.Player.LeftClick.performed -= _ => OnLeftClicked?.Invoke();
+            m_GameInput.Player.RightClick.performed -= _ => OnRightClicked?.Invoke();
+            m_GameInput.Player.Interact.performed -= _ => OnInteract?.Invoke();
 
-            m_gameInput.Disable();
+            m_GameInput.Disable();
         }
     }
 

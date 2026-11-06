@@ -5,10 +5,10 @@ using UnityEngine;
 public class UpgradeData : ScriptableObject
 {
     [SerializeField] public int m_iUpgradeID;
-    [SerializeField] private string m_upgradeName;
+    [SerializeField] private string m_UpgradeName;
     [TextArea]
-    public string m_upgradeDesc;
-    public Sprite m_iconSprite;
+    public string m_UpgradeDesc;
+    public Sprite m_IconSprite;
     [SerializeField] private bool bActivate = false;
     public bool m_bActivate => bActivate;
 

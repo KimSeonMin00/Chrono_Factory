@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class PenaltyBarHandler : MonoBehaviour
 {
-    [SerializeField] Image m_heatBar;
-    [SerializeField] Image m_pollutionBar;
+    [SerializeField] Image m_HeatBar;
+    [SerializeField] Image m_PollutionBar;
 
     float m_fHeatRatio;
     float m_fPollutionRatio;
@@ -12,16 +12,16 @@ public class PenaltyBarHandler : MonoBehaviour
     bool m_bHeatAlert;
     bool m_bPollutionAlert;
 
-    [SerializeField] Change_Color m_heatChange;
-    [SerializeField] Change_Color m_pollutionChange;
-    [SerializeField] Change_Color m_lightChange;
+    [SerializeField] Change_Color m_HeatChange;
+    [SerializeField] Change_Color m_PollutionChange;
+    [SerializeField] Change_Color m_LightChange;
 
     void Update()
     {
         m_fHeatRatio = ResourceManager.Instance.Get_HeatRatio();
-        m_heatBar.fillAmount = m_fHeatRatio;
+        m_HeatBar.fillAmount = m_fHeatRatio;
         m_fPollutionRatio = ResourceManager.Instance.Get_PollutionRatio();
-        m_pollutionBar.fillAmount = m_fPollutionRatio;
+        m_PollutionBar.fillAmount = m_fPollutionRatio;
 
         if (m_fHeatRatio >= 0.5f)
             m_bHeatAlert = true;
@@ -33,18 +33,18 @@ public class PenaltyBarHandler : MonoBehaviour
         else
             m_bPollutionAlert = false;
 
-        m_heatChange.Activate(m_bHeatAlert);
-        m_pollutionChange.Activate(m_bPollutionAlert);
+        m_HeatChange.Activate(m_bHeatAlert);
+        m_PollutionChange.Activate(m_bPollutionAlert);
 
-        if(m_lightChange == null)
-            m_lightChange = GameObject.FindWithTag("MainLight").GetComponent<Change_Color>();
+        if(m_LightChange == null)
+            m_LightChange = GameObject.FindWithTag("MainLight").GetComponent<Change_Color>();
 
         if (m_bHeatAlert || m_bPollutionAlert)
         {
-            m_lightChange.Activate(true);
+            m_LightChange.Activate(true);
             SoundManager.Instance.PlayAlert();
         }
         else
-            m_lightChange.Activate(false);
+            m_LightChange.Activate(false);
     }
 }

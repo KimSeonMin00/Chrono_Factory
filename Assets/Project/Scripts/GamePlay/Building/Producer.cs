@@ -29,8 +29,8 @@ public abstract class Producer : Building
         {
             m_fTime += Time.deltaTime * m_fCurrentProduceSpeed;
 
-            ResourceManager.Instance.Add_Heat(m_data.m_fHeatPerSecond * Time.deltaTime);
-            ResourceManager.Instance.Add_Pollution(m_data.m_fPollutionPerSecond * Time.deltaTime);
+            ResourceManager.Instance.Add_Heat(m_Data.m_fHeatPerSecond * Time.deltaTime);
+            ResourceManager.Instance.Add_Pollution(m_Data.m_fPollutionPerSecond * Time.deltaTime);
 
             if (m_fTime >= m_recipeData.m_fProductionTime)
             {
@@ -72,11 +72,11 @@ public abstract class Producer : Building
         if (m_recipeData == null)
             return false;
 
-        List<ResourceAmount> RequireResources = m_recipeData.m_inputResources;
+        List<ResourceAmount> RequireResources = m_recipeData.m_InputResources;
 
         foreach (var resource in RequireResources)
         {
-            if (ResourceManager.Instance.Get_ResourceAmount(resource.m_itemData) < resource.m_iAmount)
+            if (ResourceManager.Instance.Get_ResourceAmount(resource.m_item) < resource.m_iAmount)
                 return false;
         }
 
@@ -88,11 +88,11 @@ public abstract class Producer : Building
         if (m_recipeData == null)
             return;
 
-        List<ResourceAmount> RequireResources = m_recipeData.m_inputResources;
+        List<ResourceAmount> RequireResources = m_recipeData.m_InputResources;
 
         foreach (var resource in RequireResources)
         {
-            ResourceManager.Instance.Consume_Resource(resource.m_itemData, resource.m_iAmount);
+            ResourceManager.Instance.Consume_Resource(resource.m_item, resource.m_iAmount);
         }
 
         m_bIsProduce = true;
@@ -103,8 +103,8 @@ public abstract class Producer : Building
         if (m_recipeData == null)
             return;
 
-        ResourceManager.Instance.Add_Resource(m_recipeData.m_outputResources.m_itemData, m_recipeData.m_outputResources.m_iAmount * m_iCurrentProduceAmount);
-        ResourceManager.Instance.Produce_Effect(m_recipeData.m_outputResources.m_itemData, transform.position, m_recipeData.m_outputResources.m_iAmount * m_iCurrentProduceAmount);
+        ResourceManager.Instance.Add_Resource(m_recipeData.m_OutputResources.m_item, m_recipeData.m_OutputResources.m_iAmount * m_iCurrentProduceAmount);
+        ResourceManager.Instance.Produce_Effect(m_recipeData.m_OutputResources.m_item, transform.position, m_recipeData.m_OutputResources.m_iAmount * m_iCurrentProduceAmount);
 
         foreach (Vector3Int cell in Get_NearCellPos())
         {

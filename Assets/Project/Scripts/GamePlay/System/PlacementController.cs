@@ -9,8 +9,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public struct PlacementInfo
 {
-    public BuildingData m_buildingData;
-    public RecipeData m_recipeData;
+    public BuildingData m_BuildingData;
+    public RecipeData m_RecipeData;
 }
 
 //플레이 도중 건물 설치를 담당하는 클래스
@@ -85,9 +85,9 @@ public class PlacementController : Singleton<PlacementController>
     {
         Vector3 vecWorldPos = Get_WorldPos(vecCellPos);
 
-        if (m_PlacementInfo.m_buildingData != null)
+        if (m_PlacementInfo.m_BuildingData != null)
         {
-            if (!m_PlacementInfo.m_buildingData.IsEnable_Spawn(vecCellPos))
+            if (!m_PlacementInfo.m_BuildingData.IsEnable_Spawn(vecCellPos))
                 return;
 
             if (!Consume_Cost())
@@ -96,25 +96,25 @@ public class PlacementController : Singleton<PlacementController>
                 return;
             }
 
-            if (m_PlacementInfo.m_buildingData.m_goPrefab != null)
+            if (m_PlacementInfo.m_BuildingData.m_goPrefab != null)
             {
-                m_PlacementInfo.m_buildingData.Spawn_Instance(vecWorldPos, vecCellPos, m_PlacementInfo.m_recipeData);
+                m_PlacementInfo.m_BuildingData.Spawn_Instance(vecWorldPos, vecCellPos, m_PlacementInfo.m_RecipeData);
             }
         }
     }
 
     public bool Consume_Cost()
     {
-        List<ResourceAmount> m_Costs = m_PlacementInfo.m_buildingData.m_totalCost;
+        List<ResourceAmount> m_Costs = m_PlacementInfo.m_BuildingData.m_Cost;
 
         foreach (var cost in m_Costs)
         {
-            if (ResourceManager.Instance.Get_ResourceAmount(cost.m_itemData) < cost.m_iAmount)
+            if (ResourceManager.Instance.Get_ResourceAmount(cost.m_item) < cost.m_iAmount)
                 return false;
         }
 
         foreach (var cost in m_Costs)
-            ResourceManager.Instance.Consume_Resource(cost.m_itemData, cost.m_iAmount);
+            ResourceManager.Instance.Consume_Resource(cost.m_item, cost.m_iAmount);
 
         return true;
     }
@@ -132,7 +132,7 @@ public class PlacementController : Singleton<PlacementController>
             Vector3 vecWorldPos = m_Grid.CellToWorld(MouseCursorPointer.Instance.m_vecCurrentCell);
             Vector3 vecCellSize = m_Grid.cellSize;
 
-            vecWorldPos.x += vecCellSize.x * 0.5f * (float)m_PlacementInfo.m_buildingData.m_iWidth;
+            vecWorldPos.x += vecCellSize.x * 0.5f * (float)m_PlacementInfo.m_BuildingData.m_iWidth;
             vecWorldPos.y = 0.01f;//Ground와의 겹침을 방지하기 위해 살짝 띄움
 
             return vecWorldPos;
@@ -148,12 +148,12 @@ public class PlacementController : Singleton<PlacementController>
 
     public void Update_Ghost()
     {
-        if (m_PlacementInfo.m_buildingData != null)
+        if (m_PlacementInfo.m_BuildingData != null)
         {
             Vector3Int vecCellPos = MouseCursorPointer.Instance.m_vecCurrentCell;
 
             if(m_GhostObject != null)
-                m_GhostObject.Update_Ghost(Get_WorldPos(vecCellPos), m_PlacementInfo.m_buildingData.IsEnable_Spawn(vecCellPos));
+                m_GhostObject.Update_Ghost(Get_WorldPos(vecCellPos), m_PlacementInfo.m_BuildingData.IsEnable_Spawn(vecCellPos));
         }
     }
 
@@ -161,8 +161,8 @@ public class PlacementController : Singleton<PlacementController>
     public void Set_BuildingData(PlacementInfo placeInfo)
     {
         m_PlacementInfo = placeInfo;
-        m_GhostObject.Set_Ghost(m_PlacementInfo.m_buildingData);
+        m_GhostObject.Set_Ghost(m_PlacementInfo.m_BuildingData);
 
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_clickSound);
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_ClickSound);
     }
 }

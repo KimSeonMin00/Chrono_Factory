@@ -9,13 +9,13 @@ using UnityEngine.SceneManagement;
 //업그레이드 포인트와 업그레이트 Data, Effect 관리
 public class UpgradeManager : Singleton<UpgradeManager>
 {
-    [SerializeField] private PermanantData m_playerData;//업그레이드 포인트
-    [SerializeField] private List<UpgradeData> m_upgradeList;//Upgrade Data
-    private UpgradeEffectRegistry m_upgradeEffects;//실제 Upgrade Effect 모음
+    [SerializeField] private PermanantData m_Data;//업그레이드 포인트
+    [SerializeField] private List<UpgradeData> m_UpgradeList;//Upgrade Data
+    private UpgradeEffectRegistry m_UpgradeEffects;//실제 Upgrade Effect 모음
 
     public event Action<int> OnPointChanged;
 
-    private Coroutine m_calculateCourutine;
+    private Coroutine m_CalculateCourutine;
 
     protected override void Awake()
     {
@@ -26,7 +26,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
             Reset_Upgrade();
 
-            m_upgradeEffects = new UpgradeEffectRegistry();
+            m_UpgradeEffects = new UpgradeEffectRegistry();
         }
 
         else
@@ -49,24 +49,24 @@ public class UpgradeManager : Singleton<UpgradeManager>
     }
     public void Add_Point(int iPoint)
     {
-        m_playerData.m_iTotalPoint += iPoint;
+        m_Data.m_iTotalPoint += iPoint;
     }
 
     public int Get_Point()
     {
-        return m_playerData.m_iTotalPoint;
+        return m_Data.m_iTotalPoint;
     }
 
     public void Start_CalculatePoint()
     {
-        m_calculateCourutine = StartCoroutine(Calculate_Point());
+        m_CalculateCourutine = StartCoroutine(Calculate_Point());
     }
 
     //게임 오버 후 포인트를 정산 하는 코루틴, 자원이 서서히 줄어듬에 따라 포인트가 점점 올라가는 것을 시각적으로 보여주기 위함
     IEnumerator Calculate_Point()
     {
-        var m_itemList = ResourceManager.Instance.m_itemDataList;
-        int iCurrentPoints = m_playerData.m_iTotalPoint;
+        var m_itemList = ResourceManager.Instance.m_ItemDataList;
+        int iCurrentPoints = m_Data.m_iTotalPoint;
 
         yield return new WaitForSeconds(2f);
 
@@ -77,8 +77,8 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
             while (ResourceManager.Instance.Consume_Resource(item, 1))
             {               
-                m_playerData.m_iTotalPoint += item.m_iValuePerUnit;
-                OnPointChanged?.Invoke(m_playerData.m_iTotalPoint);
+                m_Data.m_iTotalPoint += item.m_iValuePerUnit;
+                OnPointChanged?.Invoke(m_Data.m_iTotalPoint);
 
                 yield return new WaitForSeconds(0.01f);
             }
@@ -93,10 +93,10 @@ public class UpgradeManager : Singleton<UpgradeManager>
                 return false;
 
             int iCost = data.Get_Cost();
-            if (iCost <= m_playerData.m_iTotalPoint)
+            if (iCost <= m_Data.m_iTotalPoint)
             {
-                m_playerData.m_iTotalPoint -= iCost;
-                OnPointChanged?.Invoke(m_playerData.m_iTotalPoint);
+                m_Data.m_iTotalPoint -= iCost;
+                OnPointChanged?.Invoke(m_Data.m_iTotalPoint);
                 data.Upgrade_Level();
                 return true;
             }
@@ -116,7 +116,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     public List<UpgradeData> Get_All_Upgrades()
     {
-        return m_upgradeList;
+        return m_UpgradeList;
     }
 
     //result 씬에서 화면 클릭시 코루틴을 종료하고 바로 최종 포인트를 계산
@@ -125,29 +125,29 @@ public class UpgradeManager : Singleton<UpgradeManager>
         if (GameManager.Instance.m_currentState != GameState.GameOver)
             return;
 
-        if (m_calculateCourutine != null)
-            StopCoroutine(m_calculateCourutine);
+        if (m_CalculateCourutine != null)
+            StopCoroutine(m_CalculateCourutine);
         else
             return;
 
-            var m_itemList = ResourceManager.Instance.m_itemDataList;
-        int iCurrentPoints = m_playerData.m_iTotalPoint;
+            var m_itemList = ResourceManager.Instance.m_ItemDataList;
+        int iCurrentPoints = m_Data.m_iTotalPoint;
 
         foreach (var item in m_itemList)
         {
             int iAmount = ResourceManager.Instance.Get_ResourceAmount(item);
             ResourceManager.Instance.Consume_Resource(item, iAmount);
-            m_playerData.m_iTotalPoint += item.m_iValuePerUnit * iAmount;
+            m_Data.m_iTotalPoint += item.m_iValuePerUnit * iAmount;
         }
 
-        OnPointChanged?.Invoke(m_playerData.m_iTotalPoint);
+        OnPointChanged?.Invoke(m_Data.m_iTotalPoint);
     }
 
     public void Reset_Upgrade()
     {
-        m_playerData.m_iTotalPoint = 0;
+        m_Data.m_iTotalPoint = 0;
 
-        foreach (UpgradeData data in m_upgradeList)
+        foreach (UpgradeData data in m_UpgradeList)
         {
             data.Reset_Level();
         }
@@ -155,6 +155,6 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     public void Upgrade_Apply(UpgradeEffectType effectType, Building building)
     {
-        m_upgradeEffects.Apply(effectType, building);
+        m_UpgradeEffects.Apply(effectType, building);
     }
 }

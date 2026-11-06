@@ -5720,7 +5720,7 @@ MonoBehaviour:
   m_ColorRef:
     image: {fileID: 0}
     textmesh: {fileID: 0}
-    light: {fileID: 1988188072}
+    light: {fileID: 0}
   m_ColorOrigin: {r: 0.5372549, g: 0.5019608, b: 0.8784314, a: 1}
   m_ColorChange: {r: 1, g: 0.4, b: 0.38039216, a: 1}
   m_fChangeDelay: 1

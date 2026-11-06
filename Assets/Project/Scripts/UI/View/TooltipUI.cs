@@ -8,11 +8,11 @@ using System.Collections.Generic;
 //건물, 업그레이드 정보 툴팁
 public class TooltipUI : MonoBehaviour
 {
-    [SerializeField] private Image m_sprite;
-    [SerializeField] private TextMeshProUGUI m_tmpNameText;
-    [SerializeField] private TextMeshProUGUI m_tmpDescText;
+    [SerializeField] private Image m_Sprite;
+    [SerializeField] private TextMeshProUGUI m_NameText;
+    [SerializeField] private TextMeshProUGUI m_DescText;
 
-    [SerializeField] private List<CostUI> m_costOption;//건물 정보를 볼때만 활성화
+    [SerializeField] private List<CostUI> m_CostOption;//건물 정보를 볼때만 활성화
 
     private RectTransform m_rectTrasform;
 
@@ -34,9 +34,9 @@ public class TooltipUI : MonoBehaviour
     {
         this.gameObject.SetActive(true);
 
-        m_tmpNameText.text = name;
-        m_tmpDescText.text = desc;
-        m_sprite.sprite = sprite;
+        m_NameText.text = name;
+        m_DescText.text = desc;
+        m_Sprite.sprite = sprite;
 
         Off_Option();
     }
@@ -52,14 +52,14 @@ public class TooltipUI : MonoBehaviour
 
         for(int i =0; i < resources.Count; i++)
         {
-            m_costOption[i].Set_Data(resources[i]);
-            m_costOption[i].gameObject.SetActive(true);
+            m_CostOption[i].Set_Data(resources[i]);
+            m_CostOption[i].gameObject.SetActive(true);
         }
     }
 
     public void Off_Option()
     {
-        foreach (var cost in m_costOption)
+        foreach (var cost in m_CostOption)
             cost.gameObject.SetActive(false);
     }
 }

@@ -6,49 +6,49 @@ using UnityEngine.UI;
 public class BuildingUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("References")]
-    [SerializeField] private Image m_buildingImage;
+    [SerializeField] private Image m_BuildingImage;
     [Header("Data")]
     [SerializeField] private BuildingData m_buildingData;
-    [SerializeField] private List<RecipeData> m_recipeDataList;
+    [SerializeField] private List<RecipeData> m_RecipeDataList;
 
     [Header("List")]
-    [SerializeField] private RecipeUIList m_recipeUIList;
+    [SerializeField] private RecipeUIList m_RecipeUIList;
     
 
     private void Awake()
     {
         if (m_buildingData != null)
         {
-            m_buildingImage = GetComponentsInChildren<Image>()[1];
-            m_buildingImage.sprite = m_buildingData.m_iconSprite;
+            m_BuildingImage = GetComponentsInChildren<Image>()[1];
+            m_BuildingImage.sprite = m_buildingData.m_IconSprite;
         }
 
-        if (m_recipeDataList.Count != 0)
+        if (m_RecipeDataList.Count != 0)
             Set_Recipe();
     }
 
     public void Set_Recipe()
     {
-        m_recipeUIList.Set_Recipe(m_buildingData, m_recipeDataList);
+        m_RecipeUIList.Set_Recipe(m_buildingData, m_RecipeDataList);
     }
     public void Set_Building()
     {
         PlacementInfo placeInfo = new PlacementInfo();
-        placeInfo.m_buildingData = m_buildingData;
-        placeInfo.m_recipeData = null;
+        placeInfo.m_BuildingData = m_buildingData;
+        placeInfo.m_RecipeData = null;
         PlacementController.Instance.Set_BuildingData(placeInfo);
     }
 
     public void On_Clicked()
     {
-        if (m_recipeDataList.Count == 0)
+        if (m_RecipeDataList.Count == 0)
             Set_Building();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        UIManager.Instance.ShowTooltip(m_buildingData.m_buildingName, m_buildingData.m_buildingDesc, m_buildingData.m_iconSprite);
-        UIManager.Instance.Use_Option(m_buildingData.m_totalCost);
+        UIManager.Instance.ShowTooltip(m_buildingData.m_BuildingName, m_buildingData.m_BuildingDesc, m_buildingData.m_IconSprite);
+        UIManager.Instance.Use_Option(m_buildingData.m_Cost);
     }
 
     public void OnPointerExit(PointerEventData eventData)

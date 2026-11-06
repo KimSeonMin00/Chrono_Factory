@@ -7,16 +7,16 @@ public class BuildingData : ScriptableObject
 {
     [Header("Base Info")]
     public int m_iBuildingID;
-    public string m_buildingName;
+    public string m_BuildingName;
     [TextArea]
-    public string m_buildingDesc;
-    public Sprite m_iconSprite;
+    public string m_BuildingDesc;
+    public Sprite m_IconSprite;
     public GameObject m_goPrefab;
 
     [Header("Building Setting")]
     public int m_iHeight = 1;
     public int m_iWidth = 1;
-    public List<ResourceAmount> m_totalCost;
+    public List<ResourceAmount> m_Cost;
 
     [Header("Penalty Setting")]
     public float m_fHeatPerSecond;
@@ -56,7 +56,7 @@ public class BuildingData : ScriptableObject
 
         BillbordSprite billboard = goInstance.AddComponent<BillbordSprite>();
 
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_clickSound);
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.m_ClickSound);
 
         if (billboard != null)
             billboard.Set_Billboard();
@@ -67,7 +67,7 @@ public class BuildingData : ScriptableObject
     {
         Building building = goInstance.GetComponent<Building>();
 
-        building.Init(this, vecCellPos, m_buildingName);
+        building.Init(this, vecCellPos, m_BuildingName);
 
         return building;
     }

@@ -9,7 +9,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] TimerUI m_timerUI;
 
     [Header("GameMode")]
-    [SerializeField] GameObject m_goPlaying;//게임플레이 중에만 활성화되는 UI
+    [SerializeField] GameObject m_Playing;//게임플레이 중에만 활성화되는 UI
 
     public void Start()
     {
@@ -19,10 +19,10 @@ public class UIManager : Singleton<UIManager>
     public void OnStateChanged(GameState state)
     {
         if (state == GameState.Playing)
-            m_goPlaying.SetActive(true);
+            m_Playing.SetActive(true);
 
         else
-            m_goPlaying.SetActive(false);
+            m_Playing.SetActive(false);
     }
 
     public void Reset_Timer()
